@@ -29,6 +29,12 @@
                             @endforeach
                         </tbody>
                     </table>
+
+                    {!! Form::open(array('url' => 'foo/bar')) !!}
+                    {!! Form::text('username') !!}
+                    {!! Form::close() !!}
+
+                    {{ Html::image('imgs/teams/chelsea.png') }}
                 </div>
             </div>
         </div>

@@ -22,4 +22,3 @@ Route::auth();
 //Team
 Route::get('teams', 'TeamsController@index');
 Route::get('teams/show/{id}', 'TeamsController@show');
-

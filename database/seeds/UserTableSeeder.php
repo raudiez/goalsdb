@@ -12,6 +12,6 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        User::create(['name' => 'reddevilrau', 'email' => 'rauldiez20@gmail.com', 'password' => '$2y$10$C7Aa.KJkgbNs7jRgRfFE2.2Udroim3SVsp2aO.pbamY8efL2fAhkO']);
+      User::create(['name' => 'reddevilrau', 'email' => 'rauldiez20@gmail.com', 'password' => '$2y$10$C7Aa.KJkgbNs7jRgRfFE2.2Udroim3SVsp2aO.pbamY8efL2fAhkO']);
     }
 }
