@@ -25,24 +25,24 @@
     <li>{{$team->name}}</li>
   </ol>
   <div class="row">
-    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-      <img src="{{URL::asset('imgs/teams/'.$team->logo.'.png')}}" alt="{{$team->name}}" style="width: 100%; margin-left: 30px;">
+    <div class="col-xs-2 col-md-2">
+      {{ Html::image('imgs/teams/'.$team->logo.'.png',$team->name,array('style' => 'width: 100%; margin-left: 30px;')) }}
     </div>
-    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
+    <div class="col-xs-8 col-md-8 col-xs-offset-1 col-md-offset-1">
       <div class="page-header">
           <h1>{{ $team->name }}</h1>
         </div>
       <div class="row">
-        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        <div class="col-xs-3 col-md-3">
           <h3><span class="label label-primary">Total: {{$total_goals}}</span></h3>
         </div>
-        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        <div class="col-xs-3 col-md-3">
           <h3><span class="label label-success">Total Club: {{$total_goals_club}}</span></h3>
         </div>
-        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        <div class="col-xs-3 col-md-3">
           <h3><span class="label label-info">Total Carrera: {{$total_goals_career}}</span></h3>
         </div>
-        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        <div class="col-xs-3 col-md-3">
           <h3><span class="label label-danger">Total sin RESTO: {{$total_goals_without}}</span></h3>
         </div>
       </div>
@@ -50,87 +50,115 @@
   </div>
   <div class="clearfix"><br/></div>
   <div class="clearfix"><br/></div>
+
+  {!! Form::open(array('url' => 'teams/save/'.$team->id)) !!}
   <div class="row">
-    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-    </div>
-    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-      <table class="table table-striped table-hover">
-        <thead>
+    <div class="col-xs-11 col-md-11">
+      <div class="table-responsive"><table class="table table-striped table-hover">
+        <thead class="row">
           <tr>
-            <th style="text-align: right">Pos</th>
-            <th>Jugador</th>
-            <th style="text-align: center">Goles Club</th>
-            <th style="text-align: center">% Club</th>
-            <th style="text-align: center">Goles Carrera</th>
-            <th style="text-align: center">% Carrera</th>
-            <th style="text-align: center">Goles totales</th>
-            <th style="text-align: center">% del Total</th>
-            <th style="text-align: center">% del Total sin <i>RESTO</i></th>
+            <th class="col-xs-1 col-md-1" style="text-align: right">Pos</th>
+            <th class="col-xs-1 col-md-1" >Jugador</th>
+            <th class="col-xs-2 col-md-2" style="text-align: center">Goles Club <span class="caret"></span></th>
+            <th class="col-xs-1 col-md-1" style="text-align: center">% Club</th>
+            <th class="col-xs-2 col-md-2" style="text-align: center">Goles Carrera</th>
+            <th class="col-xs-1 col-md-1" style="text-align: center">% Carrera</th>
+            <th class="col-xs-2 col-md-2" style="text-align: center">Goles totales</th>
+            <th class="col-xs-1 col-md-1" style="text-align: center">% del Total</th>
+            <th class="col-xs-1 col-md-1" style="text-align: center">% del Total sin <i>RESTO</i></th>
           </tr>
         </thead>
-        <tbody style="text-align: center">
-          <?php $pos = 1; ?>
+        <tbody style="text-align: center" class="row">
+          <?php $pos = 1; $i=1;?>
           @foreach ($players as $player)
           @if($player->name != 'RESTO')
           <tr>
             <!-- POS -->
-            <td style="text-align: right;"><b>{{$pos}}</b></td>
+            <td class="col-xs-1 col-md-1" style="text-align: right; vertical-align:middle"><b>{{$pos}}</b></td>
             <?php $pos++; ?>
 
             <!-- JUGADOR -->
-            <td style="text-align: left">{{$player->name}}</td>
+            <td class="col-xs-1 col-md-1" style="text-align: left; vertical-align:middle">{{$player->name}}</td>
 
             <!-- GOLES CLUB -->
-            <td>
-              <button type="button" class="btn btn-default btn-xs" style="margin-right: 8px" id="decrementClub" onClick="decrementGoal()">
-                <span class="glyphicon glyphicon-minus" aria-hidden="true" style="font-size:10px;"></span>
-              </button>
-              {{$player->goals_club}}
-              <button type="button" class="btn btn-default btn-xs" style="margin-left: 8px" id="incrementClub" onClick="incrementGoal()">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true" style="font-size: 10px;"></span>
-              </button>
+            <td class="col-xs-2 col-md-2" style="vertical-align:middle">
+              <div class="row">
+                <div class="col-xs-2 col-md-2"></div>
+                <div class="col-xs-8 col-md-8">
+                  <div class="input-group row">
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-default btn-number btn-xs" style="height:34px;" data-type="minus" data-field="quant[{{$i}}]">
+                        <span class="glyphicon glyphicon-minus"></span>
+                      </button>
+                    </span>
+                    <input type="text" name="quant[{{$i}}]" class="form-control input-number" value="{{$player->goals_club}}" min="0" style="text-align: center;">
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-default btn-number btn-xs" style="height:34px;" data-type="plus" data-field="quant[{{$i}}]">
+                        <span class="glyphicon glyphicon-plus"></span>
+                      </button>
+                    </span>
+                  </div>
+                </div>
+                <div class="col-xs-2 col-md-2"></div>
+              </div>
             </td>
 
             <!-- % CLUB -->
             @if ($total_goals_club > 0)
-              <td>{{number_format(($player->goals_club/100)/($total_goals_club/100)*100,2)}}</td>
+              <td class="col-xs-1 col-md-1" style="vertical-align:middle">{{number_format(($player->goals_club/100)/($total_goals_club/100)*100,2)}}</td>
             @else
-              <td>0.00</td>
+              <td class="col-xs-1 col-md-1" style="vertical-align:middle">0.00</td>
             @endif
 
+            <?php $i++; ?>
+
             <!-- GOLES CARRERA -->
-            <td>
-              <button type="button" class="btn btn-default btn-xs" style="margin-right: 8px" id="decrementClub" onClick="decrementGoal()">
-                <span class="glyphicon glyphicon-minus" aria-hidden="true" style="font-size:10px;"></span>
-              </button>
-              {{$player->goals_career}}
-              <button type="button" class="btn btn-default btn-xs" style="margin-left: 8px" id="incrementClub" onClick="incrementGoal()">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true" style="font-size: 10px;"></span>
-              </button>
+            <td class="col-xs-2 col-md-2" style="vertical-align:middle">
+              <div class="row">
+                <div class="col-xs-2 col-md-2"></div>
+                <div class="col-xs-8 col-md-8">
+                  <div class="input-group row">
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-default btn-number btn-xs" style="height:34px;" data-type="minus" data-field="quant[{{$i}}]">
+                        <span class="glyphicon glyphicon-minus"></span>
+                      </button>
+                    </span>
+                    <input type="text" name="quant[{{$i}}]" class="form-control input-number" value="{{$player->goals_career}}" min="0" style="text-align: center;">
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-default btn-number btn-xs" style="height:34px;" data-type="plus" data-field="quant[{{$i}}]">
+                        <span class="glyphicon glyphicon-plus"></span>
+                      </button>
+                    </span>
+                  </div>
+                </div>
+                <div class="col-xs-2 col-md-2"></div>
+              </div>
             </td>
+
+            <?php $i++; ?>
 
             <!-- % CARRERA -->
             @if ($total_goals_career > 0)
-              <td>{{number_format(($player->goals_career/100)/($total_goals_career/100)*100,2)}}</td>
+              <td class="col-xs-1 col-md-1" style="vertical-align:middle">{{number_format(($player->goals_career/100)/($total_goals_career/100)*100,2)}}</td>
             @else
-              <td>0.00</td>
+              <td class="col-xs-1 col-md-1" style="vertical-align:middle">0.00</td>
             @endif
 
             <!-- GOLES TOTALES -->
-            <td>{{$player->goals_club+$player->goals_career}}</td>
+            <td class="col-xs-2 col-md-2" style="vertical-align:middle">{{$player->goals_club+$player->goals_career}}</td>
 
             <!-- % DEL TOTAL -->
             @if ($total_goals > 0)
-              <td>{{number_format((($player->goals_club+$player->goals_career)/100)/($total_goals/100)*100,2)}}</td>
+              <td class="col-xs-1 col-md-1" style="vertical-align:middle">{{number_format((($player->goals_club+$player->goals_career)/100)/($total_goals/100)*100,2)}}</td>
             @else
-              <td>0.00</td>
+              <td class="col-xs-1 col-md-1" style="vertical-align:middle">0.00</td>
             @endif
 
             <!-- % DEL TOTAL SIN RESTO -->
             @if ($total_goals_without > 0)
-              <td>{{number_format((($player->goals_club+$player->goals_career)/100)/($total_goals_without/100)*100,2)}}</td>
+              <td class="col-xs-1 col-md-1" style="vertical-align:middle">{{number_format((($player->goals_club+$player->goals_career)/100)/($total_goals_without/100)*100,2)}}</td>
             @else
-              <td>0.00</td>
+              <td class="col-xs-1 col-md-1" style="vertical-align:middle">0.00</td>
             @endif
           </tr>
           @endif
@@ -138,20 +166,92 @@
 
           <!-- FILA DE "RESTO" -->
           <tr>
-            <td style="text-align: right;"><b>{{$pos}}</b></td>
-            <td style="text-align: left"><b>RESTO</b></td>
-            <td><b>-</b></td>
-            <td><b>-</b></td>
-            <td><b>-</b></td>
-            <td><b>-</b></td>
-            <td><b>{{$resto_goals}}</b></td>
-            <td><b>-</b></td>
-            <td><b>-</b></td>
+            <td class="col-xs-1 col-md-1" style="text-align: right;"><b>{{$pos}}</b></td>
+            <td class="col-xs-1 col-md-1" style="text-align: left"><b>RESTO</b></td>
+            <td class="col-xs-2 col-md-2" style="vertical-align:middle"><b>-</b></td>
+            <td class="col-xs-1 col-md-1" style="vertical-align:middle"><b>-</b></td>
+            <td class="col-xs-2 col-md-2" style="vertical-align:middle"><b>-</b></td>
+            <td class="col-xs-1 col-md-1" style="vertical-align:middle"><b>-</b></td>
+            <td class="col-xs-2 col-md-2" style="vertical-align:middle">
+              <div class="row">
+                <div class="col-xs-2 col-md-2"></div>
+                <div class="col-xs-8 col-md-8">
+                  <div class="input-group row">
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-default btn-number btn-xs" style="height:34px;" data-type="minus" data-field="quant[{{$i}}]">
+                        <span class="glyphicon glyphicon-minus"></span>
+                      </button>
+                    </span>
+                    <input type="text" name="quant[{{$i}}]" class="form-control input-number" value="{{$resto_goals}}" min="0" style="text-align: center;">
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-default btn-number btn-xs" style="height:34px;" data-type="plus" data-field="quant[{{$i}}]">
+                        <span class="glyphicon glyphicon-plus"></span>
+                      </button>
+                    </span>
+                  </div>
+                </div>
+                <div class="col-xs-2 col-md-2"></div>
+              </div>
+            </td>
+            <td class="col-xs-1 col-md-1" style="vertical-align:middle"><b>-</b></td>
+            <td class="col-xs-1 col-md-1" style="vertical-align:middle"><b>-</b></td>
           </tr>
         </tbody>
-      </table>
+      </table></div>
     </div>
+    <div class="col-xs-1 col-md-1">
+      <div data-spy="affix" data-offset-top="0" data-offset-bottom="200">
+        {{Form::submit('Guardar', array('class' => 'btn btn-success'))}}
+      </div>
+    </div>
+
+
   </div>
 </div>
+
+{!! Form::close() !!}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+  $('.btn-number').click(function(e){
+    e.preventDefault();
+    fieldName = $(this).attr('data-field');
+    type      = $(this).attr('data-type');
+    var input = $("input[name='"+fieldName+"']");
+    var currentVal = parseInt(input.val());
+    if (!isNaN(currentVal)) {
+      if(type == 'minus') {
+        if(currentVal > 0) {
+          input.val(currentVal - 1).change();
+        }
+        if(currentVal == 0) {
+          $(this).attr('disabled', true);
+        }
+      } else if(type == 'plus') {
+        if(currentVal >= 0) {
+          $(".btn-number[data-type='minus'][data-field='"+fieldName+"']").removeAttr('disabled')
+        }//*/
+        input.val(currentVal + 1).change();
+      }
+    } else {
+        input.val(0);
+    }
+  });
+  $(".input-number").keydown(function (e) {
+    // Allow: backspace, delete, tab, escape, enter and .
+    if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+        // Allow: Ctrl+A
+        (e.keyCode == 65 && e.ctrlKey === true) ||
+        // Allow: home, end, left, right
+        (e.keyCode >= 35 && e.keyCode <= 39)) {
+          // let it happen, don't do anything
+      return;
+    }
+    // Ensure that it is a number and stop the keypress
+    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+      e.preventDefault();
+    }
+  });
+</script>
 @endsection
 

@@ -21,4 +21,6 @@ Route::auth();
 
 //Team
 Route::get('teams', 'TeamsController@index');
-Route::get('teams/show/{id}', 'TeamsController@show');
+Route::get('teams/show/{id}/{order_by?}/{order_by_dir?}', 'TeamsController@show');
+Route::post('teams/save/{id}', 'TeamsController@save');
+

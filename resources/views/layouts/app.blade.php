@@ -19,6 +19,10 @@
         .fa-btn {
             margin-right: 6px;
         }
+        .table-hover > tbody > tr:hover {
+          background-color: #C0C2CD;
+        }
+
     </style>
 </head>
 <!--style="background-image:url('imgs/index.jpeg');"-->
@@ -45,12 +49,14 @@
                 <ul class="nav navbar-nav">
                     @if (!Auth::guest())
                         <li class="dropdown">
-                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Equipos <span class="caret"></span></a>
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Clubs <span class="caret"></span></a>
                           <ul class="dropdown-menu">
                             <li><a href="{{url('/teams')}}">Todos</a></li>
                             <li role="separator" class="divider"></li>
                             @foreach ($teams as $team_link)
-                                <li><a href="{{url('/teams/show/'.$team_link->id)}}"><img src="{{URL::asset('imgs/teams/'.$team_link->logo.'.png')}}" style="height: 12px; margin-right: 8px;margin-top: -3px; margin-left: 0px;">{{$team_link->name}}</a></li>
+                                <li><a href="{{url('/teams/show/'.$team_link->id)}}">
+                                {{ Html::image('imgs/teams/'.$team_link->logo.'.png','',array('style' => 'height: 12px; margin-right: 8px;margin-top: -3px; margin-left: 0px;')) }}
+                                {{$team_link->name}}</a></li>
                             @endforeach
                           </ul>
                         </li>
@@ -79,6 +85,8 @@
 
     @yield('content')
 
+
+
     <div class="clearfix"><br/></div>
     <div class="container">
         <hr>
@@ -92,5 +100,8 @@
     <script>
         $('.navbar [data-toggle="dropdown"]').bootstrapDropdownHover({});
     </script>
+
+
+
 </body>
 </html>

@@ -15,7 +15,7 @@
       <div class="list-group">
         <a href="{{ url('/teams/show/'.$team->id) }}" class="list-group-item" style="text-align: center;height: 300px; position: relative;">
           <h4 class="list-group-item-heading" style="text-align: left">{{$team->name}}</h4>
-          <img src="{{URL::asset('imgs/teams/'.$team->logo.'.png')}}" alt="{{$team->name}}" style="height: 75%; margin: 15px 0 15px 0;">
+          {{ Html::image('imgs/teams/'.$team->logo.'.png',$team->name,array('style' => 'height: 75%; margin: 15px 0 15px 0;')) }}
         </a>
       </div>
     </div>

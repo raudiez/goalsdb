@@ -13,16 +13,17 @@ class Player extends Model
     	return $this->belongsTo(Team::class);
     }
 
-    public static function getByTeamID_orderBy($team_id,$order){
+    public static function getByTeamID_orderBy($team_id,$order,$order_dir){
 			return DB::table('players')->
 				where('team_id', $team_id)->
-				orderBy($order,'desc')->
+				orderBy($order,$order_dir)->
 				get();
 		}
 
-		public static function getAll_goalsClub(){
+		public static function joinPlayersGoals_Club(){
 			return DB::table('players')->
-				select('name', 'goals_club')->
+				join('teams','players.team_id','=','teams.id')->
+				select('players.name', 'teams.name AS team_name','players.goals_club')->
 				orderBy('goals_club','desc')->
 				get();
 		}

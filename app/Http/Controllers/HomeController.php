@@ -26,7 +26,7 @@ class HomeController extends Controller
      */
     public function index(){
         $teams = Team::all();
-        $players = Player::getAll_goalsClub();
+        $players = Player::joinPlayersGoals_Club();
         return view('home',compact('teams','players'));
     }
 }
