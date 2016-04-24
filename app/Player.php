@@ -27,4 +27,10 @@ class Player extends Model
 				orderBy('goals_club','desc')->
 				get();
 		}
+
+		public static function updateByID($id, $name, $goals_club, $goals_career){
+			DB::table('players')->
+				where('id',$id)->
+				update(['name' => $name, 'goals_club' => $goals_club, 'goals_career' => $goals_career, 'updated_at' => date('Y-m-d G:i:s') ]);
+		}
 }

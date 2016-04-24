@@ -23,8 +23,19 @@ class TeamsController extends Controller{
     	return view('teams/show', compact('teams','team','players'));
     }
 
-    public function save($id){
-        //do something
-        return redirect('/teams/show/'.$id);
+    public function save(Request $request, $id){
+        $teams = Team::all();
+
+        $new_goals = $request->input('new_goals');
+        $old_goals = unserialize($request->input('old_goals'));
+        for ($i=0; $i < count($old_goals); $i++) {
+            if($old_goals[$i]['id'] == $new_goals[$i]['id']){
+                if($old_goals[$i]['goals_club'] != $new_goals[$i]['goals_club'] or $old_goals[$i]['goals_career'] != $new_goals[$i]['goals_career']){
+                    Player::updateByID($new_goals[$i]['id'],$new_goals[$i]['name'],$new_goals[$i]['goals_club'],$new_goals[$i]['goals_career']);
+                }
+            }
+        }
+
+        return redirect('teams/show/'.$id);
     }
 }

@@ -3,11 +3,11 @@
 @section('content')
 <div class="container">
   <ol class="breadcrumb">
-    <li><a href="{{ url('/') }}">Home</a></li>
-    <li>Equipos</li>
+    <li><a href="{{ url('/') }}">Inicio</a></li>
+    <li>Clubs</li>
   </ol>
   <div class="page-header">
-    <h1>Equipos</h1>
+    <h1>Clubs</h1>
   </div>
   <div class="row">
     @foreach ($teams as $team)
