@@ -7,19 +7,24 @@
   $total_goals = 0;
   $total_goals_without = 0;
   $resto_goals = 0;
+  $resto_id = 0;
   $j=0;
   $old_goals=[];
   foreach ($players as $player) {
     if ($player->name != 'RESTO'){
       $total_goals_club += $player->goals_club;
       $total_goals_career += $player->goals_career;
+      $old_goals[$j]=array('id' => $player->id, 'name' => $player->name, 'goals_club' => $player->goals_club, 'goals_career' => $player->goals_career);
+      $new_goals[$j]=array('id' => $player->id, 'name' => $player->name, 'goals_club' => $player->goals_club, 'goals_career' => $player->goals_career);
+      $j++;
     }else{
       $resto_goals = $player->goals_club;
+      $resto_id = $player->id;
     }
-    $old_goals[$j]=array('id' => $player->id, 'name' => $player->name, 'goals_club' => $player->goals_club, 'goals_career' => $player->goals_career);
-    $new_goals[$j]=array('id' => $player->id, 'name' => $player->name, 'goals_club' => $player->goals_club, 'goals_career' => $player->goals_career);
-    $j++;
   }
+  $old_goals[$j]=array('id' => $resto_id, 'name' => 'RESTO', 'goals_club' => $resto_goals, 'goals_career' => 0);
+  $new_goals[$j]=array('id' => $resto_id, 'name' => 'RESTO', 'goals_club' => $resto_goals, 'goals_career' => 0);
+
   $total_goals_without = $total_goals_club + $total_goals_career;
   $total_goals = $total_goals_without + $resto_goals;
 
@@ -75,18 +80,17 @@
           </tr>
         </thead>
         <tbody style="text-align: center" class="row">
-          <?php $i=1; ?>
+          <?php $i=1; $k=0; ?>
           @for ($j = 0; $j < count($new_goals); $j++)
           @if($new_goals[$j]['name'] != 'RESTO')
-
           <tr>
             <!-- POS -->
-            <td class="col-xs-1 col-md-1" style="text-align: right; vertical-align:middle"><b>{{$j+1}}</b></td>
-            {{Form::hidden('new_goals['.$j.'][id]', $new_goals[$j]['id'])}}
+            <td class="col-xs-1 col-md-1" style="text-align: right; vertical-align:middle"><b>{{$k+1}}</b></td>
+            {{Form::hidden('new_goals['.$k.'][id]', $new_goals[$j]['id'])}}
 
             <!-- JUGADOR -->
             <td class="col-xs-1 col-md-1" style="text-align: left; vertical-align:middle">{{$new_goals[$j]['name']}}</td>
-            {{Form::hidden('new_goals['.$j.'][name]', $new_goals[$j]['name'])}}
+            {{Form::hidden('new_goals['.$k.'][name]', $new_goals[$j]['name'])}}
 
             <!-- GOLES CLUB -->
             <td class="col-xs-2 col-md-2" style="vertical-align:middle">
@@ -95,13 +99,13 @@
                 <div class="col-xs-10 col-md-8">
                   <div class="input-group row">
                     <span class="input-group-btn">
-                      <button type="button" class="btn btn-default btn-number btn-xs" style="height:34px;" data-type="minus" data-field="{{'new_goals['.$j.'][goals_club]'}}">
+                      <button type="button" class="btn btn-default btn-number btn-xs" style="height:34px;" data-type="minus" data-field="{{'new_goals['.$k.'][goals_club]'}}">
                         <span class="glyphicon glyphicon-minus"></span>
                       </button>
                     </span>
-                    <input type="text" name="{{'new_goals['.$j.'][goals_club]'}}" class="form-control input-number" value="{{$new_goals[$j]['goals_club']}}" min="0" style="text-align: center;">
+                    <input type="text" name="{{'new_goals['.$k.'][goals_club]'}}" class="form-control input-number" value="{{$new_goals[$j]['goals_club']}}" min="0" style="text-align: center;">
                     <span class="input-group-btn">
-                      <button type="button" class="btn btn-default btn-number btn-xs" style="height:34px;" data-type="plus" data-field="{{'new_goals['.$j.'][goals_club]'}}">
+                      <button type="button" class="btn btn-default btn-number btn-xs" style="height:34px;" data-type="plus" data-field="{{'new_goals['.$k.'][goals_club]'}}">
                         <span class="glyphicon glyphicon-plus"></span>
                       </button>
                     </span>
@@ -110,7 +114,6 @@
                 <div class="col-xs-1 col-md-2"></div>
               </div>
             </td>
-
             <!-- % CLUB -->
             @if ($total_goals_club > 0)
               <td class="col-xs-1 col-md-1" style="vertical-align:middle">{{number_format(($new_goals[$j]['goals_club']/100)/($total_goals_club/100)*100,2)}}</td>
@@ -127,13 +130,13 @@
                 <div class="col-xs-10 col-md-8">
                   <div class="input-group row">
                     <span class="input-group-btn">
-                      <button type="button" class="btn btn-default btn-number btn-xs" style="height:34px;" data-type="minus" data-field="{{'new_goals['.$j.'][goals_career]'}}">
+                      <button type="button" class="btn btn-default btn-number btn-xs" style="height:34px;" data-type="minus" data-field="{{'new_goals['.$k.'][goals_career]'}}">
                         <span class="glyphicon glyphicon-minus"></span>
                       </button>
                     </span>
-                    <input type="text" name="{{'new_goals['.$j.'][goals_career]'}}" class="form-control input-number" value="{{$new_goals[$j]['goals_career']}}" min="0" style="text-align: center;">
+                    <input type="text" name="{{'new_goals['.$k.'][goals_career]'}}" class="form-control input-number" value="{{$new_goals[$j]['goals_career']}}" min="0" style="text-align: center;">
                     <span class="input-group-btn">
-                      <button type="button" class="btn btn-default btn-number btn-xs" style="height:34px;" data-type="plus" data-field="{{'new_goals['.$j.'][goals_career]'}}">
+                      <button type="button" class="btn btn-default btn-number btn-xs" style="height:34px;" data-type="plus" data-field="{{'new_goals['.$k.'][goals_career]'}}">
                         <span class="glyphicon glyphicon-plus"></span>
                       </button>
                     </span>
@@ -169,15 +172,16 @@
               <td class="col-xs-1 col-md-1" style="vertical-align:middle">0.00</td>
             @endif
           </tr>
+          <?php $k++; ?>
           @endif
           @endfor
 
           <!-- FILA DE "RESTO" -->
           <tr>
-            <td class="col-xs-1 col-md-1" style="text-align: right;"><b>{{$j}}</b></td>
-            {{Form::hidden('new_goals['.($j-1).'][id]', $new_goals[$j-1]['id'])}}
+            <td class="col-xs-1 col-md-1" style="text-align: right;"><b>{{$k+1}}</b></td>
+            {{Form::hidden('new_goals['.$k.'][id]', $new_goals[$j-1]['id'])}}
             <td class="col-xs-1 col-md-1" style="text-align: left"><b>RESTO</b></td>
-            {{Form::hidden('new_goals['.($j-1).'][name]', $new_goals[$j-1]['name'])}}
+            {{Form::hidden('new_goals['.$k.'][name]', $new_goals[$j-1]['name'])}}
             <td class="col-xs-2 col-md-2" style="vertical-align:middle"><b>-</b></td>
             <td class="col-xs-1 col-md-1" style="vertical-align:middle"><b>-</b></td>
             <td class="col-xs-2 col-md-2" style="vertical-align:middle"><b>-</b></td>
@@ -188,13 +192,13 @@
                 <div class="col-xs-10 col-md-8">
                   <div class="input-group row">
                     <span class="input-group-btn">
-                      <button type="button" class="btn btn-default btn-number btn-xs" style="height:34px;" data-type="minus" data-field="{{'new_goals['.($j-1).'][goals_club]'}}">
+                      <button type="button" class="btn btn-default btn-number btn-xs" style="height:34px;" data-type="minus" data-field="{{'new_goals['.$k.'][goals_club]'}}">
                         <span class="glyphicon glyphicon-minus"></span>
                       </button>
                     </span>
-                    <input type="text" name="{{'new_goals['.($j-1).'][goals_club]'}}" class="form-control input-number" value="{{$resto_goals}}" min="0" style="text-align: center;">
+                    <input type="text" name="{{'new_goals['.$k.'][goals_club]'}}" class="form-control input-number" value="{{$resto_goals}}" min="0" style="text-align: center;">
                     <span class="input-group-btn">
-                      <button type="button" class="btn btn-default btn-number btn-xs" style="height:34px;" data-type="plus" data-field="{{'new_goals['.($j-1).'][goals_club]'}}">
+                      <button type="button" class="btn btn-default btn-number btn-xs" style="height:34px;" data-type="plus" data-field="{{'new_goals['.$k.'][goals_club]'}}">
                         <span class="glyphicon glyphicon-plus"></span>
                       </button>
                     </span>
@@ -202,7 +206,7 @@
                 </div>
                 <div class="col-xs-1 col-md-2"></div>
               </div>
-              {{Form::hidden('new_goals['.($j-1).'][goals_career]', $new_goals[$j-1]['goals_career'])}}
+              {{Form::hidden('new_goals['.$k.'][goals_career]', $new_goals[$j-1]['goals_career'])}}
             </td>
             <td class="col-xs-1 col-md-1" style="vertical-align:middle"><b>-</b></td>
             <td class="col-xs-1 col-md-1" style="vertical-align:middle"><b>-</b></td>

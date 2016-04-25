@@ -17,6 +17,7 @@ class Player extends Model
 			return DB::table('players')->
 				where('team_id', $team_id)->
 				orderBy($order,$order_dir)->
+				orderBy('name','asc')->
 				get();
 		}
 
@@ -25,6 +26,7 @@ class Player extends Model
 				join('teams','players.team_id','=','teams.id')->
 				select('players.name', 'teams.name AS team_name','players.goals_club')->
 				orderBy('goals_club','desc')->
+				orderBy('name','asc')->
 				get();
 		}
 
