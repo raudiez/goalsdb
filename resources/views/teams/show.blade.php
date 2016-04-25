@@ -64,7 +64,7 @@
 
   {!! Form::open(array('url' => 'teams/save/'.$team->id)) !!}
   <div class="row">
-    <div class="col-xs-10 col-md-11">
+    <div class="col-xs-10 col-md-10">
       <div class="table-responsive"><table class="table table-striped table-hover">
         <thead class="row">
           <tr>
@@ -215,14 +215,40 @@
       </table></div>
     </div>
 
-    <div class="col-xs-1 col-md-1">
-      <div data-spy="affix" data-offset-top="0" data-offset-bottom="200">
-        {{Form::submit('Guardar', array('class' => 'btn btn-success'))}}
+    <div class="col-xs-2 col-md-2">
+      {{Form::submit('Guardar', array('class' => 'btn btn-success'))}}
+      <div class="clearfix"><br/></div>
+      <div class="panel panel-primary">
+        <div class="panel-heading"><b>Records de goles</b></div>
+        <div class="panel-body">
+          <table class="table table-striped table-hover">
+            <thead class="row">
+              <tr>
+                <th class="col-xs-3 col-md-3" style="text-align: right;vertical-align:middle">Gol</th>
+                <th class="col-xs-9 col-md-9">Jugador</th>
+              </tr>
+            </thead>
+            <tbody style="text-align: left" class="row">
+              @foreach ($records as $record)
+              <tr>
+                <!-- RECORD -->
+                <td class="col-xs-3 col-md-3" style="text-align: right;vertical-align:middle"><b>{{$record->goals}}</b></td>
+
+                <!-- JUGADOR -->
+                <td class="col-xs-9 col-md-9" style="vertical-align:middle">{{$record->player_name}}</td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
       </div>
+      <div class="clearfix"><br/></div>
+
+      <a href="{{ url('/records/form/'.$team->id) }}" class="btn btn-danger" role="button">Añadir record</a>
+
     </div>
 
     {{Form::hidden('old_goals', serialize($old_goals))}}
-
   </div>
 </div>
 {!! Form::close() !!}

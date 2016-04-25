@@ -14,5 +14,6 @@ class TeamTableSeeder extends Seeder
     Team::create(['name' => 'Atlético de Madrid', 'logo' => 'atletico']);
     Team::create(['name' => 'Chelsea FC', 'logo' => 'chelsea']);
     Team::create(['name' => 'Manchester United FC', 'logo' => 'manud']);
+    Team::create(['name' => 'PES United (Pruebas)', 'logo' => 'pes_united']);
 	}
 }

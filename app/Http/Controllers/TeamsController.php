@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Team;
 use App\Player;
+use App\Record;
 
 use Illuminate\Http\Request;
 
@@ -17,10 +18,11 @@ class TeamsController extends Controller{
 
     public function show($id,$order_by='goals_club',$order_by_dir='desc'){
     	$teams = Team::all();
+        $records = Record::joinRecords_byTeamID($id);
     	$team = Team::getByID($id);
     	$players = Player::getByTeamID_orderBy($id,$order_by,$order_by_dir);
 
-    	return view('teams/show', compact('teams','team','players'));
+    	return view('teams/show', compact('teams','team','players','records'));
     }
 
     public function save(Request $request, $id){

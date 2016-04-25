@@ -24,3 +24,7 @@ Route::get('teams', 'TeamsController@index');
 Route::get('teams/show/{id}/{order_by?}/{order_by_dir?}', 'TeamsController@show');
 Route::post('teams/save/{id}', 'TeamsController@save');
 
+//Record
+Route::get('records/form/{id}', 'RecordsController@form');
+Route::post('records/save/{id}', 'RecordsController@save');
+

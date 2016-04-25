@@ -1,6 +1,5 @@
 <?php
 
-use App\Team;
 Use App\Player;
 use Illuminate\Database\Seeder;
 
@@ -12,7 +11,6 @@ class PlayerTableSeeder extends Seeder
      * @return void
      */
   public function run(){
-  	$teams = Team::all();
 
     $players = [
 
@@ -136,7 +134,7 @@ class PlayerTableSeeder extends Seeder
     ['team_id' => 3, 'name' => 'Giovani', 'goals_club' => 9, 'goals_career' => 0],
     ['team_id' => 3, 'name' => 'Godín', 'goals_club' => 1, 'goals_career' => 0],
     ['team_id' => 3, 'name' => 'Halilovic', 'goals_club' => 0, 'goals_career' => 0],
-    ['team_id' => 3, 'name' => 'Ibra', 'goals_club' => 66, 'goals_career' => 4],
+    ['team_id' => 3, 'name' => 'Ibrahimović', 'goals_club' => 66, 'goals_career' => 4],
     ['team_id' => 3, 'name' => 'Iniesta', 'goals_club' => 2, 'goals_career' => 0],
     ['team_id' => 3, 'name' => 'Isco', 'goals_club' => 25, 'goals_career' => 12],
     ['team_id' => 3, 'name' => 'Jackson', 'goals_club' => 7, 'goals_career' => 0],
@@ -166,6 +164,16 @@ class PlayerTableSeeder extends Seeder
     ['team_id' => 3, 'name' => 'Walker', 'goals_club' => 0, 'goals_career' => 0],
     ['team_id' => 3, 'name' => 'Xabi', 'goals_club' => 2, 'goals_career' => 0],
     ['team_id' => 3, 'name' => 'Yaya', 'goals_club' => 1, 'goals_career' => 0],
+
+
+    //PES UNITED (PRUEBAS)
+    ['team_id' => 4, 'name' => 'Castolo', 'goals_club' => 678, 'goals_career' => 0],
+    ['team_id' => 4, 'name' => 'Ximelez', 'goals_club' => 13, 'goals_career' => 5],
+    ['team_id' => 4, 'name' => 'Ivarov', 'goals_club' => 23, 'goals_career' => 3],
+    ['team_id' => 4, 'name' => 'Minanda', 'goals_club' => 34, 'goals_career' => 15],
+    ['team_id' => 4, 'name' => 'Ordaz', 'goals_club' => 3, 'goals_career' => 1],
+    ['team_id' => 4, 'name' => 'RESTO', 'goals_club' => 24, 'goals_career' => 0],
+
 
     ];
     foreach ($players as $player) {
