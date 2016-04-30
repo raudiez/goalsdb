@@ -48,7 +48,7 @@ class PlayerTableSeeder extends Seeder
     ['team_id' => 1, 'name' => 'Piqué', 'goals_club' => 1, 'goals_career' => 0],
     ['team_id' => 1, 'name' => 'Rakitic', 'goals_club' => 1, 'goals_career' => 0],
     ['team_id' => 1, 'name' => 'Raul García', 'goals_club' => 2, 'goals_career' => 0],
-    ['team_id' => 1, 'name' => 'RESTO', 'goals_club' => 67, 'goals_career' => 0],
+    ['team_id' => 1, 'name' => 'RESTO', 'goals_club' => 85, 'goals_career' => 0],
     ['team_id' => 1, 'name' => 'Rode', 'goals_club' => 1, 'goals_career' => 0],
     ['team_id' => 1, 'name' => 'Sneijder', 'goals_club' => 2, 'goals_career' => 0],
     ['team_id' => 1, 'name' => 'Tevez', 'goals_club' => 1, 'goals_career' => 0],
@@ -165,14 +165,11 @@ class PlayerTableSeeder extends Seeder
     ['team_id' => 3, 'name' => 'Xabi', 'goals_club' => 2, 'goals_career' => 0],
     ['team_id' => 3, 'name' => 'Yaya', 'goals_club' => 1, 'goals_career' => 0],
 
-
-    //PES UNITED (PRUEBAS)
-    ['team_id' => 4, 'name' => 'Castolo', 'goals_club' => 678, 'goals_career' => 0],
-    ['team_id' => 4, 'name' => 'Ximelez', 'goals_club' => 13, 'goals_career' => 5],
-    ['team_id' => 4, 'name' => 'Ivarov', 'goals_club' => 23, 'goals_career' => 3],
-    ['team_id' => 4, 'name' => 'Minanda', 'goals_club' => 34, 'goals_career' => 15],
-    ['team_id' => 4, 'name' => 'Ordaz', 'goals_club' => 3, 'goals_career' => 1],
-    ['team_id' => 4, 'name' => 'RESTO', 'goals_club' => 24, 'goals_career' => 0],
+    //BOCA JUNIORS
+    ['team_id' => 4, 'name' => 'Yaya', 'goals_club' => 3, 'goals_career' => 0],
+    ['team_id' => 4, 'name' => 'Benzema', 'goals_club' => 5, 'goals_career' => 0],
+    ['team_id' => 4, 'name' => 'Bacca', 'goals_club' => 5, 'goals_career' => 0],
+    ['team_id' => 4, 'name' => 'Schürrle', 'goals_club' => 7, 'goals_career' => 0],
 
 
     ];

@@ -33,11 +33,7 @@ class RecordTableSeeder extends Seeder
 	    ['player_id' => 106, 'goals' => 800],
 	    ['player_id' => 129, 'goals' => 900],
 
-	    //PES UNITED (PRUEBAS)
-	    ['player_id' => 144, 'goals' => 100],
-	    ['player_id' => 144, 'goals' => 200],
-	    ['player_id' => 144, 'goals' => 300],
-	    ['player_id' => 144, 'goals' => 400],
+	    //BOCA JUNIORS
 
 	    ];
 	    foreach ($records as $record) {
