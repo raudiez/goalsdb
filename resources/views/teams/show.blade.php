@@ -64,7 +64,7 @@
 
   {!! Form::open(array('url' => 'teams/save/'.$team->id)) !!}
   <div class="row">
-    <div class="col-xs-10 col-md-10">
+    <div class="col-xs-12 col-md-10">
       <div class="table-responsive"><table class="table table-striped table-hover">
         <thead class="row">
           <tr>
@@ -215,7 +215,7 @@
       </table></div>
     </div>
 
-    <div class="col-xs-2 col-md-2">
+    <div class="col-xs-12 col-md-2">
       {{Form::submit('Guardar', array('class' => 'btn btn-success'))}}
       <div class="clearfix"><br/></div>
       <div class="panel panel-primary">
@@ -243,11 +243,8 @@
         </div>
       </div>
       <div class="clearfix"><br/></div>
-
       <a href="{{ url('/records/form/'.$team->id) }}" class="btn btn-danger" role="button">Añadir record</a>
-
     </div>
-
     {{Form::hidden('old_goals', serialize($old_goals))}}
   </div>
 </div>

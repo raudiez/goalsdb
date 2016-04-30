@@ -13,7 +13,7 @@ use App\Http\Requests;
 class RecordsController extends Controller
 {
   public function form($team_id){
-  	$teams = Team::all();
+  	$teams = Team::all()->sortBy('name');
     $max_record = Record::getMaxByTeam_id($team_id);
     $new_record = (($max_record/100)+1)*100;
   	$team = Team::getByID($team_id);

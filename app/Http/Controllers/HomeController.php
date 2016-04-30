@@ -25,7 +25,7 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        $teams = Team::all();
+        $teams = Team::all()->sortBy('name');
         $players = Player::joinPlayersGoals_Club();
         return view('home',compact('teams','players'));
     }

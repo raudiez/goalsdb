@@ -12,12 +12,12 @@ use App\Http\Requests;
 
 class TeamsController extends Controller{
     public function index(){
-    	$teams = Team::all();
+    	$teams = Team::all()->sortBy('name');
     	return view('teams/list', compact('teams'));
     }
 
     public function show($id,$order_by='goals_club',$order_by_dir='desc'){
-    	$teams = Team::all();
+    	$teams = Team::all()->sortBy('name');
         $records = Record::joinRecords_byTeamID($id);
     	$team = Team::getByID($id);
     	$players = Player::getByTeamID_orderBy($id,$order_by,$order_by_dir);
@@ -26,7 +26,7 @@ class TeamsController extends Controller{
     }
 
     public function save(Request $request, $id){
-        $teams = Team::all();
+        $teams = Team::all()->sortBy('name');
 
         $new_goals = $request->input('new_goals');
         $old_goals = unserialize($request->input('old_goals'));
