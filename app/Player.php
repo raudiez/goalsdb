@@ -8,31 +8,37 @@ use Illuminate\Database\Eloquent\Model;
 
 class Player extends Model
 {
-    public function team()
-    {
-    	return $this->belongsTo(Team::class);
-    }
+  public function team()
+  {
+  	return $this->belongsTo(Team::class);
+  }
 
-    public static function getByTeamID_orderBy($team_id,$order,$order_dir){
-			return DB::table('players')->
-				where('team_id', $team_id)->
-				orderBy($order,$order_dir)->
-				orderBy('name','asc')->
-				get();
-		}
+  public static function getByTeamID_orderBy($team_id,$order,$order_dir){
+		return DB::table('players')->
+			where('team_id', $team_id)->
+			orderBy($order,$order_dir)->
+			orderBy('name','asc')->
+			get();
+	}
 
-		public static function joinPlayersGoals_Club(){
-			return DB::table('players')->
-				join('teams','players.team_id','=','teams.id')->
-				select('players.name', 'teams.name AS team_name','players.goals_club')->
-				orderBy('goals_club','desc')->
-				orderBy('name','asc')->
-				get();
-		}
+	public static function joinPlayersGoals_Club(){
+		return DB::table('players')->
+			join('teams','players.team_id','=','teams.id')->
+			select('players.name', 'teams.name AS team_name','players.goals_club')->
+			orderBy('goals_club','desc')->
+			orderBy('name','asc')->
+			get();
+	}
 
-		public static function updateByID($id, $name, $goals_club, $goals_career){
-			DB::table('players')->
-				where('id',$id)->
-				update(['name' => $name, 'goals_club' => $goals_club, 'goals_career' => $goals_career, 'updated_at' => date('Y-m-d G:i:s') ]);
-		}
+	public static function updateByID($id, $name, $goals_club, $goals_career){
+		DB::table('players')->
+			where('id',$id)->
+			update(['name' => $name, 'goals_club' => $goals_club, 'goals_career' => $goals_career, 'updated_at' => date('Y-m-d G:i:s') ]);
+	}
+
+	public static function insertNew($player_name, $team_id){
+		$now = date('Y-m-d G:i:s');
+		DB::table('players')->
+			insert(['team_id' => $team_id, 'name' => $player_name, 'goals_club' => 0, 'goals_career' => 0, 'created_at' => $now, 'updated_at' => $now ]);
+	}
 }

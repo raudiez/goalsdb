@@ -211,12 +211,27 @@
             <td class="col-xs-1 col-md-1" style="vertical-align:middle"><b>-</b></td>
             <td class="col-xs-1 col-md-1" style="vertical-align:middle"><b>-</b></td>
           </tr>
+          <tr>
+            <td class="col-xs-1 col-md-1"></td>
+            <td class="col-xs-1 col-md-1" style="text-align: left">
+              <a href="{{ url('/players/form/'.$team->id) }}" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-plus-sign"></span> Añadir jugador</a>
+            </td>
+            <td class="col-xs-2 col-md-2"></td>
+            <td class="col-xs-1 col-md-1"></td>
+            <td class="col-xs-2 col-md-2"></td>
+            <td class="col-xs-1 col-md-1"></td>
+            <td class="col-xs-2 col-md-2"></td>
+            <td class="col-xs-1 col-md-1"></td>
+            <td class="col-xs-1 col-md-1"></td>
+          </tr>
         </tbody>
       </table></div>
     </div>
 
     <div class="col-xs-12 col-md-2">
-      {{Form::submit('Guardar', array('class' => 'btn btn-success'))}}
+      <button type="submit" class="btn btn-success">
+        <span class="glyphicon glyphicon-ok"></span> Guardar
+      </button>
       <div class="clearfix"><br/></div>
       <div class="panel panel-primary">
         <div class="panel-heading"><b>Records de goles</b></div>
@@ -243,7 +258,7 @@
         </div>
       </div>
       <div class="clearfix"><br/></div>
-      <a href="{{ url('/records/form/'.$team->id) }}" class="btn btn-danger" role="button">Añadir record</a>
+      <a href="{{ url('/records/form/'.$team->id) }}" class="btn btn-danger" role="button"><span class="glyphicon glyphicon-plus-sign"></span> Añadir record</a>
     </div>
     {{Form::hidden('old_goals', serialize($old_goals))}}
   </div>

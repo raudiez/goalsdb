@@ -21,10 +21,14 @@ Route::auth();
 
 //Team
 Route::get('teams', 'TeamsController@index');
-Route::get('teams/show/{id}/{order_by?}/{order_by_dir?}', 'TeamsController@show');
-Route::post('teams/save/{id}', 'TeamsController@save');
+Route::get('teams/show/{team_id}/{order_by?}/{order_by_dir?}', 'TeamsController@show');
+Route::post('teams/save/{team_id}', 'TeamsController@save');
+
+//Player
+Route::get('players/form/{team_id}', 'PlayersController@form');
+Route::post('players/save/{team_id}', 'PlayersController@save');
 
 //Record
-Route::get('records/form/{id}', 'RecordsController@form');
-Route::post('records/save/{id}', 'RecordsController@save');
+Route::get('records/form/{team_id}', 'RecordsController@form');
+Route::post('records/save/{team_id}', 'RecordsController@save');
 
