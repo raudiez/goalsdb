@@ -52,7 +52,31 @@
       <div class="panel panel-primary">
         <div class="panel-heading"><b>Goles totales de cada equipo</b></div>
         <div class="panel-body">
-          En construcción.
+          <div class="table-responsive"><table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th style="text-align: right;">Pos</th>
+                <th style="text-align: center">Club</th>
+                <th style="text-align: center">Goles totales</th>
+              </tr>
+            </thead>
+            <tbody style="text-align: center">
+              <?php $i=1; ?>
+              @foreach ($goals_by_club as $team_goals)
+              <tr>
+                <!-- POS -->
+                <td class="col-xs-1 col-md-1" style="text-align: right"><b>{{$i}}</b></td>
+                <?php $i++; ?>
+
+                <!-- CLUB -->
+                <td class="col-xs-7 col-md-7" style="text-align: left">{{$team_goals->team_name}}</td>
+
+                <!-- GOLES CLUB -->
+                <td class="col-xs-4 col-md-4">{{$team_goals->total_goals}}</td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table></div>
         </div>
       </div>
     </div>
