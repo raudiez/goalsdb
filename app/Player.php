@@ -30,6 +30,14 @@ class Player extends Model
 			get();
 	}
 
+	public static function getAllPlayersGoals(){
+		$all_goals_club = DB::table('players')->
+			sum('goals_club');
+		$all_goals_career = DB::table('players')->
+			sum('goals_career');
+		return $all_goals_club + $all_goals_career;
+	}
+
 	public static function updateByID($id, $name, $goals_club, $goals_career){
 		DB::table('players')->
 			where('id',$id)->

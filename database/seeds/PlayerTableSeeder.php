@@ -170,6 +170,7 @@ class PlayerTableSeeder extends Seeder
     ['team_id' => 4, 'name' => 'Benzema', 'goals_club' => 5, 'goals_career' => 0],
     ['team_id' => 4, 'name' => 'Bacca', 'goals_club' => 5, 'goals_career' => 0],
     ['team_id' => 4, 'name' => 'Schürrle', 'goals_club' => 7, 'goals_career' => 0],
+    ['team_id' => 4, 'name' => 'RESTO', 'goals_club' => 0, 'goals_career' => 0],
 
 
     ];

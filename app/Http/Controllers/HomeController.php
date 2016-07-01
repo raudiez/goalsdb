@@ -27,6 +27,7 @@ class HomeController extends Controller
     public function index(){
         $teams = Team::all()->sortBy('name');
         $players = Player::joinPlayersGoals_Club();
-        return view('home',compact('teams','players'));
+        $total_goals = Player::getAllPlayersGoals();
+        return view('home',compact('teams','players','total_goals'));
     }
 }
