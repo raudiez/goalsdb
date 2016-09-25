@@ -19,6 +19,10 @@ Route::get('/', 'HomeController@index');
 //Auth
 Route::auth();
 
+//User
+Route::get('owners', 'UsersController@index');
+Route::get('owners/show/{user_id}', 'UsersController@show');
+
 //Team
 Route::get('teams', 'TeamsController@index');
 Route::get('teams/show/{team_id}/{order_by?}/{order_by_dir?}', 'TeamsController@show');

@@ -4,6 +4,9 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use DB;
+use Illuminate\Database\Eloquent\Model;
+
 class User extends Authenticatable
 {
     /**
@@ -23,4 +26,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function players(){
+        return $this->hasMany(Player::class);
+    }
+
+    public static function getByID($id){
+        return DB::table('users')->where('id', $id)->first();
+    }
 }

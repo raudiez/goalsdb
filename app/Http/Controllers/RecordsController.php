@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Team;
 use App\Player;
 use App\Record;
+use App\User;
 
 use Illuminate\Http\Request;
 
@@ -13,13 +14,14 @@ use App\Http\Requests;
 class RecordsController extends Controller
 {
   public function form($team_id){
+    $owners = User::all()->sortBy('name');
   	$teams = Team::all()->sortBy('name');
     $max_record = Record::getMaxByTeam_id($team_id);
     $new_record = (($max_record/100)+1)*100;
   	$team = Team::getByID($team_id);
   	$players = Player::getByTeamID_orderBy($team_id,'name','asc');
 
-  	return view('records/form', compact('teams','team','players', 'new_record'));
+  	return view('records/form', compact('owners', 'teams','team','players', 'new_record'));
   }
 
   public function save(Request $request,$team_id){

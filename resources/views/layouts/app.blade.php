@@ -49,6 +49,18 @@
                 <ul class="nav navbar-nav">
                     @if (!Auth::guest())
                         <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Directivos <span class="caret"></span></a>
+                          <ul class="dropdown-menu">
+                            <li><a href="{{url('/owners')}}">Todos</a></li>
+                            <li role="separator" class="divider"></li>
+                            @foreach ($owners as $owner_link)
+                                <li><a href="{{url('/owners/show/'.$owner_link->id)}}">
+                                <!--{{ Html::image('imgs/owners/'.$owner_link->logo.'.png','',array('style' => 'height: 12px; margin-right: 8px;margin-top: -3px; margin-left: 0px;')) }}-->
+                                <b>{{$owner_link->name}}</b></a></li>
+                            @endforeach
+                          </ul>
+                        </li>
+                        <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Clubs <span class="caret"></span></a>
                           <ul class="dropdown-menu">
                             <li><a href="{{url('/teams')}}">Todos</a></li>

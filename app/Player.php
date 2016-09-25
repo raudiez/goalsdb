@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Player extends Model
 {
-  public function team()
+  public function user()
   {
-  	return $this->belongsTo(Team::class);
+  	return $this->belongsTo(User::class);
   }
 
   public static function getByTeamID_orderBy($team_id,$order,$order_dir){
