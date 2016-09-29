@@ -22,8 +22,9 @@ class UsersController extends Controller{
         $owners = User::all()->sortBy('name');
     	$teams = Team::all()->sortBy('name');
     	$owner = User::getByID($id);
+        $clubs = Team::getByOwnerID($id);
 
-    	return view('owners/show', compact('owners', 'teams','team'));
+    	return view('owners/show', compact('owners', 'owner', 'teams', 'clubs'));
     }
 
 }

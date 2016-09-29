@@ -13,6 +13,7 @@
   </div>
   <div class="row">
     {!! Form::open(array('url' => 'players/save/'.$team->id)) !!}
+    {{Form::hidden('owner_id', $team->owner_id)}}
     <div class="col-md-4"></div>
     <div class="col-md-4">
       <div class="form-group">

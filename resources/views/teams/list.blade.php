@@ -16,6 +16,7 @@
         <a href="{{ url('/teams/show/'.$team->id) }}" class="list-group-item" style="text-align: center;height: 300px; position: relative;">
           <h4 class="list-group-item-heading" style="text-align: left">{{$team->name}}</h4>
           {{ Html::image('imgs/teams/'.$team->logo.'.png',$team->name,array('style' => 'height: 75%; margin: 15px 0 15px 0;')) }}
+          <h1 class="list-group-item-heading" style="text-align: right; color: rgba(44, 44, 44, 0.6); margin-top: -30px; font-size: 50px;"><i><b>{{$team->version}}</b></i></h1>
         </a>
       </div>
     </div>

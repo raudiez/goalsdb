@@ -6,7 +6,7 @@
 
     <div class="col-md-9">
       <div class="panel panel-primary">
-        <div class="panel-heading"><b>Clasifiación total</b>  </div>
+        <div class="panel-heading"><b>Clasifiación total Fifa 16</b>  </div>
         <div class="panel-body">
           <div class="table-responsive"><table class="table table-striped table-hover">
             <thead>
@@ -33,7 +33,7 @@
                 <td class="col-xs-4 col-md-4" style="text-align: left">{{$player->team_name}}</td>
 
                 <!-- GOLES CLUB -->
-                <td class="col-xs-3 col-md-3">{{$player->goals_club}}</td>
+                <td class="col-xs-3 col-md-3">{{$player->goals_club_16}}</td>
               </tr>
               @endif
               @endforeach
@@ -50,7 +50,7 @@
         </div>
       </div>
       <div class="panel panel-primary">
-        <div class="panel-heading"><b>Goles totales de cada equipo</b></div>
+        <div class="panel-heading"><b>Goles totales de cada equipo (16)</b></div>
         <div class="panel-body">
           <div class="table-responsive"><table class="table table-striped table-hover">
             <thead>
@@ -62,7 +62,7 @@
             </thead>
             <tbody style="text-align: center">
               <?php $i=1; ?>
-              @foreach ($goals_by_club as $team_goals)
+              @foreach ($goals_by_club_16 as $team_goals)
               <tr>
                 <!-- POS -->
                 <td class="col-xs-1 col-md-1" style="text-align: right"><b>{{$i}}</b></td>

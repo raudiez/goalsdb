@@ -28,11 +28,11 @@ class HomeController extends Controller
     public function index(){
         $owners = User::all()->sortBy('name');
         $teams = Team::all()->sortBy('name');
-        $players = Player::joinPlayersGoals_Club();
+        $players = Player::joinPlayersGoals_Club(16);
         $total_goals = Player::getAllPlayersGoals();
         //$goals_by_owner = Player::joinOwnerTotalGoals();
-        $goals_by_club = Player::joinClubTotalGoals();
+        $goals_by_club_16 = Player::joinClubTotalGoals(16);
 
-        return view('home',compact('owners', 'teams','players','total_goals',/*'goals_by_owner', */'goals_by_club'));
+        return view('home',compact('owners', 'teams','players','total_goals',/*'goals_by_owner', */'goals_by_club_16'));
     }
 }

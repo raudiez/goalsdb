@@ -13,6 +13,7 @@
   </div>
   <div class="row">
     {!! Form::open(array('url' => 'records/save/'.$team->id)) !!}
+    {{Form::hidden('fifa_version', $team->version)}}
     <div class="col-md-4"></div>
     <div class="col-md-4">
       <div class="form-group">

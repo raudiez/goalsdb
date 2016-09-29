@@ -16,10 +16,10 @@ class RecordsController extends Controller
   public function form($team_id){
     $owners = User::all()->sortBy('name');
   	$teams = Team::all()->sortBy('name');
-    $max_record = Record::getMaxByTeam_id($team_id);
+    $team = Team::getByID($team_id);
+    $max_record = Record::getMaxByOwnerAndVersion($team->owner_id,$team->version);
     $new_record = (($max_record/100)+1)*100;
-  	$team = Team::getByID($team_id);
-  	$players = Player::getByTeamID_orderBy($team_id,'name','asc');
+  	$players = Player::getByOwnerAndVersion_orderBy($team->owner_id,$team->version,'name','asc');
 
   	return view('records/form', compact('owners', 'teams','team','players', 'new_record'));
   }
@@ -28,8 +28,9 @@ class RecordsController extends Controller
 
   	$player_id = $request->input('player_id');
   	$goals = $request->input('goals');
+    $version = $request->input('fifa_version');
 
-  	Record::insert($player_id,$goals);
+  	Record::insert($player_id,$goals,$version);
 
   	return redirect('teams/show/'.$team_id);
   }

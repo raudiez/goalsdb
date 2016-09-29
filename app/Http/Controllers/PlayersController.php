@@ -20,9 +20,9 @@ class PlayersController extends Controller{
   }
 
   public function save(Request $request,$team_id){
-
   	$player_name = $request->input('player_name');
-  	Player::insertNew($player_name,$team_id);
+    $owner_id = $request->input('owner_id');
+  	Player::insertNew($player_name,$owner_id);
   	return redirect('teams/show/'.$team_id);
   }
 }

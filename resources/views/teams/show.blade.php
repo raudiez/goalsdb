@@ -63,6 +63,7 @@
   <div class="clearfix"><br/></div>
 
   {!! Form::open(array('url' => 'teams/save/'.$team->id)) !!}
+  {{Form::hidden('fifa_version', $team->version)}}
   <div class="row">
     <div class="col-xs-12 col-md-10">
       <div class="table-responsive"><table class="table table-striped table-hover">
