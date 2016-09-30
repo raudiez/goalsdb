@@ -49,7 +49,7 @@
                 <ul class="nav navbar-nav">
                     @if (!Auth::guest())
                         <li class="dropdown">
-                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Directivos <span class="caret"></span></a>
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Entrenadores <span class="caret"></span></a>
                           <ul class="dropdown-menu">
                             <li><a href="{{url('/owners')}}">Todos</a></li>
                             <li role="separator" class="divider"></li>
@@ -68,7 +68,7 @@
                             @foreach ($teams as $team_link)
                                 <li><a href="{{url('/teams/show/'.$team_link->id)}}">
                                 {{ Html::image('imgs/teams/'.$team_link->logo.'.png','',array('style' => 'height: 12px; margin-right: 8px;margin-top: -3px; margin-left: 0px;')) }}
-                                {{$team_link->name}}</a></li>
+                                {{$team_link->name}} {{ Html::image('imgs/fifa'.$team_link->version.'_onlynum.png','',array('style' => 'height: 12px; margin-right: 8px;margin-top: -3px; margin-left: 5px;')) }}</a></li>
                             @endforeach
                           </ul>
                         </li>
@@ -102,7 +102,7 @@
     <div class="clearfix"><br/></div>
     <div class="container">
         <hr>
-        <h6 class="small">&copy; 2016 - <a href="https://github.com/raudiez">Raúl Díez Sánchez</a></h6>
+        <h6 class="small">&copy; 2016 - <a href="https://github.com/raudiez">Raúl Díez Sánchez</a> - FIFA 16, FIFA 17 et al. and all FIFA assets are property of EA Sports.</h6>
     </div>
     <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>

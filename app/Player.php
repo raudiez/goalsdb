@@ -40,6 +40,10 @@ class Player extends Model
 		return DB::select('SELECT teams.name as team_name, SUM(coalesce(players.goals_club_'.$version.' ,0)+COALESCE(players.goals_career_'.$version.',0)) as total_goals from players INNER JOIN teams ON players.owner_id = teams.owner_id and teams.version = '.$version.' GROUP by teams.id order by total_goals desc');
 	}
 
+	public static function joinOwnerTotalGoals(){
+		return DB::select('SELECT users.name as owner_name, SUM(coalesce(players.goals_club_16 ,0)+COALESCE(players.goals_career_16,0)+COALESCE(players.goals_club_17,0)+COALESCE(players.goals_career_17,0)) as total_goals from players INNER JOIN users ON players.owner_id = users.id GROUP by users.id order by total_goals desc');
+	}
+
 	public static function getAllPlayersGoals(){
 		$all_goals_club_16 = DB::table('players')->
 			sum('goals_club_16');
