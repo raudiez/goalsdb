@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 
 class PlayersController extends Controller{
+
 	public function form($team_id){
     $owners = User::all()->sortBy('name');
   	$teams = Team::all()->sortBy('name');

@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 
 class UsersController extends Controller{
+
     public function index(){
         $owners = User::all()->sortBy('name');
     	$teams = Team::all()->sortBy('name');
