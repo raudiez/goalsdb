@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Competition;
+use App\Team;
+use App\User;
 
 use Illuminate\Http\Request;
 
@@ -15,6 +17,9 @@ use RuntimeException;
 class LOFCController extends Controller{
 
   public function botaoro(){
+
+    $owners = User::all()->sortBy('name');
+    $teams = Team::all()->sortBy('name');
 
     $client = new Client();
     $response = $client->get('http://www.gesliga.es/Estadisticas.aspx?Liga=246520');
@@ -77,12 +82,14 @@ class LOFCController extends Controller{
               return $a['goals'] < $b['goals'];
           });
 
-  	return view('lofc/botaoro', compact('goles_liga', 'goles_double', 'goles_last', 'goles_totales'));
+  	return view('lofc/botaoro', compact('owners', 'teams', 'goles_liga', 'goles_double', 'goles_last', 'goles_totales'));
   }
 
   public function competitions(){
+    $owners = User::all()->sortBy('name');
+    $teams = Team::all()->sortBy('name');
     $competitions = Competition::all()->sortBy('name');
-    return view('lofc/competitions/list', compact('competitions'));
+    return view('lofc/competitions/list', compact('owners', 'teams', 'competitions'));
   }
 
         
