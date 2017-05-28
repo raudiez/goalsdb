@@ -4,16 +4,17 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>FifaGoalsDB</title>
+    <link rel="icon" href="{{ URL::asset('imgs/lofc.png') }}" />
+    <title>LOFC - Liga Online de Fútbol entre Caballeros</title>
 
     <!-- Fonts -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
+    <link href="{{ URL::asset('css/premier-league/style.css') }}" rel='stylesheet' type='text/css'>
 
     <!-- Styles -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-    {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
+    <link href="{{ URL::asset('css/style.css') }}" rel="stylesheet">
 
     <style>
         .fa-btn {
@@ -39,14 +40,21 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    FifaGoalsDB
+                <a class="navbar-brand" href="{{ url('/') }}">{{ Html::image('imgs/lofc.png','',array('style' => 'height: 90%;')) }}
                 </a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                      <a href="{{ url('/') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="font-family: PremierLeague; font-size: 26px; margin-left: -10px;"><b>LOFC</b> <span class="caret"></span></a>
+                      <ul class="dropdown-menu" style="margin-left: -10px;">
+                        <li><a href="{{url('lofc/competitions')}}">Copas</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="{{url('lofc/botaoro')}}">Bota de Oro</a></li>
+                      </ul>
+                    </li>
                     @if (!Auth::guest())
                         <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Entrenadores <span class="caret"></span></a>
@@ -55,7 +63,6 @@
                             <li role="separator" class="divider"></li>
                             @foreach ($owners as $owner_link)
                                 <li><a href="{{url('/owners/show/'.$owner_link->id)}}">
-                                <!--{{ Html::image('imgs/owners/'.$owner_link->logo.'.png','',array('style' => 'height: 12px; margin-right: 8px;margin-top: -3px; margin-left: 0px;')) }}-->
                                 <b>{{$owner_link->name}}</b></a></li>
                             @endforeach
                           </ul>
@@ -77,6 +84,7 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
+
                     @if (!Auth::guest())
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -87,13 +95,18 @@
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Salir</a></li>
                             </ul>
                         </li>
+                    @else
+                        <li>
+                            <a href="{{ url('/login') }}">Login</span>
+                            </a>
+                        </li>
                     @endif
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div class="clearfix" style="margin-top: 60px;"><br/></div>
+    <div class="clearfix" style="margin-top: 90px;"><br/></div>
 
     @yield('content')
 
@@ -102,7 +115,7 @@
     <div class="clearfix"><br/></div>
     <div class="container">
         <hr>
-        <h6 class="small">&copy; 2016 - <a href="https://github.com/raudiez">Raúl Díez Sánchez</a> - FIFA 16, FIFA 17 et al. and all FIFA assets are property of EA Sports.</h6>
+        <h6 class="small">&copy; 2017 - <a href="https://github.com/raudiez">Raúl Díez Sánchez</a> - FIFA 16, FIFA 17 et al. and all FIFA assets are property of EA Sports, Electronic Arts and the Fédération Internationale de Football Association (FIFA).</h6>
     </div>
     <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>

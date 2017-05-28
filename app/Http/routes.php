@@ -36,3 +36,7 @@ Route::post('players/save/{team_id}', 'PlayersController@save');
 Route::get('records/form/{team_id}', 'RecordsController@form');
 Route::post('records/save/{team_id}', 'RecordsController@save');
 
+//LOFC
+Route::get('lofc/competitions', 'LOFCController@competitions');
+Route::get('lofc/botaoro', 'LOFCController@botaoro');
+

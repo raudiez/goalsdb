@@ -12,6 +12,11 @@ use App\Http\Requests;
 
 class PlayersController extends Controller{
 
+  public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
 	public function form($team_id){
     $owners = User::all()->sortBy('name');
   	$teams = Team::all()->sortBy('name');

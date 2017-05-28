@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+@if (!Auth::guest())
   <div class="row">
     <div class="col-md-12">
       <div class="panel panel-primary">
@@ -188,6 +189,13 @@
       </div>
     </div>
   </div>
+@else
+  <center>
+  <h1 style="font-family: PremierLeague;">Bienvenido a la <b>LOFC</b></h1>
+  <div class="clearfix" style="margin-top: 40px;"><br/></div>
+  {{ Html::image('imgs/lofc.png','',array('style' => 'height: 250px')) }}
+  </center>
+@endif
 </div>
 @endsection
 
