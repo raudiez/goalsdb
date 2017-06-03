@@ -5,6 +5,7 @@
   <ol class="breadcrumb">
     <li><a href="{{ url('/') }}">Inicio</a></li>
     <li>LOFC</li>
+    <li>Temporada 2</li>
     <li>Bota de Oro</li>
   </ol>
   <div class="page-header">

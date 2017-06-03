@@ -18,6 +18,8 @@ Route::get('/', 'HomeController@index');
 
 //Auth
 Route::auth();
+Route::get('/register', 'Auth\AuthController@getRegister');
+Route::get('/login', 'Auth\AuthController@getLogin');
 
 //User
 Route::get('owners', 'UsersController@index');
@@ -37,6 +39,6 @@ Route::get('records/form/{team_id}', 'RecordsController@form');
 Route::post('records/save/{team_id}', 'RecordsController@save');
 
 //LOFC
-Route::get('lofc/competitions', 'LOFCController@competitions');
-Route::get('lofc/botaoro', 'LOFCController@botaoro');
+Route::get('lofc/competitions/{season_id}', 'LOFCController@competitions');
+Route::get('lofc/botaoro/{season_id}', 'LOFCController@botaoro');
 

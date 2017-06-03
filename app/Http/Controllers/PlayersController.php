@@ -20,9 +20,10 @@ class PlayersController extends Controller{
 	public function form($team_id){
     $owners = User::all()->sortBy('name');
   	$teams = Team::all()->sortBy('name');
+    $lofc_seasons = LOFCSeason::all();
   	$team = Team::getByID($team_id);
 
-  	return view('players/form', compact('owners', 'teams','team'));
+  	return view('players/form', compact('owners', 'teams', 'lofc_seasons', 'team'));
   }
 
   public function save(Request $request,$team_id){

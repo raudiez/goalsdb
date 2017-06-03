@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Competition;
 use App\Team;
 use App\User;
+use App\LOFCCompetition;
+use App\LOFCSeason;
 
 use Illuminate\Http\Request;
 
@@ -16,13 +17,15 @@ use RuntimeException;
 
 class LOFCController extends Controller{
 
-  public function botaoro(){
+  public function botaoro($season_id){
 
     $owners = User::all()->sortBy('name');
     $teams = Team::all()->sortBy('name');
+    $lofc_seasons = LOFCSeason::all();
+    $season = LOFCSeason::getByID($season_id);
 
     $client = new Client();
-    $response = $client->get('http://www.gesliga.es/Estadisticas.aspx?Liga=246520');
+    $response = $client->get("http://www.gesliga.es/Estadisticas.aspx?Liga=$season->id_gesliga");
     $gesliga = $response->getBody()->getContents();
     $crawler = new Crawler($gesliga);
     if ($crawler->filter('#ctl00_CH1_rptEstadisticas_ctl00_grd')->count()){
@@ -47,8 +50,10 @@ class LOFCController extends Controller{
       }
     }else $goles_liga = array();
 
-    /*$goles_double = array(array('name' => 'Batshuayi', 'goals' => 3), array('name' => 'Serresiete', 'goals' => 20));
+    //PRUEBAS
+    /*$goles_double = array(array('name' => 'Batshuayi', 'goals' => 3), array('name' => 'Batshuayi', 'goals' => 3), array('name' => 'Batshuayi', 'goals' => 3), array('name' => 'Batshuayi', 'goals' => 3), array('name' => 'Batshuayi', 'goals' => 3), array('name' => 'Batshuayi', 'goals' => 3), array('name' => 'Batshuayi', 'goals' => 3), array('name' => 'Batshuayi', 'goals' => 3), array('name' => 'Batshuayi', 'goals' => 3), array('name' => 'Batshuayi', 'goals' => 3), array('name' => 'Serresiete', 'goals' => 20));
     $goles_last = array(array('name' => 'Ibrahimovic', 'goals' => 1), array('name' => 'Pedrerol', 'goals' => 25));//*/
+
     $goles_double = array();
     $goles_last = array();//*/
 
@@ -81,15 +86,36 @@ class LOFCController extends Controller{
     usort($goles_totales, function($a, $b) {
               return $a['goals'] < $b['goals'];
           });
+    usort($goles_double, function($a, $b) {
+              return $a['goals'] < $b['goals'];
+          });
+    usort($goles_last, function($a, $b) {
+              return $a['goals'] < $b['goals'];
+          });
 
-  	return view('lofc/botaoro', compact('owners', 'teams', 'goles_liga', 'goles_double', 'goles_last', 'goles_totales'));
+    //solo top10 tras todo
+    $goles_liga = array_slice($goles_liga, 0, 10, true);
+    $goles_double = array_slice($goles_double, 0, 10, true);
+    $goles_last = array_slice($goles_last, 0, 10, true);
+    $goles_totales = array_slice($goles_totales, 0, 10, true);
+
+  	return view('lofc/botaoro', compact('owners', 'teams', 'lofc_seasons', 'goles_liga', 'goles_double', 'goles_last', 'goles_totales'));
   }
 
-  public function competitions(){
+  public function competitions($season_id){
     $owners = User::all()->sortBy('name');
     $teams = Team::all()->sortBy('name');
-    $competitions = Competition::all()->sortBy('name');
-    return view('lofc/competitions/list', compact('owners', 'teams', 'competitions'));
+    $lofc_seasons = LOFCSeason::all();
+    $season = LOFCSeason::getByID($season_id);
+
+    $client = new Client();
+    $response = $client->get("http://www.gesliga.es/Clasificacion.aspx?Liga=$season->id_gesliga");
+    $gesliga = $response->getBody()->getContents();
+    $crawler = new Crawler($gesliga);
+    $gesliga_name = $crawler->filter('#ctl00_menuLigaDesktop_lblNombreLiga')->text();
+
+    $competitions = LOFCCompetition::getBySeasonID($season_id);
+    return view('lofc/competitions/list', compact('owners', 'teams', 'lofc_seasons', 'season', 'gesliga_name', 'competitions'));
   }
 
         
