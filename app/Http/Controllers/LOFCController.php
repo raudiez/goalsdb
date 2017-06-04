@@ -18,9 +18,6 @@ use RuntimeException;
 class LOFCController extends Controller{
 
   public function botaoro($season_id){
-
-    $owners = User::all()->sortBy('name');
-    $teams = Team::all()->sortBy('name');
     $season = LOFCSeason::getByID($season_id);
 
     $client = new Client();
@@ -98,12 +95,10 @@ class LOFCController extends Controller{
     $goles_last = array_slice($goles_last, 0, 10, true);
     $goles_totales = array_slice($goles_totales, 0, 10, true);
 
-  	return view('lofc/botaoro', compact('owners', 'teams', 'goles_liga', 'goles_double', 'goles_last', 'goles_totales'));
+  	return view('lofc/botaoro', compact('goles_liga', 'goles_double', 'goles_last', 'goles_totales'));
   }
 
   public function competitions($season_id){
-    $owners = User::all()->sortBy('name');
-    $teams = Team::all()->sortBy('name');
     $season = LOFCSeason::getByID($season_id);
 
     $client = new Client();
@@ -113,7 +108,7 @@ class LOFCController extends Controller{
     $gesliga_name = $crawler->filter('#ctl00_menuLigaDesktop_lblNombreLiga')->text();
 
     $competitions = LOFCCompetition::getBySeasonID($season_id);
-    return view('lofc/competitions/list', compact('owners', 'teams', 'season', 'gesliga_name', 'competitions'));
+    return view('lofc/competitions/list', compact('season', 'gesliga_name', 'competitions'));
   }
 
         

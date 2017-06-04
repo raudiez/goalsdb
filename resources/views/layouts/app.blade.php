@@ -50,15 +50,21 @@
           <li class="dropdown">
             <a href="{{ url('/') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="font-family: PremierLeague; font-size: 26px; margin-left: -10px;"><b>LOFC</b> <span class="caret"></span></a>
             <ul class="dropdown-menu" style="margin-left: -10px;">
+            <?php $i=0; ?>
             @foreach ($lofc_seasons as $season)
-              <li class="dropdown-submenu">
-                <a class="test" tabindex="-1" href="#">Temporada {{$season->id}} <span class="caret"></span></a>
-                <ul class="dropdown-menu">
+              <li>
+                <a href="#">Temporada {{$season->id}} <span class="caret"></span></a>
+                <ul class="dropdown-menu sub-menu" style="top: {{$i}}px;">
+                  <li class="dropdown-header">Temporada {{$season->id}}</li>
+                  <li role="separator" class="divider"></li>
                   <li><a href="{{url('lofc/competitions/'.$season->id)}}">Competiciones</a></li>
                   <li><a href="{{url('lofc/botaoro/'.$season->id)}}">Bota de Oro</a></li>
                 </ul>
               </li>
+              <?php $i+=28; ?>
             @endforeach
+            <li role="separator" class="divider"></li>
+            <li><a href="https://goo.gl/BbHjkJ" target="_blank">Reglamento</a></li>
             </ul>
           </li>
           @if (!Auth::guest())
@@ -131,17 +137,6 @@
   <script>
     $('.navbar [data-toggle="dropdown"]').bootstrapDropdownHover({});
   </script>
-  <script>
-    $(document).ready(function(){
-      $('.dropdown-submenu a.test').on("click", function(e){
-        $(this).next('ul').toggle();
-        e.stopPropagation();
-        e.preventDefault();
-      });
-    });
-    </script>
-
-
 
 </body>
 </html>

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Team;
 use App\Player;
-use App\User;
 
 use Illuminate\Http\Request;
 
@@ -18,11 +17,9 @@ class PlayersController extends Controller{
     }
 
 	public function form($team_id){
-    $owners = User::all()->sortBy('name');
-  	$teams = Team::all()->sortBy('name');
   	$team = Team::getByID($team_id);
 
-  	return view('players/form', compact('owners', 'teams', 'team'));
+  	return view('players/form', compact('team'));
   }
 
   public function save(Request $request,$team_id){
