@@ -22,19 +22,17 @@ class TeamsController extends Controller{
     public function index(){
         $owners = User::all()->sortBy('name');
     	$teams = Team::all()->sortBy('name');
-        $lofc_seasons = LOFCSeason::all();
-    	return view('teams/list', compact('owners', 'teams', 'lofc_seasons'));
+    	return view('teams/list', compact('owners', 'teams'));
     }
 
     public function show($id,$order_by='goals_club',$order_by_dir='desc'){
         $owners = User::all()->sortBy('name');
     	$teams = Team::all()->sortBy('name');
-        $lofc_seasons = LOFCSeason::all();
         $team = Team::getByID($id);
         $records = Record::getRecordsByOwnerAndVersion($team->owner_id, $team->version);
     	$players = Player::getByOwnerAndVersion_orderBy($team->owner_id,$team->version,$order_by.'_'.$team->version,$order_by_dir);
 
-    	return view('teams/show', compact('owners', 'teams', 'lofc_seasons', 'team', 'players', 'records'));
+    	return view('teams/show', compact('owners', 'teams', 'team', 'players', 'records'));
     }
 
     public function save(Request $request, $id){
