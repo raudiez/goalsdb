@@ -14,7 +14,7 @@
   <div class="row">
     <div class="col-xs-12 col-md-4">
       <div class="list-group">
-        <a href="http://www.gesliga.es/Clasificacion.aspx?Liga={{$season->id_gesliga}}" class="list-group-item" style="text-align: center;height: 150px; position: relative;">
+        <a href="http://www.gesliga.es/Clasificacion.aspx?Liga={{$season->id_gesliga}}" class="list-group-item" style="text-align: center;height: 150px; position: relative;" target="_blank">
           <h3 class="list-group-item-heading" style="text-align: left">{{$gesliga_name}}</h3>
           <br/>
           <p style="text-align: center;">Ir a <b>Gesliga</b></p>
