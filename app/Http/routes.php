@@ -40,5 +40,6 @@ Route::post('records/save/{team_id}', 'RecordsController@save');
 
 //LOFC
 Route::get('lofc/competitions/{season_id}', 'LOFCController@competitions');
+Route::get('lofc/show_competition/{competition_id}', 'LOFCController@show_competition');
 Route::get('lofc/botaoro/{season_id}', 'LOFCController@botaoro');
 

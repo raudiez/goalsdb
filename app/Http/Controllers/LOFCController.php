@@ -6,6 +6,7 @@ use App\Team;
 use App\User;
 use App\LOFCCompetition;
 use App\LOFCSeason;
+use App\LOFCJunction;
 
 use Illuminate\Http\Request;
 
@@ -109,6 +110,12 @@ class LOFCController extends Controller{
 
     $competitions = LOFCCompetition::getBySeasonID($season_id);
     return view('lofc/competitions/list', compact('season', 'gesliga_name', 'competitions'));
+  }
+
+  public function show_competition($competition_id){
+    $competition = LOFCCompetition::getByID($competition_id);
+    $junctions = LOFCJunction::joinCompetition_Teams($competition_id);
+    return view('lofc/competitions/show', compact('competition', 'junctions'));
   }
 
         
