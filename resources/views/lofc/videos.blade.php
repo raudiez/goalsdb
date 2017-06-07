@@ -11,7 +11,7 @@
     <li>Vídeos de partidos</li>
   </ol>
   <div class="page-header">
-    <h1>Listado de videos de la {{$competition_name}}</h1>
+    <h1>Vídeos de la {{$competition_name}}</h1>
   </div>
   <div class="row">
     <div class="col-md-12">
