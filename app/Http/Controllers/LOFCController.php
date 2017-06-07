@@ -16,6 +16,8 @@ use GuzzleHttp\Client;
 use Symfony\Component\DomCrawler\Crawler;
 use RuntimeException;
 
+use Alaouy\Youtube\Facades\Youtube;
+
 class LOFCController extends Controller{
 
   public function botaoro($season_id){
@@ -116,6 +118,31 @@ class LOFCController extends Controller{
     $competition = LOFCCompetition::getByID($competition_id);
     $junctions = LOFCJunction::joinCompetition_Teams($competition_id);
     return view('lofc/competitions/show', compact('competition', 'junctions'));
+  }
+
+  public function competition_videos($season_id, $competition_name){
+    $season = LOFCSeason::getByID($season_id);
+    $params = array(
+        'q'             => 'LOFC '.$competition_name.' TEMPORADA'.$season_id,
+        'type'          => 'video',
+        'part'          => 'id, snippet',
+        'maxResults'    => 50
+    );
+    $results = Youtube::searchAdvanced($params);
+    $jornadas = array();
+    for ($jornada=1; $jornada < 15; $jornada++) { 
+      $i = 0;
+      foreach ($results as $result) {
+        if (preg_match('/TEMPORADA '.$season_id.' JORNADA '.$jornada.'[.\s].*/', $result->snippet->description)) {
+          $jornadas[$jornada][$i] = array(
+            'videoId' => $result->id->videoId, 
+            'title' => $result->snippet->title,
+            );
+          $i++;
+        }
+      }
+    }
+    return view('lofc/videos', compact('season', 'competition_name', 'jornadas'));
   }
 
         

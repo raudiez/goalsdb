@@ -9,7 +9,8 @@
         "laravel/framework": "5.2.*",
 	"laravelcollective/html": "5.2.*",
         "guzzlehttp/guzzle": "~6.0",
-        "symfony/css-selector": "^3.2"
+        "symfony/css-selector": "^3.2",
+        "alaouy/youtube": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

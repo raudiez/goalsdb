@@ -14,11 +14,20 @@
   <div class="row">
     <div class="col-xs-12 col-md-4">
       <div class="list-group">
-        <a href="http://www.gesliga.es/Clasificacion.aspx?Liga={{$season->id_gesliga}}" class="list-group-item" style="text-align: center;height: 150px; position: relative;" target="_blank">
+        <div class="list-group-item" style="text-align: center;height: 150px; position: relative;">
           <h3 class="list-group-item-heading" style="text-align: left">{{$gesliga_name}}</h3>
           <br/>
-          <p style="text-align: center;">Ir a <b>Gesliga</b></p>
-        </a>
+          <a href="http://www.gesliga.es/Clasificacion.aspx?Liga={{$season->id_gesliga}}" target="_blank">Ir a <b>Gesliga</b></a>
+          <br/><br/>
+          <?php 
+            if ($season->id == 1) {
+              $href_matches = 'https://www.youtube.com/playlist?list=PLsydjHvwqKccfXnsUmfcmpq7jHMMdpOFy';
+            }else{
+              $href_matches = url('lofc/competition_videos/'.$season->id.'/'.$gesliga_name);
+            }
+          ?>
+          <a href="{{$href_matches}}" @if ($season->id ==1) target="_blank" @endif >Ver partidos</a>
+        </div>
       </div>
     </div>
     @foreach ($competitions as $competition)
