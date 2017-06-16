@@ -5,7 +5,7 @@
   <ol class="breadcrumb">
     <li><a href="{{ url('/') }}">Inicio</a></li>
     <li>LOFC</li>
-    <li>Temporada 2</li>
+    <li>Temporada {{$season_id}}</li>
     <li>Bota de Oro</li>
   </ol>
   <div class="page-header">
@@ -43,9 +43,16 @@
 	        </div>
 	      </div>
 		</div>
+		@foreach ($competitions_goals as $competition_name => $competition_goals)
+		<?php 
+			usort($competition_goals, function($a, $b) {
+              return $a['goals'] < $b['goals'];
+          });//ordena los goles de esta competicion
+			$competition = array_slice($competition_goals, 0, 10, true); //solo top10
+		?>
 		<div class="col-xs-6 col-md-3">
 			<div class="panel panel-primary">
-	        <div class="panel-heading" style="text-align: center;"><b>Double Game Championship</b></div>
+	        <div class="panel-heading" style="text-align: center;"><b>{{$competition_name}}</b></div>
 	        <div class="panel-body">
 	          <div class="table-responsive"><table class="table table-striped table-hover">
 	            <thead>
@@ -57,13 +64,13 @@
 	            </thead>
 	            <tbody style="text-align: center">
 	              <?php $i=1; ?>
-	              @foreach ($goles_double as $jugador)
+	              @foreach ($competition as $jugador)
 	              <tr>
 	                <!-- POS -->
 	                <td class="col-xs-1 col-md-1" style="text-align: right"><b>{{$i}}</b></td>
 	                <?php $i++; ?>
 	                <!-- JUGADOR -->
-	                <td class="col-xs-7 col-md-7" style="text-align: left">{{$jugador['name']}}</td>
+	                <td class="col-xs-7 col-md-7" style="text-align: left">{{$jugador['player_name']}}</td>
 
 	                <!-- GOLES -->
 	                <td class="col-xs-4 col-md-4">{{$jugador['goals']}}</td>
@@ -74,37 +81,8 @@
 	        </div>
 	      </div>
 		</div>
-		<div class="col-xs-6 col-md-3">
-			<div class="panel panel-primary">
-	        <div class="panel-heading" style="text-align: center;"><b>Last Man Standing Tournament</b></div>
-	        <div class="panel-body">
-	          <div class="table-responsive"><table class="table table-striped table-hover">
-	            <thead>
-	              <tr>
-	              	<th style="text-align: right;">Pos</th>
-	                <th style="text-align: left;">Jugador</th>
-	                <th style="text-align: center">Goles</th>
-	              </tr>
-	            </thead>
-	            <tbody style="text-align: center">
-	              <?php $i=1; ?>
-	              @foreach ($goles_last as $jugador)
-	              <tr>
-	                <!-- POS -->
-	                <td class="col-xs-1 col-md-1" style="text-align: right"><b>{{$i}}</b></td>
-	                <?php $i++; ?>
-	                <!-- JUGADOR -->
-	                <td class="col-xs-7 col-md-7" style="text-align: left">{{$jugador['name']}}</td>
-
-	                <!-- GOLES -->
-	                <td class="col-xs-4 col-md-4">{{$jugador['goals']}}</td>
-	              </tr>
-	              @endforeach
-	            </tbody>
-	          </table></div>
-	        </div>
-	      </div>
-		</div>
+		@endforeach
+		
 		<div class="col-xs-6 col-md-3">
 			<div class="panel panel-primary">
 	        <div class="panel-heading" style="text-align: center;"><b>Bota de Oro</b></div>

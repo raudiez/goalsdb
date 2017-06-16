@@ -7,11 +7,11 @@
     <li>LOFC</li>
     <li>Temporada {{$season->id}}</li>
     <li><a href="{{url('lofc/competitions/'.$season->id)}}">Competiciones</a></li>
-    <li>{{$competition_name}}</li>
+    <li>{{$league_name}}</li>
     <li>Vídeos de partidos</li>
   </ol>
   <div class="page-header">
-    <h1>Vídeos de la {{$competition_name}}</h1>
+    <h1>Vídeos de la {{$league_name}}</h1>
   </div>
   <div class="row">
     <div class="col-md-12">

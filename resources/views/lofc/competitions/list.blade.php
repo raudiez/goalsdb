@@ -23,7 +23,7 @@
             if ($season->id == 1) {
               $href_matches = 'https://www.youtube.com/playlist?list=PLsydjHvwqKccfXnsUmfcmpq7jHMMdpOFy';
             }else{
-              $href_matches = url('lofc/competition_videos/'.$season->id.'/'.$gesliga_name);
+              $href_matches = url('lofc/league_videos/'.$season->id.'/'.$gesliga_name);
             }
           ?>
           <a href="{{$href_matches}}" @if ($season->id ==1) target="_blank" @endif >Ver partidos</a>

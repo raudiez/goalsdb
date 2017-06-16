@@ -49,56 +49,62 @@ class LOFCController extends Controller{
       }
     }else $goles_liga = array();
 
-    //PRUEBAS
-    /*$goles_double = array(array('name' => 'Batshuayi', 'goals' => 3), array('name' => 'Batshuayi', 'goals' => 3), array('name' => 'Batshuayi', 'goals' => 3), array('name' => 'Batshuayi', 'goals' => 3), array('name' => 'Batshuayi', 'goals' => 3), array('name' => 'Batshuayi', 'goals' => 3), array('name' => 'Batshuayi', 'goals' => 3), array('name' => 'Batshuayi', 'goals' => 3), array('name' => 'Batshuayi', 'goals' => 3), array('name' => 'Batshuayi', 'goals' => 3), array('name' => 'Serresiete', 'goals' => 20));
-    $goles_last = array(array('name' => 'Ibrahimovic', 'goals' => 1), array('name' => 'Pedrerol', 'goals' => 25));//*/
+    $season_goals = LOFCSeason::joinGoals_Season($season_id);
 
-    $goles_double = array();
-    $goles_last = array();//*/
+    $competitions_goals = array();
+    foreach ($season_goals as $value) {
+      $competition = $value->competition_name;
+      if(!isset($competitions_goals[$competition])) {
+        $competitions_goals[$competition] = array();
+        array_push($competitions_goals[$competition], array('player_name' => $value->player_name, 'goals' => $value->count,  ));
+      }else array_push($competitions_goals[$competition], array('player_name' => $value->player_name, 'goals' => $value->count,  ));
+    }
 
+    $merged = FALSE; //var_control si se han añadido los goles de liga
     $goles_totales = array(); //Inicializa totales
-    $goles_liga_cpy = $goles_liga; //copia, para luego meter solo restantes
-    foreach ($goles_double as $double){
-      $name = array_column($goles_liga_cpy, 'name'); //buscamos solo nombres
-      $k = array_search($double['name'], $name); //busca en goles_liga
-      if ($k){//si ha encontrado
-        array_push($goles_totales, array('name' => $double['name'], 'goals' => $double['goals']+$goles_liga_cpy[$k]['goals']));
-        unset($goles_liga_cpy[$k]);
-      }else{
-        array_push($goles_totales, array('name' => $double['name'], 'goals' => $double['goals']));
+    $goles_liga_cpy = $goles_liga; //copia, para luego meter solo 
+    foreach ($competitions_goals as $competition_goals) {
+      foreach ($competition_goals as $value) {
+        if (!$merged) {
+          $name = array_column($goles_liga_cpy, 'name'); //buscamos solo nombres
+          $k = array_search($value['player_name'], $name); //busca en goles_liga
+          if ($k){
+            array_push($goles_totales, array('name' => $value['player_name'], 'goals' => $value['goals']+$goles_liga_cpy[$k]['goals']));
+            unset($goles_liga_cpy[$k]);
+          }else {
+            array_push($goles_totales, array('name' => $value['player_name'], 'goals' => $value['goals']));
+          }
+        }else{
+          $name = array_column($goles_totales, 'name');
+          $k = array_search($value['player_name'], $name);
+          if ($k){
+            $goles_totales[$k]['goals'] += $value['goals'];
+          }else{
+            array_push($goles_totales, array('name' => $value['player_name'], 'goals' => $value['goals']));
+          }
+        }
+        
+      }
+      if(!$merged){
+        $goles_totales = array_merge($goles_totales, $goles_liga_cpy);
+        $merged = TRUE;
       }
     }
-    //ahora añade al final los restantes de liga
-    $goles_totales = array_merge($goles_totales, $goles_liga_cpy);
 
-    foreach ($goles_last as $last){
-      $name = array_column($goles_totales, 'name');
-      $k = array_search($last['name'], $name);
-      if ($k){
-        $goles_totales[$k]['goals'] += $last['goals'];
-      }else{
-        array_push($goles_totales, array('name' => $last['name'], 'goals' => $last['goals']));
-      }
+    if (empty($competitions_goals)){
+      $goles_totales = array_merge($goles_totales, $goles_liga);
     }
 
     //sort personalizado
     usort($goles_totales, function($a, $b) {
               return $a['goals'] < $b['goals'];
           });
-    usort($goles_double, function($a, $b) {
-              return $a['goals'] < $b['goals'];
-          });
-    usort($goles_last, function($a, $b) {
-              return $a['goals'] < $b['goals'];
-          });
 
     //solo top10 tras todo
     $goles_liga = array_slice($goles_liga, 0, 10, true);
-    $goles_double = array_slice($goles_double, 0, 10, true);
-    $goles_last = array_slice($goles_last, 0, 10, true);
     $goles_totales = array_slice($goles_totales, 0, 10, true);
 
-  	return view('lofc/botaoro', compact('goles_liga', 'goles_double', 'goles_last', 'goles_totales'));
+  	return view('lofc/botaoro', compact('season_id', 'goles_liga', 'goles_totales', 'competitions_goals'));
   }
 
   public function competitions($season_id){
@@ -120,10 +126,10 @@ class LOFCController extends Controller{
     return view('lofc/competitions/show', compact('competition', 'junctions'));
   }
 
-  public function competition_videos($season_id, $competition_name){
+  public function league_videos($season_id, $league_name){
     $season = LOFCSeason::getByID($season_id);
     $params = array(
-        'q'             => 'LOFC '.$competition_name.' TEMPORADA'.$season_id,
+        'q'             => 'LOFC '.$league_name.' TEMPORADA'.$season_id,
         'type'          => 'video',
         'part'          => 'id, snippet',
         'maxResults'    => 50
@@ -142,7 +148,7 @@ class LOFCController extends Controller{
         }
       }
     }
-    return view('lofc/videos', compact('season', 'competition_name', 'jornadas'));
+    return view('lofc/leagues/videos', compact('season', 'league_name', 'jornadas'));
   }
 
         
