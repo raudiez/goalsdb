@@ -1,8 +1,24 @@
+/***************************
+COLORES LOFC:
+Azul claro: #00fcff
+Azul claro 2: #00CAF2
+Azul: #0089c8
+Azul 2: #005FA3
+Azul 3: #004997
+Morado: #6001ff
+*****************************/
+
+/**************************
+NAVBAR
+****************************/
 .navbar-nav > li > a, .navbar-brand {
     padding-top:35px !important; 
     padding-bottom:0 !important;
     height: 75px;
     font-size: 18px;
+}
+.navbar-inverse {
+    background: linear-gradient(135deg, #000000 15%,#004997 63%,#207cca 100%,#0089c8 100%); 
 }
 .navbar {min-height:75px !important;}
 .navbar-brand{
@@ -10,17 +26,143 @@
   padding-bottom:5px !important;
 }
 
+
+
+.equal {
+  display: flex;
+  display: -webkit-flex;
+  flex-wrap: wrap;
+}
+
+
+/*****************************
+DROPDOWN SUB-MENUS
+*******************************/
 .dropdown-menu .sub-menu {
     left: 100%;
     position: absolute;
     visibility: hidden;
     margin-top: -1px;
 }
-
 .dropdown-menu li:hover .sub-menu {
     visibility: visible;
+    display: block;
+}
+ul.dropdown-menu {
+    background-color: #00fcff;
+}
+.navbar-nav > li > .dropdown-menu a{
+    color: #000000;
+}
+.dropdown-menu > li > a:hover {
+    /*background: linear-gradient(to bottom, #00fcff 0%,#0089c8 15%,#0089c8 85%,#00fcff 100%);*/
+    background-color: #0089c8;
+}
+.dropdown-toggle {
+    color:#fff !important;
 }
 
-.dropdown:hover .dropdown-menu {
-    display: block;
+
+/**************************
+BTN-LOFC-PRIMARY
+**************************/
+.btn-lofc-primary{
+    color:#fff;
+    background-color:#0089c8;
+    border-color:#005FA3
+    }
+.btn-lofc-primary.focus,.btn-lofc-primary:focus{
+    color:#fff;
+    background-color:#005FA3;
+    border-color:#004997
+    }
+.btn-lofc-primary:hover{
+    color:#fff;
+    background-color:#005FA3;
+    border-color:#004997
+    }
+.btn-lofc-primary.active,.btn-lofc-primary:active,.open>.dropdown-toggle.btn-lofc-primary{
+    color:#fff;
+    background-color:#005FA3;
+    border-color:#004997
+    }
+.btn-lofc-primary.active.focus,.btn-lofc-primary.active:focus,.btn-lofc-primary.active:hover,.btn-lofc-primary:active.focus,.btn-lofc-primary:active:focus,.btn-lofc-primary:active:hover,.open>.dropdown-toggle.btn-lofc-primary.focus,.open>.dropdown-toggle.btn-lofc-primary:focus,.open>.dropdown-toggle.btn-lofc-primary:hover{
+    color:#fff;
+    background-color:#004997;
+    border-color:#004997
+    }
+.btn-lofc-primary.active,.btn-lofc-primary:active,.open>.dropdown-toggle.btn-lofc-primary{
+    background-image:none
+    }
+.btn-lofc-primary.disabled.focus,.btn-lofc-primary.disabled:focus,.btn-lofc-primary.disabled:hover,.btn-lofc-primary[disabled].focus,.btn-lofc-primary[disabled]:focus,.btn-lofc-primary[disabled]:hover,fieldset[disabled] .btn-lofc-primary.focus,fieldset[disabled] .btn-lofc-primary:focus,fieldset[disabled] .btn-lofc-primary:hover{
+    background-color:#0089c8;
+    border-color:#005FA3
+    }
+.btn-lofc-primary .badge{
+    color:#0089c8;
+    background-color:#fff
+}
+
+
+
+/**************************
+BTN-LOFC-SUCCESS
+**************************/
+.btn-lofc-success{
+    color:#000;
+    background-color:#00fcff;
+    border-color:#00CAF2;
+}
+.btn-lofc-success.focus,.btn-lofc-success:focus{
+    color:#000;
+    background-color:#00CAF2;
+    border-color:#0089c8;
+}
+.btn-lofc-success:hover{
+    color:#000;
+    background-color:#00CAF2;
+    border-color:#0089c8;
+}
+.btn-lofc-success.active,.btn-lofc-success:active,.open>.dropdown-toggle.btn-lofc-success{
+    color:#000;
+    background-color:#00CAF2;
+    border-color:#0089c8;
+}
+.btn-lofc-success.active.focus,.btn-lofc-success.active:focus,.btn-lofc-success.active:hover,.btn-lofc-success:active.focus,.btn-lofc-success:active:focus,.btn-lofc-success:active:hover,.open>.dropdown-toggle.btn-lofc-success.focus,.open>.dropdown-toggle.btn-lofc-success:focus,.open>.dropdown-toggle.btn-lofc-success:hover{
+    color:#000;
+    background-color:#0089c8;
+    border-color:#0089c8;
+}
+.btn-lofc-success.active,.btn-lofc-success:active,.open>.dropdown-toggle.btn-lofc-success{
+    background-image:none
+}
+.btn-lofc-success.disabled.focus,.btn-lofc-success.disabled:focus,.btn-lofc-success.disabled:hover,.btn-lofc-success[disabled].focus,.btn-lofc-success[disabled]:focus,.btn-lofc-success[disabled]:hover,fieldset[disabled] .btn-lofc-success.focus,fieldset[disabled] .btn-lofc-success:focus,fieldset[disabled] .btn-lofc-success:hover{
+    background-color:#00fcff;
+    border-color:#00CAF2;
+}
+.btn-lofc-success .badge{
+color:#00fcff;
+background-color:#000;
+}
+
+/**********************************
+PANEL-LOFC-PRIMARY
+***********************************/
+.panel-lofc-primary{
+    border-color:#6001ff
+}
+.panel-lofc-primary>.panel-heading{
+    color:#fff;
+    background-color:#6001ff;
+    border-color:#6001ff
+}
+.panel-lofc-primary>.panel-heading+.panel-collapse>.panel-body{
+    border-top-color:#6001ff
+}
+.panel-lofc-primary>.panel-heading .badge{
+    color:#6001ff;
+    background-color:#fff
+}
+.panel-lofc-primary>.panel-footer+.panel-collapse>.panel-body{
+    border-bottom-color:#6001ff
 }

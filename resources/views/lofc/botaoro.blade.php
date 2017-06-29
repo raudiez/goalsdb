@@ -13,7 +13,7 @@
   </div>
 	<div class="row">
 		<div class="col-xs-6 col-md-3">
-			<div class="panel panel-primary">
+			<div class="panel panel-lofc-primary">
 	        <div class="panel-heading" style="text-align: center;"><b>Liga</b></div>
 	        <div class="panel-body">
 	          <div class="table-responsive"><table class="table table-striped table-hover">
@@ -51,7 +51,7 @@
 			$competition = array_slice($competition_goals, 0, 10, true); //solo top10
 		?>
 		<div class="col-xs-6 col-md-3">
-			<div class="panel panel-primary">
+			<div class="panel panel-lofc-primary">
 	        <div class="panel-heading" style="text-align: center;"><b>{{$competition_name}}</b></div>
 	        <div class="panel-body">
 	          <div class="table-responsive"><table class="table table-striped table-hover">
@@ -84,7 +84,7 @@
 		@endforeach
 		
 		<div class="col-xs-6 col-md-3">
-			<div class="panel panel-primary">
+			<div class="panel panel-lofc-primary">
 	        <div class="panel-heading" style="text-align: center;"><b>Bota de Oro</b></div>
 	        <div class="panel-body">
 	          <div class="table-responsive"><table class="table table-striped table-hover">

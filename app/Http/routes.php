@@ -41,6 +41,30 @@ Route::post('records/save/{team_id}', 'RecordsController@save');
 //LOFC
 Route::get('lofc/competitions/{season_id}', 'LOFCController@competitions');
 Route::get('lofc/show_competition/{competition_id}', 'LOFCController@show_competition');
+
+Route::get('lofc/match_form/{junction_id}/{leg}', 
+	['middleware' => 'auth',
+	 'uses' => 'LOFCController@match_form'
+	]);
+Route::post('lofc/match_save/{junction_id}/{leg}',
+	['middleware' => 'auth',
+	 'uses' => 'LOFCController@match_save'
+	]);
+
+Route::get('lofc/players_form/{team_id}/{junction_id}/{leg}',
+	['middleware' => 'auth',
+	 'uses' => 'LOFCController@players_form'
+	]);
+Route::post('lofc/players_save/{team_id}',
+	['middleware' => 'auth',
+	 'uses' => 'LOFCController@players_save'
+	]);
+
+Route::post('lofc/junction_save/{junction_id}/{leg}',
+	['middleware' => 'auth',
+	 'uses' => 'LOFCController@junction_save'
+	]);
+
 Route::get('lofc/botaoro/{season_id}', 'LOFCController@botaoro');
 Route::get('lofc/league_videos/{season_id}/{league_name}', 'LOFCController@league_videos');
 
