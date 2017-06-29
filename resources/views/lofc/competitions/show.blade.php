@@ -76,18 +76,26 @@
             if ($junction->second_leg && $junction->played_1){
               if(preg_match('/Ida: (.+)\n/', $junction->notes, $matches))
                 $notes = $matches[1];
-              if($notes != ''){
-                $match_goals_L = App\LOFCMatchesGoals::getByJunctionAndLegAndTeam($junction->id, 1, $junction->id_L_team); //Goles ida L
-                $match_goals_V = App\LOFCMatchesGoals::getByJunctionAndLegAndTeam($junction->id, 1, $junction->id_V_team); //Goles ida V
-                $goals_notes = '';
-                foreach ($match_goals_L as $match_scorer_L){
-                  $goals_notes = $goals_notes.$match_scorer_L->player_name.'('.$match_scorer_L->count.') , ';
-                }
-                foreach ($match_goals_V as $match_scorer_V){
-                  $goals_notes = $goals_notes.$match_scorer_V->player_name.'('.$match_scorer_V->count.') , ';
-                }
+              $match_goals_L = App\LOFCMatchesGoals::getByJunctionAndLegAndTeam($junction->id, 1, $junction->id_L_team); //Goles ida L
+              $match_goals_V = App\LOFCMatchesGoals::getByJunctionAndLegAndTeam($junction->id, 1, $junction->id_V_team); //Goles ida V
+              $goals_notes = '';
+              foreach ($match_goals_L as $match_scorer_L){
+                $goals_notes = $goals_notes.$match_scorer_L->player_name.'('.$match_scorer_L->count.') , ';
+              }
+              foreach ($match_goals_V as $match_scorer_V){
+                $goals_notes = $goals_notes.$match_scorer_V->player_name.'('.$match_scorer_V->count.') , ';
+              }
+              $goals_notes = substr($goals_notes, 0, -3);
+              $notes = $goals_notes.'<br/>Crónica: '.$notes;
+              if ($goals_notes != ''){
                 $goals_notes = substr($goals_notes, 0, -3);
-                $notes = $goals_notes.'<br/>Crónica: '.$notes;
+                if($notes != ''){
+                  $notes = $goals_notes.'<br/>Crónica: '.$notes;
+                }else{
+                  $notes = $goals_notes;
+                }
+              }
+              if($notes != ''){
             ?>
             <button type="button" class="btn btn-lofc-primary" data-container="body" data-html="true" data-toggle="popover" data-placement="top" data-content="{{$notes}}">Ver notas Ida</button>
             <?php }} ?>
@@ -96,36 +104,50 @@
             if ($junction->second_leg && $junction->played_2){
               if(preg_match('/Vuelta: (.+)/', $junction->notes, $matches))
                 $notes2 = $matches[1];
-              if($notes2 != ''){
-                $match_goals_L = App\LOFCMatchesGoals::getByJunctionAndLegAndTeam($junction->id, 2, $junction->id_L_team); //Goles ida L
-                $match_goals_V = App\LOFCMatchesGoals::getByJunctionAndLegAndTeam($junction->id, 2, $junction->id_V_team); //Goles ida V
-                $goals_notes = '';
-                foreach ($match_goals_V as $match_scorer_V){
-                  $goals_notes = $goals_notes.$match_scorer_V->player_name.'('.$match_scorer_V->count.') , ';
-                }
-                foreach ($match_goals_L as $match_scorer_L){
-                  $goals_notes = $goals_notes.$match_scorer_L->player_name.'('.$match_scorer_L->count.') , ';
-                }
+              $match_goals_L = App\LOFCMatchesGoals::getByJunctionAndLegAndTeam($junction->id, 2, $junction->id_L_team); //Goles ida L
+              $match_goals_V = App\LOFCMatchesGoals::getByJunctionAndLegAndTeam($junction->id, 2, $junction->id_V_team); //Goles ida V
+              $goals_notes = '';
+              foreach ($match_goals_V as $match_scorer_V){
+                $goals_notes = $goals_notes.$match_scorer_V->player_name.'('.$match_scorer_V->count.') , ';
+              }
+              foreach ($match_goals_L as $match_scorer_L){
+                $goals_notes = $goals_notes.$match_scorer_L->player_name.'('.$match_scorer_L->count.') , ';
+              }
+              if ($goals_notes != ''){
                 $goals_notes = substr($goals_notes, 0, -3);
-                $notes2 = $goals_notes.'<br/>Crónica: '.$notes2;
+                if($notes2 != ''){
+                  $notes2 = $goals_notes.'<br/>Crónica: '.$notes2;
+                }else{
+                  $notes2 = $goals_notes;
+                }
+              }
+              if($notes2 != ''){
             ?>
             <button type="button" class="btn btn-lofc-primary" data-container="body" data-html="true" data-toggle="popover" data-placement="top" data-content="{{$notes2}}">Ver notas Vuelta</button>
             <?php }} ?>
             <?php
             if (!$junction->second_leg && $junction->played_1){
-              $notes = $junction->notes;
+              $notes = $matches[1];
+            $match_goals_L = App\LOFCMatchesGoals::getByJunctionAndLegAndTeam($junction->id, 1, $junction->id_L_team); //Goles ida L
+            $match_goals_V = App\LOFCMatchesGoals::getByJunctionAndLegAndTeam($junction->id, 1, $junction->id_V_team); //Goles ida V
+            $goals_notes = '';
+            foreach ($match_goals_L as $match_scorer_L){
+              $goals_notes = $goals_notes.$match_scorer_L->player_name.'('.$match_scorer_L->count.') , ';
+            }
+            foreach ($match_goals_V as $match_scorer_V){
+              $goals_notes = $goals_notes.$match_scorer_V->player_name.'('.$match_scorer_V->count.') , ';
+            }
+            $goals_notes = substr($goals_notes, 0, -3);
+            $notes = $goals_notes.'<br/>Crónica: '.$notes;
+            if ($goals_notes != ''){
+              $goals_notes = substr($goals_notes, 0, -3);
               if($notes != ''){
-                $match_goals_L = App\LOFCMatchesGoals::getByJunctionAndLegAndTeam($junction->id, 1, $junction->id_L_team); //Goles ida L
-                $match_goals_V = App\LOFCMatchesGoals::getByJunctionAndLegAndTeam($junction->id, 1, $junction->id_V_team); //Goles ida V
-                $goals_notes = '';
-                foreach ($match_goals_L as $match_scorer_L){
-                  $goals_notes = $goals_notes.$match_scorer_L->player_name.'('.$match_scorer_L->count.') , ';
-                }
-                foreach ($match_goals_V as $match_scorer_V){
-                  $goals_notes = $goals_notes.$match_scorer_V->player_name.'('.$match_scorer_V->count.') , ';
-                }
-                $goals_notes = substr($goals_notes, 0, -3);
                 $notes = $goals_notes.'<br/>Crónica: '.$notes;
+              }else{
+                $notes = $goals_notes;
+              }
+            }
+            if($notes != ''){
             ?>
             <button type="button" class="btn btn-lofc-primary" data-container="body" data-html="true" data-toggle="popover" data-placement="top" data-content="{{$notes}}">Ver notas</button>
             <?php }} ?>            
