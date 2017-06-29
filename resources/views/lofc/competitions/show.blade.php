@@ -88,9 +88,9 @@
               if ($goals_notes != ''){
                 $goals_notes = substr($goals_notes, 0, -3);
                 if($notes != ''){
-                  $notes = $goals_notes.'<br/>Crónica: '.$notes;
+                  $notes = 'Goles: '.$goals_notes.'<br/>Crónica: '.$notes;
                 }else{
-                  $notes = $goals_notes;
+                  $notes = 'Goles: '.$goals_notes;
                 }
               }
               if($notes != ''){
@@ -114,9 +114,9 @@
               if ($goals_notes != ''){
                 $goals_notes = substr($goals_notes, 0, -3);
                 if($notes2 != ''){
-                  $notes2 = $goals_notes.'<br/>Crónica: '.$notes2;
+                  $notes2 = 'Goles: '.$goals_notes.'<br/>Crónica: '.$notes2;
                 }else{
-                  $notes2 = $goals_notes;
+                  $notes2 = 'Goles: '.$goals_notes;
                 }
               }
               if($notes2 != ''){
@@ -127,23 +127,23 @@
             if (!$junction->second_leg && $junction->played_1){
               $notes = $matches[1];
             $match_goals_L = App\LOFCMatchesGoals::getByJunctionAndLegAndTeam($junction->id, 1, $junction->id_L_team); //Goles L
-              $match_goals_V = App\LOFCMatchesGoals::getByJunctionAndLegAndTeam($junction->id, 1, $junction->id_V_team); //Goles V
-              $goals_notes = '';
-              foreach ($match_goals_L as $match_scorer_L){
-                $goals_notes = $goals_notes.$match_scorer_L->player_name.'('.$match_scorer_L->count.') , ';
-              }
-              foreach ($match_goals_V as $match_scorer_V){
-                $goals_notes = $goals_notes.$match_scorer_V->player_name.'('.$match_scorer_V->count.') , ';
-              }
-              if ($goals_notes != ''){
-                $goals_notes = substr($goals_notes, 0, -3);
-                if($notes != ''){
-                  $notes = $goals_notes.'<br/>Crónica: '.$notes;
-                }else{
-                  $notes = $goals_notes;
-                }
-              }
+            $match_goals_V = App\LOFCMatchesGoals::getByJunctionAndLegAndTeam($junction->id, 1, $junction->id_V_team); //Goles V
+            $goals_notes = '';
+            foreach ($match_goals_L as $match_scorer_L){
+              $goals_notes = $goals_notes.$match_scorer_L->player_name.'('.$match_scorer_L->count.') , ';
+            }
+            foreach ($match_goals_V as $match_scorer_V){
+              $goals_notes = $goals_notes.$match_scorer_V->player_name.'('.$match_scorer_V->count.') , ';
+            }
+            if ($goals_notes != ''){
+              $goals_notes = substr($goals_notes, 0, -3);
               if($notes != ''){
+                $notes = 'Goles: '.$goals_notes.'<br/>Crónica: '.$notes;
+              }else{
+                $notes = 'Goles: '.$goals_notes;
+              }
+            }
+            if($notes != ''){
             ?>
             <button type="button" class="btn btn-lofc-primary" data-container="body" data-html="true" data-toggle="popover" data-placement="top" data-content="{{$notes}}">Ver notas</button>
             <?php }} ?>            
