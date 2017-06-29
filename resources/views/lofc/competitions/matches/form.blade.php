@@ -30,7 +30,9 @@
   				$logo_L = Html::image('imgs//lofc/teams/'.$junction->lofc_team_L_logo_img,'',array('style' => 'height: 50px;margin-left:5px;'));
   				$logo_V = Html::image('imgs//lofc/teams/'.$junction->lofc_team_V_logo_img,'',array('style' => 'height: 50px;margin-left:5px;'));
   				$team_name_L = $junction->lofc_team_L_name;
+  				$team_id_L = $junction->id_L_team;
   				$team_name_V = $junction->lofc_team_V_name;
+  				$team_id_V = $junction->id_V_team;
   				$select_players_L = array();
 			  	foreach ($players_L as $player) {
 			  		$select_players_L[$player->id] = $player->name;
@@ -50,7 +52,9 @@
   				$logo_L = Html::image('imgs//lofc/teams/'.$junction->lofc_team_V_logo_img,'',array('style' => 'height: 50px;margin-left:5px;'));
   				$logo_V = Html::image('imgs//lofc/teams/'.$junction->lofc_team_L_logo_img,'',array('style' => 'height: 50px;margin-left:5px;'));
   				$team_name_L = $junction->lofc_team_V_name;
+  				$team_id_L = $junction->id_V_team;
   				$team_name_V = $junction->lofc_team_L_name;
+  				$team_id_V = $junction->id_L_team;
   				$select_players_L = array();
 			  	foreach ($players_V as $player) {
 			  		$select_players_L[$player->id] = $player->name;
@@ -91,7 +95,7 @@
 	  		<h4 style="text-align: center">{{ $logo_L }} {{$team_name_L}}</h4>
 	  		{!! Form::open(array('url' => 'lofc/match_save/'.$junction->id.'/'.$leg)) !!}
 	  		<div class="col-xs-1 col-md-1"></div>
-		  	<div class="col-xs-1 col-md-1"><a href="{{ url('/lofc/players_form/'.$junction->id_L_team.'/'.$junction->id.'/'.$leg) }}" class="btn btn-lofc-primary" role="button" title="Añadir jugador"><span class="glyphicon glyphicon-plus-sign"></span></a></div>
+		  	<div class="col-xs-1 col-md-1"><a href="{{ url('/lofc/players_form/'.$team_id_L.'/'.$junction->id.'/'.$leg) }}" class="btn btn-lofc-primary" role="button" title="Añadir jugador"><span class="glyphicon glyphicon-plus-sign"></span></a></div>
 		  	<div class="col-xs-7 col-md-7">{!! Form::select('player_id', $select_players_L, null, array('class' => 'form-control', 'placeholder' => 'Selecciona un jugador...')) !!}</div>
 		  	<div class="col-xs-2 col-md-2">{!! Form::number('count', '1', array('class' => 'form-control', 'min' => '1')) !!}</div>
 		  	<div class="clearfix"><br/></div>
@@ -103,7 +107,7 @@
 	  		<h4 style="text-align: center">{{ $logo_V }} {{$team_name_V}}</h4>
 	  		{!! Form::open(array('url' => 'lofc/match_save/'.$junction->id.'/'.$leg)) !!}
 	  		<div class="col-xs-1 col-md-1"></div>
-		  	<div class="col-xs-1 col-md-1"><a href="{{ url('/lofc/players_form/'.$junction->id_V_team.'/'.$junction->id.'/'.$leg) }}" class="btn btn-lofc-primary" role="button" title="Añadir jugador"><span class="glyphicon glyphicon-plus-sign"></span></a></div>
+		  	<div class="col-xs-1 col-md-1"><a href="{{ url('/lofc/players_form/'.$team_id_V.'/'.$junction->id.'/'.$leg) }}" class="btn btn-lofc-primary" role="button" title="Añadir jugador"><span class="glyphicon glyphicon-plus-sign"></span></a></div>
 		  	<div class="col-xs-7 col-md-7">{!! Form::select('player_id', $select_players_V, null, array('class' => 'form-control', 'placeholder' => 'Selecciona un jugador...')) !!}</div>
 		  	<div class="col-xs-2 col-md-2">{!! Form::number('count', '1', array('class' => 'form-control', 'min' => '1')) !!}</div>
 		  	<div class="clearfix"><br/></div>

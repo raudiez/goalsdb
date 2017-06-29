@@ -18,7 +18,7 @@ class LOFCJunction extends Model{
 	}
 
 	public static function joinJunction_Teams($id){
-		return DB::select('SELECT lofc_junctions.id, lofc_junctions.id_competition, lofc_junctions.name, lofc_junctions.id_L_team, lofc_junctions.id_V_team, lofc_junctions.goals_L_1, lofc_junctions.goals_V_1, lofc_junctions.goals_L_2, lofc_junctions.goals_V_2, lofc_junctions.played_1, lofc_junctions.played_2, lofc_junctions.phase, lofc_junctions.second_leg, lofc_junctions.ended, lofc_junctions.notes, lofc_team_L.name AS lofc_team_L_name, lofc_team_L.logo_img AS lofc_team_L_logo_img, lofc_team_V.name AS lofc_team_V_name, lofc_team_V.logo_img AS lofc_team_V_logo_img FROM lofc_junctions INNER JOIN lofc_teams lofc_team_L ON (lofc_team_L.id = lofc_junctions.id_L_team) INNER JOIN lofc_teams lofc_team_V ON (lofc_team_V.id = lofc_junctions.id_V_team) WHERE lofc_junctions.id = '.$id);
+		return DB::select('SELECT lofc_junctions.id, lofc_junctions.id_competition, lofc_junctions.name, lofc_junctions.id_L_team, lofc_junctions.id_V_team, lofc_junctions.goals_L_1, lofc_junctions.goals_V_1, lofc_junctions.goals_L_2, lofc_junctions.goals_V_2, lofc_junctions.played_1, lofc_junctions.played_2, lofc_junctions.phase, lofc_junctions.second_leg, lofc_junctions.ended, lofc_junctions.notes, lofc_junctions.id_L_team, lofc_team_L.name AS lofc_team_L_name, lofc_team_L.logo_img AS lofc_team_L_logo_img, lofc_junctions.id_V_team, lofc_team_V.name AS lofc_team_V_name, lofc_team_V.logo_img AS lofc_team_V_logo_img FROM lofc_junctions INNER JOIN lofc_teams lofc_team_L ON (lofc_team_L.id = lofc_junctions.id_L_team) INNER JOIN lofc_teams lofc_team_V ON (lofc_team_V.id = lofc_junctions.id_V_team) WHERE lofc_junctions.id = '.$id);
 	}
 
 	public static function joinCompetition_Teams($competition_id){
