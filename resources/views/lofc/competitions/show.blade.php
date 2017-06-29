@@ -79,14 +79,12 @@
               $match_goals_L = App\LOFCMatchesGoals::getByJunctionAndLegAndTeam($junction->id, 1, $junction->id_L_team); //Goles ida L
               $match_goals_V = App\LOFCMatchesGoals::getByJunctionAndLegAndTeam($junction->id, 1, $junction->id_V_team); //Goles ida V
               $goals_notes = '';
-              foreach ($match_goals_L as $match_scorer_L){
-                $goals_notes = $goals_notes.$match_scorer_L->player_name.'('.$match_scorer_L->count.') , ';
-              }
               foreach ($match_goals_V as $match_scorer_V){
                 $goals_notes = $goals_notes.$match_scorer_V->player_name.'('.$match_scorer_V->count.') , ';
               }
-              $goals_notes = substr($goals_notes, 0, -3);
-              $notes = $goals_notes.'<br/>Crónica: '.$notes;
+              foreach ($match_goals_L as $match_scorer_L){
+                $goals_notes = $goals_notes.$match_scorer_L->player_name.'('.$match_scorer_L->count.') , ';
+              }
               if ($goals_notes != ''){
                 $goals_notes = substr($goals_notes, 0, -3);
                 if($notes != ''){
@@ -104,8 +102,8 @@
             if ($junction->second_leg && $junction->played_2){
               if(preg_match('/Vuelta: (.+)/', $junction->notes, $matches))
                 $notes2 = $matches[1];
-              $match_goals_L = App\LOFCMatchesGoals::getByJunctionAndLegAndTeam($junction->id, 2, $junction->id_L_team); //Goles ida L
-              $match_goals_V = App\LOFCMatchesGoals::getByJunctionAndLegAndTeam($junction->id, 2, $junction->id_V_team); //Goles ida V
+              $match_goals_L = App\LOFCMatchesGoals::getByJunctionAndLegAndTeam($junction->id, 2, $junction->id_L_team); //Goles vuelta L
+              $match_goals_V = App\LOFCMatchesGoals::getByJunctionAndLegAndTeam($junction->id, 2, $junction->id_V_team); //Goles vuelta V
               $goals_notes = '';
               foreach ($match_goals_V as $match_scorer_V){
                 $goals_notes = $goals_notes.$match_scorer_V->player_name.'('.$match_scorer_V->count.') , ';
@@ -131,14 +129,12 @@
             $match_goals_L = App\LOFCMatchesGoals::getByJunctionAndLegAndTeam($junction->id, 1, $junction->id_L_team); //Goles ida L
             $match_goals_V = App\LOFCMatchesGoals::getByJunctionAndLegAndTeam($junction->id, 1, $junction->id_V_team); //Goles ida V
             $goals_notes = '';
-            foreach ($match_goals_L as $match_scorer_L){
-              $goals_notes = $goals_notes.$match_scorer_L->player_name.'('.$match_scorer_L->count.') , ';
-            }
             foreach ($match_goals_V as $match_scorer_V){
               $goals_notes = $goals_notes.$match_scorer_V->player_name.'('.$match_scorer_V->count.') , ';
             }
-            $goals_notes = substr($goals_notes, 0, -3);
-            $notes = $goals_notes.'<br/>Crónica: '.$notes;
+            foreach ($match_goals_L as $match_scorer_L){
+              $goals_notes = $goals_notes.$match_scorer_L->player_name.'('.$match_scorer_L->count.') , ';
+            }
             if ($goals_notes != ''){
               $goals_notes = substr($goals_notes, 0, -3);
               if($notes != ''){
