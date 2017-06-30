@@ -13,7 +13,7 @@
     <h1>{{$competition->name}}</h1>
   </div>
   <div class="row equal">
-  <?php $phase = 1; ?>
+  <?php $phase = 1;?>
   @foreach ($junctions as $junction)
     @if ($junction->phase == 3)
     <div class="col-xs-12 col-md-3"></div>
@@ -22,7 +22,7 @@
     <div class="col-xs-12 col-md-6">
     @endif
       <div class="panel panel-lofc-primary" style="height:92%;">
-        <div class="panel-heading" style="text-align: center;"><b>{{$junction->name}}</b></div>
+        <div class="panel-heading" style="text-align: center;"><b>{{$junction->name}}</b><br/>{{$junction->date}}</div>
         <div class="panel-body">
           <p style="text-align: center">
           @if ($junction->lofc_team_L_logo_img != '')
@@ -148,6 +148,19 @@
             <button type="button" class="btn btn-lofc-primary" data-container="body" data-html="true" data-toggle="popover" data-placement="top" data-content="{{$notes}}">Ver notas</button>
             <?php }} ?>            
           </p>
+          <center>
+            <?php 
+              if ($junction->ended){
+                foreach ($videos as $video) {
+                  if (strpos($video->snippet->title, $competition->name.' | '.$junction->lofc_team_L_name.' '.$goals_L.' - '.$goals_V.' '.$junction->lofc_team_V_name)) {
+                    ?>
+                    <a href="https://www.youtube.com/watch?v={{$video->id->videoId}}" target="_blank">Ver vídeo »</a>
+                    <?php
+                  }
+                }
+              }
+            ?>
+          </center>
         </div>
       </div>
     </div>

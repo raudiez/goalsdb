@@ -138,6 +138,4 @@
   </div>{{-- ROW --}}
 </div>{{-- CONTAINER --}}
 
-{{-- TODO: SELECT VALIDATOR (mostrar errores). BORRAR UN GOLEADOR (Y QUE SE APLIQUE A GOALS, MATCHES_GOALS Y JUNCTION) --}}
-
 @endsection

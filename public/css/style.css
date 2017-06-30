@@ -17,6 +17,9 @@ NAVBAR
     height: 75px;
     font-size: 18px;
 }
+.navbar-nav > li > a{
+    color:#fff !important;
+}
 .navbar-inverse {
     background: linear-gradient(135deg, #000000 15%,#004997 63%,#207cca 100%,#0089c8 100%); 
 }
@@ -27,6 +30,9 @@ NAVBAR
 }
 
 
+/***************************
+ROW TODOS COL-X MISMO HEIGHT
+********************************/
 
 .equal {
   display: flex;
@@ -58,9 +64,7 @@ ul.dropdown-menu {
     /*background: linear-gradient(to bottom, #00fcff 0%,#0089c8 15%,#0089c8 85%,#00fcff 100%);*/
     background-color: #0089c8;
 }
-.dropdown-toggle {
-    color:#fff !important;
-}
+
 
 
 /**************************
