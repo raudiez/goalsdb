@@ -49,11 +49,6 @@ class LOFCController extends Controller{
 
       $goles_liga = array();
       for($i = 0; $i < count($arr_players); $i++){
-       /* iconv('UTF-8', 'ASCII//TRANSLIT', 
-        mb_detect_encoding($text, "UTF-8,ISO-8859-1")
-        iconv(mb_detect_encoding($arr_players[$i], "UTF-8,ISO-8859-1") "UTF-8", $arr_players[$i])
-        utf8_encode($arr_players[$i])
-        */
         array_push($goles_liga, array('name' => $arr_players[$i], 'goals' => $arr_goals[$i]));
       }
     }else $goles_liga = array();
@@ -75,25 +70,26 @@ class LOFCController extends Controller{
     foreach ($competitions_goals as $competition_goals) {
       foreach ($competition_goals as $value) {
         if (!$merged) {
-          $name = array_column($goles_liga_cpy, 'name'); //buscamos solo nombres
-          //$name = array_map("utf8_encode",$name);
-          $k = array_search($value['player_name'], $name); //busca en goles_liga
-          if ($k && ctype_alpha($k)){
+          $k = FALSE;
+          foreach ($goles_liga_cpy as $key => $cpy) {
+            if ($cpy['name'] == $value['player_name']){
+              $k = $key;
+            }
+          }
+          if (isset($k) && $k !== FALSE){// && ctype_alpha($k)){
             array_push($goles_totales, array('name' => $value['player_name'], 'goals' => $value['goals']+$goles_liga_cpy[$k]['goals']));
             unset($goles_liga_cpy[$k]);
           }else {
             array_push($goles_totales, array('name' => $value['player_name'], 'goals' => $value['goals']));
           }
         }else{
-          //$name = array_map("utf8_encode",$name);
           $k = array_search($value['player_name'], $name);
-          if ($k){
+          if (isset($k)){
             $goles_totales[$k]['goals'] += $value['goals'];
           }else{
             array_push($goles_totales, array('name' => $value['player_name'], 'goals' => $value['goals']));
           }
         }
-        
       }
       if(!$merged){
         $goles_totales = array_merge($goles_totales, $goles_liga_cpy);
