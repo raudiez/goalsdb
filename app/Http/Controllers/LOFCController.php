@@ -25,7 +25,7 @@ use Alaouy\Youtube\Facades\Youtube;
 class LOFCController extends Controller{
 
   public function botaoro($season_id){
-    $season = LOFCSeason::getByID($season_i);
+    $season = LOFCSeason::getByID($season_id);
     $client = new Client(['http_errors' => false, 'connect_timeout' => 8, 'timeout' => 10]);
     try {
       $response = $client->get("http://www.gesliga.es/Estadisticas.aspx?Liga=$season->id_gesliga");
