@@ -25,32 +25,48 @@ use Alaouy\Youtube\Facades\Youtube;
 class LOFCController extends Controller{
 
   public function botaoro($season_id){
-    $season = LOFCSeason::getByID($season_id);
-
-    $client = new Client();
-    $response = $client->get("http://www.gesliga.es/Estadisticas.aspx?Liga=$season->id_gesliga");
-    $gesliga = $response->getBody()->getContents();
-    $crawler = new Crawler($gesliga);
-    if ($crawler->filter('#ctl00_CH1_rptEstadisticas_ctl00_grd')->count()){
-      $goleadores_table = $crawler->filter('#ctl00_CH1_rptEstadisticas_ctl00_grd')->html();
-
-      $players = trim(preg_replace("/<(?:td|th)[^>]*>.*?<\/(?:td|th)>\s+<\/tr>/i", "</tr>", $goleadores_table));
-      $players = trim(preg_replace("/<(?:td|th)[^>]*>.*?<\/(?:td|th)>\s+<\/tr>/i", "</tr>", $players));
-      $players = trim(preg_replace('/(<tr.+|.+tr>|<th.+)/', '', $players));
-      $players = trim(preg_replace("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", $players));
-      $players = trim(preg_replace('/(<td>|<\/td>)/', '', $players));
-      $players = trim(preg_replace('/\s+\n/', "\n", $players));
-
-      $goals = trim(preg_replace( '/[^0-9\n]/', '', $goleadores_table ));
-      $goals = trim(preg_replace("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", $goals));
-
-      $arr_players = explode("\n", $players);
-      $arr_goals = explode("\n", $goals);
-
-      $goles_liga = array();
-      for($i = 0; $i < count($arr_players); $i++){
-        array_push($goles_liga, array('name' => $arr_players[$i], 'goals' => $arr_goals[$i]));
+    $season = LOFCSeason::getByID($season_i);
+    $client = new Client(['http_errors' => false, 'connect_timeout' => 8, 'timeout' => 10]);
+    try {
+      $response = $client->get("http://www.gesliga.es/Estadisticas.aspx?Liga=$season->id_gesliga");
+      //$response = $client->get("http://slowwly.robertomurray.co.uk/delay/600000/url/http://www.google.co.uk");
+    }catch(Exception $e) {
+      if ($e->hasResponse()) {
+        $exception = (string) $e->getResponse()->getBody();
+        \Log::info($exception);
       }
+      $response = '';
+    }catch (\GuzzleHttp\Exception\ConnectException $e) {
+      if ($e->hasResponse()) {
+        $exception = (string) $e->getResponse()->getBody();
+        \Log::info($exception);
+      }
+      $response = '';
+    }
+    if (!is_string($response) && $response != ''){
+      $gesliga = $response->getBody()->getContents();
+      $crawler = new Crawler($gesliga);
+      if ($crawler->filter('#ctl00_CH1_rptEstadisticas_ctl00_grd')->count()){
+        $goleadores_table = $crawler->filter('#ctl00_CH1_rptEstadisticas_ctl00_grd')->html();
+
+        $players = trim(preg_replace("/<(?:td|th)[^>]*>.*?<\/(?:td|th)>\s+<\/tr>/i", "</tr>", $goleadores_table));
+        $players = trim(preg_replace("/<(?:td|th)[^>]*>.*?<\/(?:td|th)>\s+<\/tr>/i", "</tr>", $players));
+        $players = trim(preg_replace('/(<tr.+|.+tr>|<th.+)/', '', $players));
+        $players = trim(preg_replace("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", $players));
+        $players = trim(preg_replace('/(<td>|<\/td>)/', '', $players));
+        $players = trim(preg_replace('/\s+\n/', "\n", $players));
+
+        $goals = trim(preg_replace( '/[^0-9\n]/', '', $goleadores_table ));
+        $goals = trim(preg_replace("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", $goals));
+
+        $arr_players = explode("\n", $players);
+        $arr_goals = explode("\n", $goals);
+
+        $goles_liga = array();
+        for($i = 0; $i < count($arr_players); $i++){
+          array_push($goles_liga, array('name' => $arr_players[$i], 'goals' => $arr_goals[$i]));
+        }
+      }else $goles_liga = array();
     }else $goles_liga = array();
 
     $season_goals = LOFCSeason::joinGoals_Season($season_id);
@@ -116,11 +132,28 @@ class LOFCController extends Controller{
   public function competitions($season_id){
     $season = LOFCSeason::getByID($season_id);
 
-    $client = new Client();
-    $response = $client->get("http://www.gesliga.es/Clasificacion.aspx?Liga=$season->id_gesliga");
-    $gesliga = $response->getBody()->getContents();
-    $crawler = new Crawler($gesliga);
-    $gesliga_name = $crawler->filter('#ctl00_menuLigaDesktop_lblNombreLiga')->text();
+    $client = new Client(['http_errors' => false, 'connect_timeout' => 8, 'timeout' => 10]);
+    try {
+      $response = $client->get("http://www.gesliga.es/Clasificacion.aspx?Liga=$season->id_gesliga");
+      //$response = $client->get("http://slowwly.robertomurray.co.uk/delay/600000/url/http://www.google.co.uk");
+    }catch(Exception $e) {
+      if ($e->hasResponse()) {
+        $exception = (string) $e->getResponse()->getBody();
+        \Log::info($exception);
+      }
+      $response = '';
+    }catch (\GuzzleHttp\Exception\ConnectException $e) {
+      if ($e->hasResponse()) {
+        $exception = (string) $e->getResponse()->getBody();
+        \Log::info($exception);
+      }
+      $response = '';
+    }
+    if (!is_string($response) && $response != ''){
+      $gesliga = $response->getBody()->getContents();
+      $crawler = new Crawler($gesliga);
+      $gesliga_name = $crawler->filter('#ctl00_menuLigaDesktop_lblNombreLiga')->text();
+    }else $gesliga_name = '';
 
     $competitions = LOFCCompetition::getBySeasonID($season_id);
     return view('lofc/competitions/list', compact('season', 'gesliga_name', 'competitions'));

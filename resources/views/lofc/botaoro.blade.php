@@ -16,30 +16,33 @@
 			<div class="panel panel-lofc-primary">
 	        <div class="panel-heading" style="text-align: center;"><b>Liga</b></div>
 	        <div class="panel-body">
-	          <div class="table-responsive"><table class="table table-striped table-hover">
-	            <thead>
-	              <tr>
-	              	<th style="text-align: right;">Pos</th>
-	                <th style="text-align: left;">Jugador</th>
-	                <th style="text-align: center">Goles</th>
-	              </tr>
-	            </thead>
-	            <tbody style="text-align: center">
-	              <?php $i=1; ?>
-	              @foreach ($goles_liga as $jugador)
-	              <tr>
-	                <!-- POS -->
-	                <td class="col-xs-1 col-md-1" style="text-align: right"><b>{{$i}}</b></td>
-	                <?php $i++; ?>
-	                <!-- JUGADOR -->
-	                <td class="col-xs-7 col-md-7" style="text-align: left">{{$jugador['name']}}</td>
+	        	@if (!empty($goles_liga))
+		          <div class="table-responsive"><table class="table table-striped table-hover">
+		            <thead>
+		              <tr>
+		              	<th style="text-align: right;">Pos</th>
+		                <th style="text-align: left;">Jugador</th>
+		                <th style="text-align: center">Goles</th>
+		              </tr>
+		            </thead>
+		            <tbody style="text-align: center">
+		              <?php $i=1; ?>
+		              @foreach ($goles_liga as $jugador)
+		              <tr>
+		                <!-- POS -->
+		                <td class="col-xs-1 col-md-1" style="text-align: right"><b>{{$i}}</b></td>
+		                <?php $i++; ?>
+		                <!-- JUGADOR -->
+		                <td class="col-xs-7 col-md-7" style="text-align: left">{{$jugador['name']}}</td>
 
-	                <!-- GOLES -->
-	                <td class="col-xs-4 col-md-4">{{$jugador['goals']}}</td>
-	              </tr>
-	              @endforeach
-	            </tbody>
-	          </table></div>
+		                <!-- GOLES -->
+		                <td class="col-xs-4 col-md-4">{{$jugador['goals']}}</td>
+		              </tr>
+		              @endforeach
+		            </tbody>
+		          </table></div>
+		        @else <p>No se ha podido conectar con Gesliga</p>
+          	@endif
 	        </div>
 	      </div>
 		</div>
