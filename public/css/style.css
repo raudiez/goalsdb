@@ -170,3 +170,10 @@ PANEL-LOFC-PRIMARY
 .panel-lofc-primary>.panel-footer+.panel-collapse>.panel-body{
     border-bottom-color:#6001ff
 }
+
+/**********************************
+EXTRA CSS
+***********************************/
+.premier{
+    font-family: PremierLeague;
+}

@@ -10,11 +10,28 @@
     <li>{{$competition->name}}</li>
   </ol>
   <div class="page-header">
-    <h1>{{$competition->name}}</h1>
+    <h1 class="premier">{{$competition->name}}</h1>
   </div>
   <div class="row equal">
-  <?php $phase = 1;?>
+  <?php $phase = 0; $showed = 0;?>
   @foreach ($junctions as $junction)
+    <?php 
+      if ($junction->phase != $phase) {
+        $phase = $junction->phase;
+        if ($phase != $showed) {
+          $phase_name = preg_replace('/[0-9]+/', '', $junction->name);
+          $phase_name = preg_replace('/\s$/', '', $phase_name);
+          ?>
+          <div class="col-xs-12 col-md-12">
+            <h3 class="premier text-muted" style="text-align: center">
+              {{$phase_name}}
+            </h3>
+          </div>
+          <?php
+          $showed = $phase;
+        }
+      }
+    ?>
     @if ($junction->phase == 3)
     <div class="col-xs-12 col-md-3"></div>
     <div class="col-xs-12 col-md-6">

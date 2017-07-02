@@ -9,7 +9,7 @@
     <li>Competiciones</li>
   </ol>
   <div class="page-header">
-    <h1>Listado de competiciones de la temporada {{$season->id}}</h1>
+    <h1 class="premier">Listado de competiciones de la temporada {{$season->id}}</h1>
   </div>
   <div class="row">
     <div class="col-xs-12 col-md-4">

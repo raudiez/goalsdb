@@ -191,7 +191,7 @@
   </div>
 @else
   <center>
-  <h1 style="font-family: PremierLeague;">Bienvenido a la <b>LOFC</b></h1>
+  <h1 class="premier">Bienvenido a la <b>LOFC</b></h1>
   <div class="clearfix" style="margin-top: 40px;"><br/></div>
   {{ Html::image('imgs/lofc.png','',array('style' => 'height: 250px')) }}
   </center>

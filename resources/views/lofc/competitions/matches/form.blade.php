@@ -12,7 +12,7 @@
     <li>{{$junction->name}}</li>
   </ol>
   <div class="page-header">
-    <h2>{{$competition->name}} - {{$junction->name}} 
+    <h2 class="premier">{{$competition->name}} - {{$junction->name}} 
     @if ($junction->second_leg && $leg == 1)
      - Partido de ida
     @elseif ($junction->second_leg && $leg == 2)

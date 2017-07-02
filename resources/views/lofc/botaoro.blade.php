@@ -9,7 +9,7 @@
     <li>Bota de Oro</li>
   </ol>
   <div class="page-header">
-    <h1>Bota de Oro</h1>
+    <h1 class="premier">Bota de Oro</h1>
   </div>
 	<div class="row">
 		<div class="col-xs-6 col-md-3">

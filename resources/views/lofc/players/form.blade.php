@@ -8,7 +8,7 @@
     <li>Añadir jugador a {{$team->name}}</li>
   </ol>
   <div class="page-header">
-    <h1>Añadir jugador</h1>
+    <h1 class="premier">Nuevo jugador</h1>
   </div>
   <div class="row">
     {!! Form::open(array('url' => 'lofc/players_save/'.$team->id)) !!}

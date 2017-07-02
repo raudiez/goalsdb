@@ -162,6 +162,10 @@ class LOFCController extends Controller{
   public function show_competition($competition_id){
     $competition = LOFCCompetition::getByID($competition_id);
     $junctions = LOFCJunction::joinCompetition_Teams($competition_id);
+    ///*
+    
+
+    //*/
     $params = array(
         'q'             => 'LOFC '.$competition->name.' TEMPORADA'.$competition->id_season,
         'type'          => 'video',
