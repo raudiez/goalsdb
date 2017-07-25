@@ -142,7 +142,7 @@
             <?php }} ?>
             <?php
             if (!$junction->second_leg && $junction->played_1){
-              $notes = $matches[1];
+              $notes = $junction->notes;
             $match_goals_L = App\LOFCMatchesGoals::getByJunctionAndLegAndTeam($junction->id, 1, $junction->id_L_team); //Goles L
             $match_goals_V = App\LOFCMatchesGoals::getByJunctionAndLegAndTeam($junction->id, 1, $junction->id_V_team); //Goles V
             $goals_notes = '';
