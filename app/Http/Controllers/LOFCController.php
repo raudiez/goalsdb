@@ -80,41 +80,25 @@ class LOFCController extends Controller{
       }else array_push($competitions_goals[$competition], array('player_name' => $value->player_name, 'goals' => $value->count,  ));
     }
 
-    $merged = FALSE; //var_control si se han añadido los goles de liga
-    $goles_totales = array(); //Inicializa totales
-    $goles_liga_cpy = $goles_liga; //copia, para luego meter solo 
+    $goles_totales = $goles_liga; //Inicializa totales con los de liga 
     foreach ($competitions_goals as $competition_goals) {
       foreach ($competition_goals as $value) {
-        if (!$merged) {
-          $k = FALSE;
-          foreach ($goles_liga_cpy as $key => $cpy) {
-            if ($cpy['name'] == $value['player_name']){
-              $k = $key;
-            }
-          }
-          if (isset($k) && $k !== FALSE){// && ctype_alpha($k)){
-            array_push($goles_totales, array('name' => $value['player_name'], 'goals' => $value['goals']+$goles_liga_cpy[$k]['goals']));
-            unset($goles_liga_cpy[$k]);
-          }else {
-            array_push($goles_totales, array('name' => $value['player_name'], 'goals' => $value['goals']));
-          }
-        }else{
-          $k = array_search($value['player_name'], $name);
-          if (isset($k)){
-            $goles_totales[$k]['goals'] += $value['goals'];
-          }else{
-            array_push($goles_totales, array('name' => $value['player_name'], 'goals' => $value['goals']));
+        $k = FALSE;
+        foreach ($goles_totales as $key => $cpy) {
+          if ($cpy['name'] == $value['player_name']){
+            $k = $key;
           }
         }
-      }
-      if(!$merged){
-        $goles_totales = array_merge($goles_totales, $goles_liga_cpy);
-        $merged = TRUE;
+        if (isset($k) && $k !== FALSE){
+          $goles_totales[$k]['goals'] += $value['goals'];
+        }else {
+          array_push($goles_totales, array('name' => $value['player_name'], 'goals' => $value['goals']));
+        }
       }
     }
 
     if (empty($competitions_goals)){
-      $goles_totales = array_merge($goles_totales, $goles_liga);
+      $goles_totales = $goles_liga;
     }
 
     //sort personalizado
