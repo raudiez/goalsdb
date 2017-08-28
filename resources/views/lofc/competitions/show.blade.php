@@ -53,8 +53,11 @@
                   $goals_V = $junction->goals_V_1 + $junction->goals_V_2;
           ?>
           <b>{{$goals_L}}</b> - <b>{{$goals_V}}</b>
-          <?php }else { ?>
-          <b>{{$junction->goals_L_1}}</b> - <b>{{$junction->goals_V_1}}</b>
+          <?php }else { 
+                  $goals_L = $junction->goals_L_1;
+                  $goals_V = $junction->goals_V_1;
+            ?>
+          <b>{{$goals_L}}</b> - <b>{{$goals_V}}</b>
           <?php } ?>
           {{$junction->lofc_team_V_name}} 
           @if ($junction->lofc_team_V_logo_img != '')

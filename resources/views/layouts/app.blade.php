@@ -142,6 +142,11 @@
         $('[data-toggle="popover"]').popover(); 
     });
   </script>
+  <script>
+    /*$('.dropdown').on('mouseenter mouseleave click tap', function() {
+      $(this).toggleClass("open");
+    });*/
+  </script>
 
 </body>
 </html>
