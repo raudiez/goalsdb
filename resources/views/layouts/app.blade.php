@@ -50,18 +50,16 @@
           <li class="dropdown">
             <a href="{{ url('/') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="font-family: PremierLeague; font-size: 26px; margin-left: -10px;"><b>LOFC</b> <span class="caret"></span></a>
             <ul class="dropdown-menu" style="margin-left: -10px;">
-            <?php $i=0; ?>
             @foreach ($lofc_seasons as $season)
-              <li>
-                <a href="#">Temporada {{$season->id}} <span class="caret"></span></a>
-                <ul class="dropdown-menu sub-menu" style="top: {{$i}}px;">
+              <li class="dropdown-submenu">
+                <a tabindex="-1" href="#">Temporada {{$season->id}}</a>
+                <ul class="dropdown-menu">
                   <li class="dropdown-header">Temporada {{$season->id}}</li>
                   <li role="separator" class="divider"></li>
                   <li><a href="{{url('lofc/competitions/'.$season->id)}}">Competiciones</a></li>
                   <li><a href="{{url('lofc/botaoro/'.$season->id)}}">Bota de Oro</a></li>
                 </ul>
               </li>
-              <?php $i+=28; ?>
             @endforeach
             <li role="separator" class="divider"></li>
             <li><a href="https://goo.gl/BbHjkJ" target="_blank">Reglamento</a></li>
@@ -132,20 +130,24 @@
   <!-- JavaScripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
-  <script src="{{URL::asset('js/jquery.bootstrap-dropdown-hover.min.js')}}"></script>
   <script>
-    $('.navbar [data-toggle="dropdown"]').bootstrapDropdownHover({});
+    $(document).ready(function() {
+      $( ".dropdown-submenu" ).click(function(event) {
+          // stop bootstrap.js to hide the parents
+          event.stopPropagation();
+          // hide the open children
+          $( this ).find(".dropdown-submenu").removeClass('open');
+          // add 'open' class to all parents with class 'dropdown-submenu'
+          $( this ).parents(".dropdown-submenu").addClass('open');
+          // this is also open (or was)
+          $( this ).toggleClass('open');
+      });
+    });
   </script>
   <script>
     $(document).ready(function(){
         $('[data-toggle="popover"]').popover(); 
     });
-  </script>
-  <script>
-    /*$('.dropdown').on('mouseenter mouseleave click tap', function() {
-      $(this).toggleClass("open");
-    });*/
   </script>
 
 </body>
