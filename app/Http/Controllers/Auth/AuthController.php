@@ -84,7 +84,20 @@ class AuthController extends Controller
     }
 
     protected function getLogin() {
-       $lofc_seasons = LOFCSeason::all();
-       return view('auth.login', compact('lofc_seasons','user'));
+        /**
+         * save the previous page in the session
+         */
+        $previous_url = \Session::get('_previous.url');
+        $ref = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
+        $ref = rtrim($ref, '/');
+        if ($previous_url != url('login')) {
+            \Session::put('referrer', $ref);
+            if ($previous_url == $ref) {
+                \Session::put('url.intended', $ref);
+            }
+        }
+
+        $lofc_seasons = LOFCSeason::all();
+        return view('auth.login', compact('lofc_seasons','user'));
     }
 }

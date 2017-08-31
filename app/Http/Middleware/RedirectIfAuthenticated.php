@@ -18,9 +18,9 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            return redirect('/');
+            /*return to the previous page*/
+            return redirect()->intended(\Session::pull('referrer'));
         }
-
         return $next($request);
     }
 }
