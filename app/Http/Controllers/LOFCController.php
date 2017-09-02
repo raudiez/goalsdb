@@ -146,10 +146,6 @@ class LOFCController extends Controller{
   public function show_competition($competition_id){
     $competition = LOFCCompetition::getByID($competition_id);
     $junctions = LOFCJunction::joinCompetition_Teams($competition_id);
-    ///*
-    
-
-    //*/
     $params = array(
         'q'             => 'LOFC '.$competition->name.' TEMPORADA'.$competition->id_season,
         'type'          => 'video',
@@ -195,6 +191,22 @@ class LOFCController extends Controller{
     if ($player->id_team == $junction->id_L_team){
       LOFCJunction::updateGoals($junction_id, 'L', $leg, $count);
     }else LOFCJunction::updateGoals($junction_id, 'V', $leg, $count);
+    return redirect('lofc/match_form/'.$junction_id.'/'.$leg);
+  }
+
+  public function delete_match_goal($id_match_goal){
+    $match_goal = LOFCMatchesGoals::getByID($id_match_goal);
+    $count = $match_goal->count;
+    $leg = $match_goal->leg;
+    $player_id = $match_goal->id_player;
+    $player = LOFCPlayer::getByID($player_id);
+    $junction_id = $match_goal->id_junction;
+    $junction = LOFCJunction::getByID($junction_id);
+    LOFCMatchesGoals::destroy($id_match_goal);
+    LOFCGoals::insertOrUpdate($player_id, $junction->id_competition, -$count);
+    if ($player->id_team == $junction->id_L_team){
+      LOFCJunction::updateGoals($junction_id, 'L', $leg, -$count);
+    }else LOFCJunction::updateGoals($junction_id, 'V', $leg, -$count);
     return redirect('lofc/match_form/'.$junction_id.'/'.$leg);
   }
 

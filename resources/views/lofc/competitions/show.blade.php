@@ -76,6 +76,8 @@
             <b>Vuelta:</b> <b>{{$junction->goals_V_2}}</b> - <b>{{$junction->goals_L_2}}</b>  <a href="{{ url('/lofc/match_form/'.$junction->id.'/2') }}">Modificar resultado</a>
             @elseif (!$junction->second_leg && !$junction->played_1)
             <a href="{{ url('/lofc/match_form/'.$junction->id.'/1') }}">Introducir resultado</a>
+            @elseif (!$junction->second_leg && $junction->played_1)
+            <a href="{{ url('/lofc/match_form/'.$junction->id.'/1') }}">Modificar resultado</a><br/>
             @endif
           @else
             @if ($junction->second_leg && !$junction->played_1)

@@ -74,7 +74,7 @@
 	        <div class="list-group-item" style="text-align: center; position: relative;">
 	          <h4 class="list-group-item-heading" style="text-align: left">Goleadores {{$team_name_L}}</h4>
 	          @foreach ($match_goals_L as $match_scorer_L)
-	          <p>{{$match_scorer_L->player_name.' : '.$match_scorer_L->count}}</p>
+	          <p><a href="{{ url('/lofc/delete_match_goal/'.$match_scorer_L->id) }}" class="btn-sm" role="button" title="Eliminar goleador"><span class="glyphicon glyphicon-minus-sign" style="color: #ff0000"></span></a>   {{$match_scorer_L->player_name.' : '.$match_scorer_L->count}}</p>
 	          @endforeach
 	        </div>
 	      </div>
@@ -84,7 +84,7 @@
 	        <div class="list-group-item" style="text-align: center; position: relative;">
 	          <h4 class="list-group-item-heading" style="text-align: left">Goleadores {{$team_name_V}}</h4>
 	          @foreach ($match_goals_V as $match_scorer_V)
-	          <p>{{$match_scorer_V->player_name.' : '.$match_scorer_V->count}}</p>
+	          <p><a href="{{ url('/lofc/delete_match_goal/'.$match_scorer_V->id) }}" class="btn-sm" role="button" title="Eliminar goleador"><span class="glyphicon glyphicon-minus-sign" style="color: #ff0000"></span></a>   {{$match_scorer_V->player_name.' : '.$match_scorer_V->count}}</p>
 	          @endforeach
 	        </div>
 	      </div>

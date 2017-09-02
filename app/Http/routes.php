@@ -50,6 +50,10 @@ Route::post('lofc/match_save/{junction_id}/{leg}',
 	['middleware' => 'auth',
 	 'uses' => 'LOFCController@match_save'
 	]);
+Route::get('lofc/delete_match_goal/{id_match_goal}',
+	['middleware' => 'auth',
+	 'uses' => 'LOFCController@delete_match_goal'
+	]);
 
 Route::get('lofc/players_form/{team_id}/{junction_id}/{leg}',
 	['middleware' => 'auth',
