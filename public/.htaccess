@@ -16,3 +16,4 @@
 </IfModule>
 
 #ErrorDocument 403 /fifagoalsdb/resources/views/errors/403.blade.php
+#ErrorDocument 500 /fifagoalsdb/resources/views/errors/500.blade.php

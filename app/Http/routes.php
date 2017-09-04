@@ -11,8 +11,6 @@
 |
 */
 
-use App\Team;
-
 //Home
 Route::get('/', 'HomeController@index');
 
@@ -38,37 +36,44 @@ Route::post('players/save/{team_id}', 'PlayersController@save');
 Route::get('records/form/{team_id}', 'RecordsController@form');
 Route::post('records/save/{team_id}', 'RecordsController@save');
 
-//LOFC
-Route::get('lofc/competitions/{season_id}', 'LOFCController@competitions');
-Route::get('lofc/show_competition/{competition_id}', 'LOFCController@show_competition');
 
+//LOFC:
+
+////Competitions
+Route::get('lofc/competitions/{season_id}', 'Lofc\CompetitionsController@list_competitions');
+Route::get('lofc/show_competition/{competition_id}', 'Lofc\CompetitionsController@show_competition');
+Route::get('lofc/league_videos/{season_id}/{league_name}', 'Lofc\CompetitionsController@league_videos');
+
+////MatchesGoals
 Route::get('lofc/match_form/{junction_id}/{leg}', 
 	['middleware' => 'auth',
-	 'uses' => 'LOFCController@match_form'
+	 'uses' => 'Lofc\MatchesGoalsController@match_form'
 	]);
 Route::post('lofc/match_save/{junction_id}/{leg}',
 	['middleware' => 'auth',
-	 'uses' => 'LOFCController@match_save'
+	 'uses' => 'Lofc\MatchesGoalsController@match_save'
 	]);
 Route::get('lofc/delete_match_goal/{id_match_goal}',
 	['middleware' => 'auth',
-	 'uses' => 'LOFCController@delete_match_goal'
+	 'uses' => 'Lofc\MatchesGoalsController@delete_match_goal'
 	]);
 
+////Players
 Route::get('lofc/players_form/{team_id}/{junction_id}/{leg}',
 	['middleware' => 'auth',
-	 'uses' => 'LOFCController@players_form'
+	 'uses' => 'Lofc\PlayersController@players_form'
 	]);
 Route::post('lofc/players_save/{team_id}',
 	['middleware' => 'auth',
-	 'uses' => 'LOFCController@players_save'
+	 'uses' => 'Lofc\PlayersController@players_save'
 	]);
 
+////Junctions
 Route::post('lofc/junction_save/{junction_id}/{leg}',
 	['middleware' => 'auth',
-	 'uses' => 'LOFCController@junction_save'
+	 'uses' => 'Lofc\JunctionsController@junction_save'
 	]);
 
-Route::get('lofc/botaoro/{season_id}', 'LOFCController@botaoro');
-Route::get('lofc/league_videos/{season_id}/{league_name}', 'LOFCController@league_videos');
+////BotaOro
+Route::get('lofc/botaoro/{season_id}', 'Lofc\BotaOroController@show');
 

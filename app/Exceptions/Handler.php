@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
+use Symfony\Component\Debug\Exception\FlattenException;
+
 class Handler extends ExceptionHandler
 {
     /**
@@ -45,6 +47,12 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-        return parent::render($request, $e);
+        $exception = FlattenException::create($e);
+        $statusCode = $exception->getStatusCode($exception);
+
+        if ($statusCode === 404 or $statusCode === 500 or $statusCode === 403 or $statusCode === 503 and !config('app.debug')) {
+            return response()->view('errors.' . $statusCode, [], $statusCode);
+        }else return parent::render($request, $e);
     }
+
 }

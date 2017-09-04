@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
-use App\LOFCSeason;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -79,8 +78,7 @@ class AuthController extends Controller
      * @return lofc_seasons, User
      */
     protected function getRegister() {
-       $lofc_seasons = LOFCSeason::all();
-       return view('auth.register', compact('lofc_seasons','user'));
+       return view('auth.register', compact('user'));
     }
 
     protected function getLogin() {
@@ -97,7 +95,6 @@ class AuthController extends Controller
             }
         }
 
-        $lofc_seasons = LOFCSeason::all();
-        return view('auth.login', compact('lofc_seasons','user'));
+        return view('auth.login', compact('user'));
     }
 }
