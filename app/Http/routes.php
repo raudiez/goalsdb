@@ -71,7 +71,7 @@ Route::post('lofc/players_save/{team_id}',
 ////Junctions
 Route::post('lofc/junction_save/{junction_id}/{leg}',
 	['middleware' => 'auth',
-	 'uses' => 'Lofc\JunctionsController@junction_save'
+	 'uses' => 'Lofc\JunctionsController@save'
 	]);
 
 ////BotaOro
