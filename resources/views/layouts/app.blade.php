@@ -62,6 +62,7 @@
               </li>
             @endforeach
             <li role="separator" class="divider"></li>
+            <li><a href="{{url('lofc/palmares/show')}}">Palmarés</a></li>
             <li><a href="https://goo.gl/BbHjkJ" target="_blank">Reglamento</a></li>
             </ul>
           </li>

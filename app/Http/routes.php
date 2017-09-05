@@ -77,3 +77,14 @@ Route::post('lofc/junction_save/{junction_id}/{leg}',
 ////BotaOro
 Route::get('lofc/botaoro/{season_id}', 'Lofc\BotaOroController@show');
 
+
+////Palmares
+Route::get('lofc/palmares/show', 'Lofc\PalmaresController@show');
+Route::get('lofc/palmares/form',
+	['middleware' => 'auth',
+	'uses' => 'Lofc\PalmaresController@form'
+	]);
+Route::post('lofc/palmares/save',
+	['middleware' => 'auth',
+	'uses' => 'Lofc\PalmaresController@save'
+	]);
