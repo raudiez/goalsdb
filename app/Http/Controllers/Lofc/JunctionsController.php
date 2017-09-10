@@ -71,7 +71,7 @@ class JunctionsController extends Controller{
     $all_ended = 0;
     //checks if all junctions of phase has ended
     foreach ($junctions as $junction){
-      $all_ended = $junction->ended;
+      $all_ended = $all_ended and $junction->ended;
     }
     if ($all_ended){
       //if ended, calculate next phase junction's teams

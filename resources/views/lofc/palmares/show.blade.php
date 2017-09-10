@@ -16,7 +16,7 @@
       <?php echo html_entity_decode($palmaresText) ?>
     </p>
     @if (!Auth::guest())
-    <p style="text-align: right;"><a href="{{ url('/lofc/palmares/form') }}" class="btn btn-lofc-primary" role="button" title="Editar texto" ><span class="glyphicon glyphicon-pencil"></span></a></p>
+    <p style="text-align: right;"><a href="{{ url('/lofc/palmares/form') }}" class="btn btn-lofc-primary" role="button" title="Editar texto"><span class="glyphicon glyphicon-pencil"></span></a></p>
     @endif
   </div>
 </div>

@@ -50,7 +50,7 @@ class Handler extends ExceptionHandler
         $exception = FlattenException::create($e);
         $statusCode = $exception->getStatusCode($exception);
 
-        if ($statusCode === 404 or $statusCode === 500 or $statusCode === 403 or $statusCode === 503 and !config('app.debug')) {
+        if (($statusCode === 404 or $statusCode === 500 or $statusCode === 403 or $statusCode === 503) and !config('app.debug')) {
             return response()->view('errors.' . $statusCode, [], $statusCode);
         }else return parent::render($request, $e);
     }
