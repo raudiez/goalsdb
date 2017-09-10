@@ -52,6 +52,9 @@
       </div>
     </div>
     @endforeach
+    <div class="col-xs-12 col-md-12">
+      <a href="{{ url('/lofc/competitions/form/'.$season->id) }}" class="btn btn-lofc-primary" role="button" title="Añadir competición"><span class="glyphicon glyphicon-plus-sign"></span> Añadir competición</a>
+    </div>
   </div>
 
 </div>

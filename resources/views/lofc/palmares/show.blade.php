@@ -8,7 +8,7 @@
     <li>Palmarés</li>
   </ol>
   <div class="page-header">
-    <h1 class="premier" style="font-size: 32px;margin-left: 137px; margin-bottom: -46px">í</h1>
+    <h1 class="premier" style="font-size: 32px;margin-left: 137px; margin-bottom: -46px">´</h1>
     <h1 class="premier">Palmares</h1>
   </div>
   <div class="row">

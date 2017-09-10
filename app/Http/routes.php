@@ -43,6 +43,15 @@ Route::post('records/save/{team_id}', 'RecordsController@save');
 Route::get('lofc/competitions/{season_id}', 'Lofc\CompetitionsController@list_competitions');
 Route::get('lofc/show_competition/{competition_id}', 'Lofc\CompetitionsController@show_competition');
 Route::get('lofc/league_videos/{season_id}/{league_name}', 'Lofc\CompetitionsController@league_videos');
+Route::get('lofc/competitions/form/{season_id}',
+	['middleware' => 'auth',
+	 'uses' => 'Lofc\CompetitionsController@form'
+	]);
+Route::post('lofc/competitions/save/{season_id}',
+	['middleware' => 'auth',
+	 'uses' => 'Lofc\CompetitionsController@save'
+	]);
+
 
 ////MatchesGoals
 Route::get('lofc/match_form/{junction_id}/{leg}', 

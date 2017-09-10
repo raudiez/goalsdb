@@ -86,5 +86,17 @@ class CompetitionsController extends Controller{
     }
     return view('lofc/leagues/videos', compact('season', 'league_name', 'jornadas'));
   }
+
+  public function form($season_id){
+    return view('lofc/competitions/form', compact('season_id'));
+  }
+
+  public function save(Request $request, $season_id){
+    $name = $request->input('name');
+    $num_teams = $request->input('num_teams');
+    $round_trip = null !== $request->input('round_trip');
+    LOFCCompetition::insert($season_id, $name, $num_teams, $round_trip);
+    return redirect('lofc/competitions/'.$season_id);
+  }
         
 }
