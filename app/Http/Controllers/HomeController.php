@@ -29,4 +29,9 @@ class HomeController extends Controller
 
         return view('home', compact('players16', 'players17', 'total_goals', 'goals_by_owner', 'goals_by_club_16', 'goals_by_club_17'));
     }
+
+    public function disclaimer(Request $request){
+
+        return view('disclaimer');
+    }
 }

@@ -13,6 +13,7 @@
 
 //Home
 Route::get('/', 'HomeController@index');
+Route::get('/disclaimer', 'HomeController@disclaimer');
 
 //Auth
 Route::auth();

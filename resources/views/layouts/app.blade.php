@@ -126,7 +126,7 @@
   <div class="clearfix"><br/></div>
   <div class="container">
     <hr>
-    <h6 class="small">&copy; 2017 - <a href="https://github.com/raudiez">Raúl Díez Sánchez</a> - FIFA 16, FIFA 17 et al. and all FIFA assets are property of EA Sports, Electronic Arts and the Fédération Internationale de Football Association (FIFA).</h6>
+    <h6 class="small">&copy; 2017 - <a href="https://github.com/raudiez">Raúl Díez Sánchez</a> - Read <a href="{{ url('/disclaimer') }}">disclaimer</a> for legal and abuse related information.</h6>
   </div>
   <!-- JavaScripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
