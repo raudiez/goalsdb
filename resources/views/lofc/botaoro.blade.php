@@ -11,118 +11,80 @@
   <div class="page-header">
     <h1 class="premier">Bota de Oro</h1>
   </div>
-	<div class="row">
-		<div class="col-xs-6 col-md-3">
-			<div class="panel panel-lofc-primary">
-	        <div class="panel-heading" style="text-align: center;"><b>Liga</b></div>
-	        <div class="panel-body">
-	        	@if (!empty($goles_liga))
-		          <div class="table-responsive"><table class="table table-striped table-hover">
-		            <thead>
-		              <tr>
-		              	<th style="text-align: right;">Pos</th>
-		                <th style="text-align: left;">Jugador</th>
-		                <th style="text-align: center">Goles</th>
-		              </tr>
-		            </thead>
-		            <tbody style="text-align: center">
-		              <?php $i=1; ?>
-		              @foreach ($goles_liga as $jugador)
-		              <tr>
-		                <!-- POS -->
-		                <td class="col-xs-1 col-md-1" style="text-align: right"><b>{{$i}}</b></td>
-		                <?php $i++; ?>
-		                <!-- JUGADOR -->
-		                <td class="col-xs-7 col-md-7" style="text-align: left">{{$jugador['name']}}</td>
+  <div class="row">
+  	<div class="col-xs-12 col-md-12">
+  		<div class="panel panel-lofc-primary">
+	      <div class="panel-heading" style="text-align: center;"><b>Clasificación de la temporada {{$season_id}}</b></div>
+	      <div class="panel-body">
+	      	@if (!empty($goles_liga))
+	      	<div class="table-responsive"><table class="table table-striped table-hover">
+            <thead>
+              <tr>
+              	<th style="text-align: right;">Pos</th>
+                <th style="text-align: left;">Jugador</th>
+                <th style="text-align: center">Liga</th>
+                @foreach ($competitions_goals as $competition_name => $competition_goals)
+                <th style="text-align: center">{{$competition_name}}</th>
+                @endforeach
+                <th style="text-align: center">Total</th>
+              </tr>
+            </thead>
+            <tbody style="text-align: center">
+              <?php $i=1; ?>
+              @foreach ($goles_totales as $jugador)
+              <tr>
+                <!-- POS -->
+                <td class="col-xs-1 col-md-1" style="text-align: right"><b>{{$i}}</b></td>
+                <?php $i++; ?>
+                <!-- JUGADOR -->
+                <td class="col-xs-2 col-md-2" style="text-align: left">{{$jugador['name']}}</td>
 
-		                <!-- GOLES -->
-		                <td class="col-xs-4 col-md-4">{{$jugador['goals']}}</td>
-		              </tr>
-		              @endforeach
-		            </tbody>
-		          </table></div>
-		        @else <p>No se ha podido conectar con Gesliga</p>
-          	@endif
-	        </div>
-	      </div>
-		</div>
-		@foreach ($competitions_goals as $competition_name => $competition_goals)
-		<?php 
-			usort($competition_goals, function($a, $b) {
-              return $a['goals'] < $b['goals'];
-          });//ordena los goles de esta competicion
-			$competition = array_slice($competition_goals, 0, 10, true); //solo top10
-		?>
-		<div class="col-xs-6 col-md-3">
-			<div class="panel panel-lofc-primary">
-	        <div class="panel-heading" style="text-align: center;"><b>{{$competition_name}}</b></div>
-	        <div class="panel-body">
-	          <div class="table-responsive"><table class="table table-striped table-hover">
-	            <thead>
-	              <tr>
-	              	<th style="text-align: right;">Pos</th>
-	                <th style="text-align: left;">Jugador</th>
-	                <th style="text-align: center">Goles</th>
-	              </tr>
-	            </thead>
-	            <tbody style="text-align: center">
-	              <?php $i=1; ?>
-	              @foreach ($competition as $jugador)
-	              <tr>
-	                <!-- POS -->
-	                <td class="col-xs-1 col-md-1" style="text-align: right"><b>{{$i}}</b></td>
-	                <?php $i++; ?>
-	                <!-- JUGADOR -->
-	                <td class="col-xs-7 col-md-7" style="text-align: left">{{$jugador['player_name']}}</td>
+                <!-- LIGA -->
+                <?php $found = FALSE; ?>
+                @foreach ($goles_liga as $jugador_lig)
+              		@if ($jugador['name'] == $jugador_lig['name'])
+              		<?php 
+              			$found = TRUE;
+              			$goals_lig = $jugador_lig['goals'];
+              		?>
+              		@endif
+              	@endforeach
+              	@if ($found)
+              		<td class="col-xs-1 col-md-1">{{$goals_lig}}</td>
+              	@else 
+              		<td class="col-xs-1 col-md-1">-</td>
+              	@endif
 
-	                <!-- GOLES -->
-	                <td class="col-xs-4 col-md-4">{{$jugador['goals']}}</td>
-	              </tr>
-	              @endforeach
-	            </tbody>
-	          </table></div>
-	        </div>
-	      </div>
-		</div>
-		@endforeach
-		
-		<div class="col-xs-6 col-md-3">
-			<div class="panel panel-lofc-primary">
-	        <div class="panel-heading" style="text-align: center;"><b>Bota de Oro</b></div>
-	        <div class="panel-body">
-	          <div class="table-responsive"><table class="table table-striped table-hover">
-	            <thead>
-	              <tr>
-	              	<th style="text-align: right;">Pos</th>
-	                <th style="text-align: left;">Jugador</th>
-	                <th style="text-align: center">Goles</th>
-	              </tr>
-	            </thead>
-	            <tbody style="text-align: center">
-	              <?php $i=1; ?>
-	              @foreach ($goles_totales as $jugador)
-	              <tr>
-	                <!-- POS -->
-	                <td class="col-xs-1 col-md-1" style="text-align: right"><b>{{$i}}</b></td>
-	                <?php $i++; ?>
-	                <!-- JUGADOR -->
-	                <td class="col-xs-7 col-md-7" style="text-align: left">{{$jugador['name']}}</td>
+                <!-- COPAS -->
+                @foreach ($competitions_goals as $competition_name => $competition)
+                	<?php $found = FALSE; ?>
+                	@foreach ($competition as $jugador_comp)
+                		@if ($jugador['name'] == $jugador_comp['player_name'])
+                		<?php 
+                			$found = TRUE;
+                			$goals_comp = $jugador_comp['goals'];
+                		?>
+                		@endif
+                	@endforeach
+                	@if ($found)
+                		<td class="col-xs-1 col-md-1">{{$goals_comp}}</td>
+                	@else 
+                		<td class="col-xs-1 col-md-1">-</td>
+                	@endif
+                @endforeach
 
-	                <!-- GOLES -->
-	                <td class="col-xs-4 col-md-4">{{$jugador['goals']}}</td>
-	              </tr>
-	              @endforeach
-	            </tbody>
-	          </table></div>
-	        </div>
+                <!-- BOTA ORO -->
+                <td class="col-xs-2 col-md-2">{{$jugador['goals']}}</td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table></div>
+          @else <p>No se ha podido conectar con Gesliga</p>
+          @endif
 	      </div>
-		</div>
-	</div>
+	    </div>
+  	</div>
+  </div>
 </div>
-
-
-
-
-
 
 @endsection
