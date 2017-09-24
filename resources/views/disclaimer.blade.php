@@ -11,9 +11,9 @@
 
 <p><i>_ English version: _</i></p>
 
-<p>The information contained in this website as well as images, logos and names are merely for entertainment purposes. None of the associations or organizations mentioned on this web are properly registered because they are fictitious organizations or associations.</p>
+<p>The information contained in this website as well as images, logos and names are merely for entertainment purposes. None of the associations or organizations mentioned on this web are properly registered because they are fictitious.</p>
 
-<p>The logos, names and images used have not been checked in any way to determine if they were previously registered by third parties , so if you have any type of complaint that you make for misrepresentation or misuse of this information, you can do so in the contact email of this web: '<i> info.lofc at gmail dot com </i>'. Note that this contact is not written in an email format to prevent SPAM.</p>
+<p>The logos, names and images used have not been checked in any way to determine if they were previously registered by third parties, so if you have any type of complaint that you make for misrepresentation or misuse of this information, you can do so in the contact email of this web: '<i> info.lofc at gmail dot com </i>'. Note that this contact is not written in an email format to prevent SPAM.</p>
 
 <p>FIFA 16, FIFA 17 et al. and all FIFA assets are property of EA Sports, Electronic Arts and the Fédération Internationale de Football Association (FIFA).</p>
 </div>
