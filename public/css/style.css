@@ -168,3 +168,20 @@ EXTRA CSS
 .premier{
     font-family: PremierLeague;
 }
+
+.reglamento{
+    font-family: Lato;
+}
+.reglamento h2,h3{
+    font-weight: bold; 
+}
+.reglamento h4{
+    font-weight: bold;
+    text-decoration: underline; 
+}
+.reglamento ul{
+    list-style-type: none;
+}
+.reglamento p{
+    font-size: 16px;
+}

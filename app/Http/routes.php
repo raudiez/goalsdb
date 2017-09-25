@@ -98,3 +98,14 @@ Route::post('lofc/palmares/save',
 	['middleware' => 'auth',
 	'uses' => 'Lofc\PalmaresController@save'
 	]);
+
+////Reglamento
+Route::get('lofc/reglamento/show', 'Lofc\ReglamentoController@show');
+Route::get('lofc/reglamento/form',
+	['middleware' => 'auth',
+	'uses' => 'Lofc\ReglamentoController@form'
+	]);
+Route::post('lofc/reglamento/save',
+	['middleware' => 'auth',
+	'uses' => 'Lofc\ReglamentoController@save'
+	]);

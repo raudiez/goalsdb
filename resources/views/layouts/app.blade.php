@@ -23,8 +23,12 @@
     .table-hover > tbody > tr:hover {
       background-color: #C0C2CD;
     }
-
   </style>
+
+  <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=cobce5u2ujmkx8bm6g0xxrhynbz9tc96j4iieol3h84h3sx6"></script>
+  <script>tinymce.init({ selector:'#palmarestextarea'});</script>
+  <script>tinymce.init({ selector:'#reglamentotextarea', plugins: "link,toc,image,lists", image_caption: true});</script>
+
 </head>
 <!--style="background-image:url('imgs/index.jpeg');"-->
 <body id="app-layout" >
@@ -63,7 +67,7 @@
             @endforeach
             <li role="separator" class="divider"></li>
             <li><a href="{{url('lofc/palmares/show')}}">Palmarés</a></li>
-            <li><a href="https://goo.gl/BbHjkJ" target="_blank">Reglamento</a></li>
+            <li><a href="{{url('lofc/reglamento/show')}}">Reglamento</a></li>
             </ul>
           </li>
           @if (!Auth::guest())

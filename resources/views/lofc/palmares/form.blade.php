@@ -13,7 +13,7 @@
   </div>
   <div class="row">
     {!! Form::open(array('url' => 'lofc/palmares/save')) !!}
-    {!! Form::textarea('palmaresText', $palmaresText, array('class' => 'form-control', 'rows' => '20')) !!}
+    {!! Form::textarea('palmaresText', $palmaresText, array('class' => 'form-control', 'rows' => '20', 'id' => 'palmarestextarea')) !!}
         <div class="clearfix"><br/></div>
     {{Form::submit('Guardar', array('class' => 'btn btn-danger'))}}
     {!! Form::close() !!}
