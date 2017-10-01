@@ -98,7 +98,6 @@ class BotaOroController extends Controller{
           });
 
     //solo top10 tras todo
-    $goles_liga = array_slice($goles_liga, 0, 10, true);
     $goles_totales = array_slice($goles_totales, 0, 10, true);
 
   	return view('lofc/botaoro', compact('season_id', 'goles_liga', 'goles_totales', 'competitions_goals'));
