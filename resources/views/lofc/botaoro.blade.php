@@ -16,13 +16,17 @@
   		<div class="panel panel-lofc-primary">
 	      <div class="panel-heading" style="text-align: center;"><b>Clasificación de la temporada {{$season_id}}</b></div>
 	      <div class="panel-body">
-	      	@if (!empty($goles_liga))
+
+          <?php //$goles_liga = array(); ?>
+	      	@if (!empty($leagues_goals))
 	      	<div class="table-responsive"><table class="table table-striped table-hover">
             <thead>
               <tr>
               	<th style="text-align: right;">Pos</th>
                 <th style="text-align: left;">Jugador</th>
-                <th style="text-align: center">Liga</th>
+                @foreach ($leagues_goals as $league_name => $league_goals)
+                <th style="text-align: center">{{$league_name}}</th>
+                @endforeach
                 @foreach ($competitions_goals as $competition_name => $competition_goals)
                 <th style="text-align: center">{{$competition_name}}</th>
                 @endforeach
@@ -39,21 +43,23 @@
                 <!-- JUGADOR -->
                 <td class="col-xs-2 col-md-2" style="text-align: left">{{$jugador['name']}}</td>
 
-                <!-- LIGA -->
-                <?php $found = FALSE; ?>
-                @foreach ($goles_liga as $jugador_lig)
-              		@if ($jugador['name'] == $jugador_lig['name'])
-              		<?php 
-              			$found = TRUE;
-              			$goals_lig = $jugador_lig['goals'];
-              		?>
-              		@endif
-              	@endforeach
-              	@if ($found)
-              		<td class="col-xs-1 col-md-1">{{$goals_lig}}</td>
-              	@else 
-              		<td class="col-xs-1 col-md-1">-</td>
-              	@endif
+                <!-- LIGAS -->
+                @foreach ($leagues_goals as $league_name => $league)
+                  <?php $found = FALSE; ?>
+                  @foreach ($league as $jugador_lig)
+                    @if ($jugador['name'] == $jugador_lig['name'])
+                    <?php 
+                      $found = TRUE;
+                      $goals_lig = $jugador_lig['goals'];
+                    ?>
+                    @endif
+                  @endforeach
+                  @if ($found)
+                    <td class="col-xs-1 col-md-1">{{$goals_lig}}</td>
+                  @else 
+                    <td class="col-xs-1 col-md-1">-</td>
+                  @endif
+                @endforeach
 
                 <!-- COPAS -->
                 @foreach ($competitions_goals as $competition_name => $competition)

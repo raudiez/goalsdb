@@ -14,7 +14,14 @@ class LOFCCompetition extends Model{
 	}
 
 	public static function getBySeasonID($id_season){
-		return DB::table('lofc_competitions')->where('id_season', $id_season)->orderBy('name','asc')->get();;
+		return DB::table('lofc_competitions')->where('id_season', $id_season)->orderBy('name','asc')->get();
+	}
+
+	public static function getLeaguesBySeasonID($id_season){
+		return DB::table('lofc_competitions')->where([
+			['id_season', $id_season],
+			['is_league', '1'],
+			])->orderBy('name','asc')->get();
 	}
 
 	public static function insert($id_season, $name, $num_teams, $round_trip){

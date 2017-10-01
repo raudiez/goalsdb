@@ -20,33 +20,8 @@ use Alaouy\Youtube\Facades\Youtube;
 class CompetitionsController extends Controller{
 
   public function list_competitions($season_id){
-    $season = LOFCSeason::getByID($season_id);
-
-    $client = new Client(['http_errors' => false, 'connect_timeout' => 8, 'timeout' => 10]);
-    try {
-      $response = $client->get("http://www.gesliga.es/Clasificacion.aspx?Liga=$season->id_gesliga");
-      //$response = $client->get("http://slowwly.robertomurray.co.uk/delay/600000/url/http://www.google.co.uk");
-    }catch(Exception $e) {
-      if ($e->hasResponse()) {
-        $exception = (string) $e->getResponse()->getBody();
-        \Log::info($exception);
-      }
-      $response = '';
-    }catch (\GuzzleHttp\Exception\ConnectException $e) {
-      if ($e->hasResponse()) {
-        $exception = (string) $e->getResponse()->getBody();
-        \Log::info($exception);
-      }
-      $response = '';
-    }
-    if (!is_string($response) && $response != ''){
-      $gesliga = $response->getBody()->getContents();
-      $crawler = new Crawler($gesliga);
-      $gesliga_name = $crawler->filter('#ctl00_menuLigaDesktop_lblNombreLiga')->text();
-    }else $gesliga_name = '';
-
     $competitions = LOFCCompetition::getBySeasonID($season_id);
-    return view('lofc/competitions/list', compact('season', 'gesliga_name', 'competitions'));
+    return view('lofc/competitions/list', compact('season_id', 'competitions'));
   }
 
   public function show_competition($competition_id){
