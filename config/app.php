@@ -160,9 +160,14 @@ return [
         * YoutubeServiceProvider
         */
         Alaouy\Youtube\YoutubeServiceProvider::class,
+
+        /*
+        * RecaptchaServiceProvider
+        */
+        Greggilbert\Recaptcha\RecaptchaServiceProvider::class,
 	
-	/* LARAVEL COLLECTIVE HTML */
-	Collective\Html\HtmlServiceProvider::class,
+    	/* LARAVEL COLLECTIVE HTML */
+    	Collective\Html\HtmlServiceProvider::class,
     ],
 
     /*
@@ -211,10 +216,13 @@ return [
         
         /*YOUTUBE FACADE*/
         'Youtube' => Alaouy\Youtube\Facades\Youtube::class,
+
+        /*RECAPTCHA FACADE*/
+        'Recaptcha' => Greggilbert\Recaptcha\Facades\Recaptcha::class,
 	
-	/* LARAVELCOLLECTIVE HTML */
-	'Form' => Collective\Html\FormFacade::class,
-	'Html' => Collective\Html\HtmlFacade::class,
+    	/* LARAVELCOLLECTIVE HTML */
+    	'Form' => Collective\Html\FormFacade::class,
+    	'Html' => Collective\Html\HtmlFacade::class,
 
     ],
 

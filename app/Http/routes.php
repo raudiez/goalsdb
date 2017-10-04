@@ -14,6 +14,8 @@
 //Home
 Route::get('/', 'HomeController@index');
 Route::get('/disclaimer', 'HomeController@disclaimer');
+Route::get('/contact', 'HomeController@contact_form');
+Route::post('/contact_send', 'HomeController@contact_send');
 
 //Auth
 Route::auth();

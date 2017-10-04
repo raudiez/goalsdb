@@ -99,7 +99,7 @@
         <!-- Right Side Of Navbar -->
         <ul class="nav navbar-nav navbar-right">
           <!-- Authentication Links -->
-
+          <li><a href="{{url('contact')}}">Contacto</a></li>
           @if (!Auth::guest())
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
