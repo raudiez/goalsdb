@@ -11,6 +11,15 @@
   </div>
   <div class="row">
   	<div class="col-md-12">
+  	@if(count($errors->all()) > 0)
+			  <div class="alert alert-danger" role="alert"> <p><b>Attenzione!</b></p>
+			    <ul>
+			      @foreach($errors->all() as $error)
+			        <li>{{ $error }}</li>
+			      @endforeach
+			    </ul>
+			  </div>
+			@endif
   		<p>Puedes utilizar este formulario de contacto para contactar con nosotros, expresarnos cualquier duda, sugerencia o queja.</p>
   	</div>
 	  <div class="col-md-3"></div>
@@ -22,10 +31,6 @@
 	    {!! Form::label('subject', 'Texto:') !!}
 	    {!! Form::textarea('message_text', null, array('class' => 'form-control', 'rows' => '10', 'placeholder' => 'Escribe aquí tu mensaje. Si lo desea, deje un mail de contacto en el mensaje.')) !!}
 	    <div class="clearfix"><br/></div>
-	    <div class="clearfix"><br/></div>
-	    <p>Sabemos que el reCaptcha es molesto, pero es lo que nos proteje del SPAM ;)</p>
-	    {!! Recaptcha::render() !!}
-			<div class="clearfix"><br/></div>
 	    <div class="clearfix"><br/></div>
 	    {{Form::submit('Enviar', array('class' => 'btn btn-danger'))}}
 	    {!! Form::close() !!}

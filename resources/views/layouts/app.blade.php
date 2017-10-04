@@ -28,7 +28,7 @@
   <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=cobce5u2ujmkx8bm6g0xxrhynbz9tc96j4iieol3h84h3sx6"></script>
   <script>tinymce.init({ selector:'#palmarestextarea'});</script>
   <script>tinymce.init({ selector:'#reglamentotextarea', plugins: "link,toc,image,lists", image_caption: true});</script>
-
+  <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 <!--style="background-image:url('imgs/index.jpeg');"-->
 <body id="app-layout" >

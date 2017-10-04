@@ -46,14 +46,11 @@ class HomeController extends Controller
         $this->validate($request, [
             'subject' => 'required',
             'message_text' => 'required',
-            'recaptcha_response_field' => 'required|recaptcha',
         ]);
         $subject = $request->input('subject');
         $message_text = $request->input('message_text');
 
         Mail::send('emails.contact', ['message_text' => $message_text, 'subject' => $subject], function ($m) use ($message_text, $subject) {
-            //$m->from('hello@app.com', 'Your Application');
-
             $m->to('info.lofc@gmail.com')->subject('Contacto LOFC: '.$subject);
         });
 
