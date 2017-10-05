@@ -42,17 +42,35 @@ Route::post('records/save/{team_id}', 'RecordsController@save');
 
 //LOFC:
 
+////Seasons
+Route::get('lofc/seasons/form',
+	['middleware' => 'auth',
+	 'uses' => 'Lofc\SeasonsController@form'
+	]);
+Route::get('lofc/seasons/save',
+	['middleware' => 'auth',
+	 'uses' => 'Lofc\SeasonsController@save'
+	]);
+
 ////Competitions
 Route::get('lofc/competitions/{season_id}', 'Lofc\CompetitionsController@list_competitions');
 Route::get('lofc/show_competition/{competition_id}', 'Lofc\CompetitionsController@show_competition');
 Route::get('lofc/league_videos/{season_id}/{league_name}', 'Lofc\CompetitionsController@league_videos');
-Route::get('lofc/competitions/form/{season_id}',
+Route::get('lofc/competitions/form_cup/{season_id}',
 	['middleware' => 'auth',
-	 'uses' => 'Lofc\CompetitionsController@form'
+	 'uses' => 'Lofc\CompetitionsController@form_cup'
 	]);
-Route::post('lofc/competitions/save/{season_id}',
+Route::post('lofc/competitions/save_cup/{season_id}',
 	['middleware' => 'auth',
-	 'uses' => 'Lofc\CompetitionsController@save'
+	 'uses' => 'Lofc\CompetitionsController@save_cup'
+	]);
+Route::get('lofc/competitions/form_league/{season_id}',
+	['middleware' => 'auth',
+	 'uses' => 'Lofc\CompetitionsController@form_league'
+	]);
+Route::post('lofc/competitions/save_league/{season_id}',
+	['middleware' => 'auth',
+	 'uses' => 'Lofc\CompetitionsController@save_league'
 	]);
 
 

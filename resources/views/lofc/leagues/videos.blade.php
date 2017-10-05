@@ -16,6 +16,7 @@
   <div class="row">
     <div class="col-md-12">
       <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        @if(!empty($jornadas))
         @foreach ($jornadas as $key => $jornada)
           <h3>Jornada {{$key}}</h3>
           @foreach ($jornada as $video)
@@ -37,6 +38,9 @@
           </div>
           @endforeach
         @endforeach
+        @else
+        <p>Aún no hay vídeos esta temporada.</p>
+        @endif
       </div>
     </div>
   </div>

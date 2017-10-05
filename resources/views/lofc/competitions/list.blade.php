@@ -49,7 +49,16 @@
     @endforeach
     @if (!Auth::guest())
     <div class="col-xs-12 col-md-12">
-      <a href="{{ url('/lofc/competitions/form/'.$season_id) }}" class="btn btn-lofc-primary" role="button" title="Añadir competición"><span class="glyphicon glyphicon-plus-sign"></span> Añadir competición</a>
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-2">
+          <a href="{{ url('/lofc/competitions/form_league/'.$season_id) }}" class="btn btn-lofc-success" role="button" title="Añadir liga"><span class="glyphicon glyphicon-plus-sign"></span> Añadir liga</a>
+        </div>
+        <div class="col-md-2">
+          <a href="{{ url('/lofc/competitions/form_cup/'.$season_id) }}" class="btn btn-lofc-primary" role="button" title="Añadir copa"><span class="glyphicon glyphicon-plus-sign"></span> Añadir copa</a>
+        </div>
+        <div class="col-md-4"></div>
+      </div>
     </div>
     @endif
   </div>

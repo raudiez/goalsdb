@@ -24,12 +24,15 @@ class LOFCCompetition extends Model{
 			])->orderBy('name','asc')->get();
 	}
 
-	public static function insert($id_season, $name, $num_teams, $round_trip){
+	public static function insert($id_season, $name, $num_teams, $round_trip, $is_league = 0, $id_gesliga = NULL){
 		DB::table('lofc_competitions')->insert([
     		'id_season' => $id_season,
     		'name' => $name,
     		'num_teams' => $num_teams,
-    		'round_trip' => $round_trip
+    		'round_trip' => $round_trip,
+    		'is_league' => $is_league,
+    		'id_gesliga' => $id_gesliga
+
     	]);
 	}
 

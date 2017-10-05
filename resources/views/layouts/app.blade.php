@@ -66,6 +66,10 @@
               </li>
             @endforeach
             <li role="separator" class="divider"></li>
+            @if (!Auth::guest())
+            <li><a href="{{url('lofc/seasons/form')}}"><b><span class="glyphicon glyphicon-plus" style="font-size: 12px;"></span> Nueva temporada</b></a></li>
+            <li role="separator" class="divider"></li>
+            @endif
             <li><a href="{{url('lofc/palmares/show')}}">Palmarés</a></li>
             <li><a href="{{url('lofc/reglamento/show')}}">Reglamento</a></li>
             </ul>
