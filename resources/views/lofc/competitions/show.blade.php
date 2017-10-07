@@ -175,7 +175,7 @@
               if ($junction->ended){
                 if (!empty($videos)) {
                   foreach ($videos as $video) {
-                    if (strpos($video->snippet->title, $competition->name.' | '.$junction->lofc_team_L_name.' '.$goals_L.' - '.$goals_V.' '.$junction->lofc_team_V_name)) {
+                    if (strpos($video->snippet->title, $competition->id_season.' '.$competition->name.' | '.$junction->lofc_team_L_name.' '.$goals_L.' - '.$goals_V.' '.$junction->lofc_team_V_name)) {
                       ?>
                       <a href="https://www.youtube.com/watch?v={{$video->id->videoId}}" target="_blank">Ver vídeo »</a>
                       <?php
