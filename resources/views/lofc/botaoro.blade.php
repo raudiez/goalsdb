@@ -16,8 +16,6 @@
   		<div class="panel panel-lofc-primary">
 	      <div class="panel-heading" style="text-align: center;"><b>Clasificación de la temporada {{$season_id}}</b></div>
 	      <div class="panel-body">
-
-          <?php //$goles_liga = array(); ?>
 	      	@if (!empty($leagues_goals))
 	      	<div class="table-responsive"><table class="table table-striped table-hover">
             <thead>

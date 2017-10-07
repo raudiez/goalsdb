@@ -25,7 +25,7 @@ class ReglamentoController extends Controller{
   public function save(Request $request){
     $reglamentoText = $request->input('reglamentoText');
     LOFCReglamento::updateText($reglamentoText);
-    return redirect('lofc/reglamento/show');
+    return redirect('lofc/reglamento');
   }
         
 }

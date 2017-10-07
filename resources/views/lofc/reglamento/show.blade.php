@@ -13,6 +13,8 @@
   <div class="row reglamento">
     <div class="col-md-1"></div>
     <div class="col-md-10">
+      <?php $reglamentoText = str_replace('<table>', '<div class="table-responsive"><table class="table table-bordered">', $reglamentoText);?>
+      <?php $reglamentoText = str_replace('</table>', '</table></div>', $reglamentoText);?>
       <?php echo html_entity_decode($reglamentoText) ?>
     </div>
     <div class="col-md-1">

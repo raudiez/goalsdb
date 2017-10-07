@@ -25,7 +25,7 @@ class PalmaresController extends Controller{
   public function save(Request $request){
     $palmaresText = $request->input('palmaresText');
     LOFCPalmares::updateText($palmaresText);
-    return redirect('lofc/palmares/show');
+    return redirect('lofc/palmares');
   }
         
 }

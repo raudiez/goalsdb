@@ -163,12 +163,8 @@ PANEL-LOFC-PRIMARY
 }
 
 /**********************************
-EXTRA CSS
+REGLAMENTO CSS
 ***********************************/
-.premier{
-    font-family: PremierLeague;
-}
-
 .reglamento{
     font-family: Lato;
 }
@@ -184,4 +180,12 @@ EXTRA CSS
 }
 .reglamento p{
     font-size: 16px;
+}
+
+
+/**********************************
+EXTRA CSS
+***********************************/
+.premier{
+    font-family: PremierLeague;
 }

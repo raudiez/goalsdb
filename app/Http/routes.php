@@ -104,12 +104,15 @@ Route::post('lofc/junction_save/{junction_id}/{leg}',
 	 'uses' => 'Lofc\JunctionsController@save'
 	]);
 
+////Pichichi
+Route::get('lofc/pichichi/{season_id}', 'Lofc\PichichiController@show');
+
 ////BotaOro
 Route::get('lofc/botaoro/{season_id}', 'Lofc\BotaOroController@show');
 
 
 ////Palmares
-Route::get('lofc/palmares/show', 'Lofc\PalmaresController@show');
+Route::get('lofc/palmares', 'Lofc\PalmaresController@show');
 Route::get('lofc/palmares/form',
 	['middleware' => 'auth',
 	'uses' => 'Lofc\PalmaresController@form'
@@ -120,7 +123,7 @@ Route::post('lofc/palmares/save',
 	]);
 
 ////Reglamento
-Route::get('lofc/reglamento/show', 'Lofc\ReglamentoController@show');
+Route::get('lofc/reglamento', 'Lofc\ReglamentoController@show');
 Route::get('lofc/reglamento/form',
 	['middleware' => 'auth',
 	'uses' => 'Lofc\ReglamentoController@form'

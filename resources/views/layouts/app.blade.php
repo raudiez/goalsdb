@@ -27,7 +27,7 @@
 
   <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=cobce5u2ujmkx8bm6g0xxrhynbz9tc96j4iieol3h84h3sx6"></script>
   <script>tinymce.init({ selector:'#palmarestextarea'});</script>
-  <script>tinymce.init({ selector:'#reglamentotextarea', plugins: "link,toc,image,lists", image_caption: true});</script>
+  <script>tinymce.init({ selector:'#reglamentotextarea', plugins: "link,toc,image,lists,table", image_caption: true});</script>
   <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 <!--style="background-image:url('imgs/index.jpeg');"-->
@@ -61,6 +61,7 @@
                   <li class="dropdown-header">Temporada {{$season->id}}</li>
                   <li role="separator" class="divider"></li>
                   <li><a href="{{url('lofc/competitions/'.$season->id)}}">Competiciones</a></li>
+                  <li><a href="{{url('lofc/pichichi/'.$season->id)}}">Pichichi</a></li>
                   <li><a href="{{url('lofc/botaoro/'.$season->id)}}">Bota de Oro</a></li>
                 </ul>
               </li>
@@ -70,8 +71,8 @@
             <li><a href="{{url('lofc/seasons/form')}}"><b><span class="glyphicon glyphicon-plus" style="font-size: 12px;"></span> Nueva temporada</b></a></li>
             <li role="separator" class="divider"></li>
             @endif
-            <li><a href="{{url('lofc/palmares/show')}}">Palmarés</a></li>
-            <li><a href="{{url('lofc/reglamento/show')}}">Reglamento</a></li>
+            <li><a href="{{url('lofc/palmares')}}">Palmarés</a></li>
+            <li><a href="{{url('lofc/reglamento')}}">Reglamento</a></li>
             </ul>
           </li>
           @if (!Auth::guest())
