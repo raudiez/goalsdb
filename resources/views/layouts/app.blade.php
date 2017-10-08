@@ -125,17 +125,18 @@
       </div>
     </div>
   </nav>
-
-  <div class="clearfix" style="margin-top: 90px;"><br/></div>
-
-  @yield('content')
-
-
-
-  <div class="clearfix"><br/></div>
   <div class="container">
-    <hr>
-    <h6 class="small">&copy; 2017 - <a href="https://github.com/raudiez" target="_blank">Raúl Díez Sánchez</a> - Read <a href="{{ url('/disclaimer') }}">disclaimer</a> for legal and abuse related information.</h6>
+    <div class="fill">
+      <div class="clearfix" style="margin-top: 90px;"><br/></div>
+      @yield('content')
+      <div class="clearfix" style="margin-top: 90px;"><br/></div>
+      <footer class="footer">
+        <div class="container">
+          <hr>
+          <h6 class="small">&copy; 2017 - <a href="https://github.com/raudiez" target="_blank">Raúl Díez Sánchez</a> - Read <a href="{{ url('/disclaimer') }}">disclaimer</a> for legal and abuse related information.</h6>
+        </div>
+      </footer>
+    </div>
   </div>
   <!-- JavaScripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>

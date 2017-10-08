@@ -8,6 +8,44 @@ Azul 3: #004997
 Morado: #6001ff
 *****************************/
 
+
+html, body{
+    height:100%;
+}
+
+.container{
+    background-color: #fff;
+    box-shadow: 0px 5px 15px 5px #fff;
+}
+.container .fill{
+    min-height: 90.5vh;
+}
+
+.container .fill .container{
+    width: 100%;
+}
+
+body {
+  position: relative;
+  margin: 0;
+  padding-bottom: 6rem;
+  min-height: 100%;
+  background: url("https://i.imgur.com/OCdfjQE.jpg")no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.footer {
+  position:relative;
+  bottom:-10px;
+}
+
+.footer .container{
+    width: 100%;
+}
+
 /**************************
 NAVBAR
 ****************************/
@@ -20,9 +58,15 @@ NAVBAR
 .navbar-nav > li > a{
     color:#fff !important;
 }
+
 .navbar-inverse {
     background: linear-gradient(135deg, #000000 15%,#004997 63%,#207cca 100%,#0089c8 100%); 
 }
+.navbar-inverse .container {
+    background-color: rgba(255, 255, 255, 0);
+    box-shadow: none;
+}
+
 .navbar {min-height:75px !important;}
 .navbar-brand{
 	padding-top:5px !important; 
