@@ -16,10 +16,25 @@
 </IfModule>
 
 <IfModule mod_deflate.c>
-    <FilesMatch ".(js|jpg|jpeg|gif|png|css|txt|html)$">
+    <FilesMatch ".(js|jpg|jpeg|gif|png|css|txt|html|woff)$">
         ExpiresActive on
         ExpiresDefault "access plus 1 month"
         SetOutputFilter DEFLATE
+    </FilesMatch>
+</IfModule>
+
+<IfModule mod_headers.c>
+    <FilesMatch "\.(ico|jpe?g|png|gif|swf)$">
+        Header set Cache-Control "max-age=2592000, public"
+    </FilesMatch>
+    <FilesMatch "\.(css|woff)$">
+        Header set Cache-Control "max-age=604800, public"
+    </FilesMatch>
+    <FilesMatch "\.(js)$">
+        Header set Cache-Control "max-age=216000, private"
+    </FilesMatch>
+    <FilesMatch "\.(x?html?|php)$">
+        Header set Cache-Control "max-age=600, private, must-revalidate"
     </FilesMatch>
 </IfModule>
 
