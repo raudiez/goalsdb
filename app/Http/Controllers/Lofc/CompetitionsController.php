@@ -52,7 +52,7 @@ class CompetitionsController extends Controller{
         foreach ($results as $result) {
           if (strpos($league_name, "Grupo")) {
             preg_match('/.* Grupo ([AB])/', $league_name, $matches);
-            if (preg_match('/TEMPORADA '.$season_id.' JORNADA '.$jornada.'GRUPO '.$matches[1].'[.\s].*/', $result->snippet->description)) {
+            if (preg_match('/TEMPORADA '.$season_id.' JORNADA '.$jornada.' GRUPO '.$matches[1].'[.\s].*/', $result->snippet->description)) {
               $jornadas[$jornada][$i] = array(
                 'videoId' => $result->id->videoId, 
                 'title' => $result->snippet->title,
