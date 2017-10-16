@@ -38,9 +38,8 @@ class CompetitionsController extends Controller{
   }
 
   public function league_videos($season_id, $league_name){
-    $season = LOFCSeason::getByID($season_id);
     $params = array(
-        'q'             => 'LOFC '.$league_name.' TEMPORADA'.$season_id,
+        'q'             => $league_name.' TEMPORADA '.$season_id,
         'type'          => 'video',
         'part'          => 'id, snippet',
         'maxResults'    => 50
@@ -51,17 +50,28 @@ class CompetitionsController extends Controller{
       for ($jornada=1; $jornada < 15; $jornada++) { 
         $i = 0;
         foreach ($results as $result) {
-          if (preg_match('/TEMPORADA '.$season_id.' JORNADA '.$jornada.'[.\s].*/', $result->snippet->description)) {
-            $jornadas[$jornada][$i] = array(
-              'videoId' => $result->id->videoId, 
-              'title' => $result->snippet->title,
-              );
-            $i++;
+          if (strpos($league_name, "Grupo")) {
+            preg_match('/.* Grupo ([AB])/', $league_name, $matches);
+            if (preg_match('/TEMPORADA '.$season_id.' JORNADA '.$jornada.'GRUPO '.$matches[1].'[.\s].*/', $result->snippet->description)) {
+              $jornadas[$jornada][$i] = array(
+                'videoId' => $result->id->videoId, 
+                'title' => $result->snippet->title,
+                );
+              $i++;
+            }
+          }else{
+            if (preg_match('/TEMPORADA '.$season_id.' JORNADA '.$jornada.'[.\s].*/', $result->snippet->description)) {
+              $jornadas[$jornada][$i] = array(
+                'videoId' => $result->id->videoId, 
+                'title' => $result->snippet->title,
+                );
+              $i++;
+            }
           }
         }
       }
     }
-    return view('lofc/leagues/videos', compact('season', 'league_name', 'jornadas'));
+    return view('lofc/leagues/videos', compact('season_id', 'league_name', 'jornadas'));
   }
 
   public function form_cup($season_id){
