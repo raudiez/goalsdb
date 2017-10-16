@@ -168,6 +168,11 @@ return [
 	
     	/* LARAVEL COLLECTIVE HTML */
     	Collective\Html\HtmlServiceProvider::class,
+
+        /*
+        * Intervention (image upload)
+        */
+        Intervention\Image\ImageServiceProvider::class
     ],
 
     /*
@@ -223,6 +228,9 @@ return [
     	/* LARAVELCOLLECTIVE HTML */
     	'Form' => Collective\Html\FormFacade::class,
     	'Html' => Collective\Html\HtmlFacade::class,
+
+        /* INTERVENTION IMAGE UPLOAD */
+        'Image' => Intervention\Image\Facades\Image::class
 
     ],
 

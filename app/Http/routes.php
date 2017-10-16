@@ -43,14 +43,15 @@ Route::post('records/save/{team_id}', 'RecordsController@save');
 //LOFC:
 
 ////Seasons
-Route::get('lofc/seasons/form',
+Route::get('lofc/seasons/create',
 	['middleware' => 'auth',
-	 'uses' => 'Lofc\SeasonsController@form'
+	 'uses' => 'Lofc\SeasonsController@create'
 	]);
-Route::get('lofc/seasons/save',
+Route::post('lofc/seasons/save',
 	['middleware' => 'auth',
 	 'uses' => 'Lofc\SeasonsController@save'
 	]);
+
 
 ////Competitions
 Route::get('lofc/competitions/{season_id}', 'Lofc\CompetitionsController@list_competitions');
@@ -97,6 +98,18 @@ Route::post('lofc/players_save/{team_id}',
 	['middleware' => 'auth',
 	 'uses' => 'Lofc\PlayersController@players_save'
 	]);
+
+
+////Teams
+Route::get('lofc/teams/modify/{season_id}',
+	['middleware' => 'auth',
+	 'uses' => 'Lofc\TeamsController@modify'
+	]);
+Route::post('lofc/teams/save/{team_id}',
+	['middleware' => 'auth',
+	 'uses' => 'Lofc\TeamsController@save'
+	]);
+
 
 ////Junctions
 Route::post('lofc/junction_save/{junction_id}/{leg}',

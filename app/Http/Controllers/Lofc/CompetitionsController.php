@@ -28,7 +28,7 @@ class CompetitionsController extends Controller{
     $competition = LOFCCompetition::getByID($competition_id);
     $junctions = LOFCJunction::joinCompetition_Teams($competition_id);
     $params = array(
-        'q'             => 'LOFC '.$competition->name.' TEMPORADA'.$competition->id_season,
+        'q'             => $competition->name.' TEMPORADA '.$competition->id_season,
         'type'          => 'video',
         'part'          => 'id, snippet',
         'maxResults'    => 50

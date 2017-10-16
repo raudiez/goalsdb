@@ -248,3 +248,8 @@ EXTRA CSS
 .premier{
     font-family: PremierLeague;
 }
+
+.custom-img-picker{
+    position: relative;
+    width: 80px;
+}
