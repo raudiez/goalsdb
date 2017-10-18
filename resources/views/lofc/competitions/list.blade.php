@@ -47,6 +47,29 @@
     </div>
     @endif
     @endforeach
+    @if (!empty($gala))
+      <div class="col-xs-12 col-md-12">
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+          <h3>Gala final</h3>
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingOne">
+              <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseVid{{$gala['videoId']}}" aria-expanded="false" aria-controls="collapseVid{{$gala['videoId']}}">
+                  Desplegar vídeo »
+                </a>
+              </h4>
+            </div>
+            <div id="collapseVid{{$gala['videoId']}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+              <div class="panel-body">
+                <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$gala['videoId']}}"></iframe>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    @endif
     @if (!Auth::guest())
     <div class="col-xs-12 col-md-12">
       <div class="row">

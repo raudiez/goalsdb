@@ -21,7 +21,26 @@ class CompetitionsController extends Controller{
 
   public function list_competitions($season_id){
     $competitions = LOFCCompetition::getBySeasonID($season_id);
-    return view('lofc/competitions/list', compact('season_id', 'competitions'));
+    $params = array(
+        'q'             => 'LOFC GALA TEMPORADA '.$season_id,
+        'type'          => 'video',
+        'part'          => 'id, snippet',
+        'maxResults'    => 50
+    );
+    $videos = Youtube::searchAdvanced($params);
+    $gala = array();
+    if (!empty($videos)) {
+      foreach ($videos as $video) {
+        if (strpos($video->snippet->title, 'TEMPORADA '.$season_id)) {
+          $gala = array(
+            'videoId' => $video->id->videoId, 
+            'title' => $video->snippet->title,
+          );
+        }
+      }
+    }
+    
+    return view('lofc/competitions/list', compact('season_id', 'competitions', 'gala'));
   }
 
   public function show_competition($competition_id){
