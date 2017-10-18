@@ -47,10 +47,26 @@
     </div>
     @endif
     @endforeach
+    @if (!Auth::guest())
+    <div class="col-xs-12 col-md-12">
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-2">
+          <a href="{{ url('/lofc/competitions/form_league/'.$season_id) }}" class="btn btn-lofc-success" role="button" title="Añadir liga"><span class="glyphicon glyphicon-plus-sign"></span> Añadir liga</a>
+        </div>
+        <div class="col-md-2">
+          <a href="{{ url('/lofc/competitions/form_cup/'.$season_id) }}" class="btn btn-lofc-primary" role="button" title="Añadir copa"><span class="glyphicon glyphicon-plus-sign"></span> Añadir copa</a>
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+    </div>
+    @endif
     @if (!empty($gala))
       <div class="col-xs-12 col-md-12">
+        <div class="page-header">
+        <h1 class="premier">Gala Final</h1>
+      </div>
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-          <h3>Gala final</h3>
           <div class="panel panel-default">
             <div class="panel-heading" role="tab" id="headingOne">
               <h4 class="panel-title">
@@ -69,20 +85,6 @@
           </div>
         </div>
       </div>
-    @endif
-    @if (!Auth::guest())
-    <div class="col-xs-12 col-md-12">
-      <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-2">
-          <a href="{{ url('/lofc/competitions/form_league/'.$season_id) }}" class="btn btn-lofc-success" role="button" title="Añadir liga"><span class="glyphicon glyphicon-plus-sign"></span> Añadir liga</a>
-        </div>
-        <div class="col-md-2">
-          <a href="{{ url('/lofc/competitions/form_cup/'.$season_id) }}" class="btn btn-lofc-primary" role="button" title="Añadir copa"><span class="glyphicon glyphicon-plus-sign"></span> Añadir copa</a>
-        </div>
-        <div class="col-md-4"></div>
-      </div>
-    </div>
     @endif
   </div>
 
