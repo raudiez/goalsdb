@@ -68,7 +68,7 @@ class JunctionsController extends Controller{
 
   private function checkAndCalculateNext($id_competition, $phase){
     $junctions = LOFCJunction::getByCompetitionIDandPhase($id_competition, $phase);
-    $all_ended = 0;
+    $all_ended = 1;
     //checks if all junctions of phase has ended
     foreach ($junctions as $junction){
       $all_ended = $all_ended and $junction->ended;
