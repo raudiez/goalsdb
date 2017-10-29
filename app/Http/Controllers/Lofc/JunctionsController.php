@@ -71,9 +71,9 @@ class JunctionsController extends Controller{
     $all_ended = 1;
     //checks if all junctions of phase has ended
     foreach ($junctions as $junction){
-      $all_ended = $all_ended and $junction->ended;
+      $all_ended = $all_ended * $junction->ended;
     }
-    if ($all_ended){
+    if ($all_ended == 1){
       //if ended, calculate next phase junction's teams
       $phaseTo = $phase +1;
       $nextJunctions = LOFCJunction::getByCompetitionIDandPhase($id_competition, $phaseTo);
