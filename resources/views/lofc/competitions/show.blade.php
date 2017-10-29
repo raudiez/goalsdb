@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
 <ol class="breadcrumb">
   <li><a href="{{ url('/') }}">Inicio</a></li>
   <li>LOFC</li>
@@ -190,6 +189,4 @@
   </div>
   @endforeach
 </div>
-
-
 @endsection

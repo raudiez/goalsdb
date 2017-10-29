@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
 @if (!Auth::guest())
   <div class="row">
     <div class="col-md-12">
@@ -196,7 +195,6 @@
   {{ Html::image('imgs/lofc.png','',array('style' => 'height: 250px')) }}
   </center>
 @endif
-</div>
 @endsection
 
 

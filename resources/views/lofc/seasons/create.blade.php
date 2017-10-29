@@ -30,5 +30,4 @@
   <div class="col-md-2"></div>
   {!! Form::close() !!}
 </div>
-
 @endsection
