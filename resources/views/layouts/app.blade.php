@@ -15,6 +15,7 @@
   <!-- Styles -->
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
   <link href="{{ URL::asset('css/style.css') }}" rel="stylesheet">
+  <link href="{{ URL::asset('css/image-picker.css') }}" rel="stylesheet">
 
   <style>
     .fa-btn {
@@ -24,7 +25,8 @@
       background-color: #C0C2CD;
     }
   </style>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="{{ URL::asset('js/image-picker.min.js') }}" type="text/javascript"></script>
   <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=cobce5u2ujmkx8bm6g0xxrhynbz9tc96j4iieol3h84h3sx6"></script>
   <script>tinymce.init({ selector:'#palmarestextarea'});</script>
   <script>tinymce.init({ selector:'#reglamentotextarea', plugins: "link,toc,image,lists,table", image_caption: true});</script>
@@ -68,7 +70,7 @@
             @endforeach
             <li role="separator" class="divider"></li>
             @if (!Auth::guest())
-            <li><a href="{{url('lofc/seasons/form')}}"><b><span class="glyphicon glyphicon-plus" style="font-size: 12px;"></span> Nueva temporada</b></a></li>
+            <li><a href="{{url('lofc/seasons/create')}}"><b><span class="glyphicon glyphicon-plus" style="font-size: 12px;"></span> Nueva temporada</b></a></li>
             <li role="separator" class="divider"></li>
             @endif
             <li><a href="{{url('lofc/palmares')}}">Palmarés</a></li>
@@ -160,6 +162,5 @@
         $('[data-toggle="popover"]').popover(); 
     });
   </script>
-
 </body>
 </html>

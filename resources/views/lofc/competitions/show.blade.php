@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
 <ol class="breadcrumb">
   <li><a href="{{ url('/') }}">Inicio</a></li>
   <li>LOFC</li>
@@ -43,7 +42,7 @@
       <div class="panel-body">
         <p style="text-align: center">
         @if ($junction->lofc_team_L_logo_img != '')
-        {{ Html::image('imgs//lofc/teams/'.$junction->lofc_team_L_logo_img,'',array('style' => 'height: 50px; margin-right:5px;')) }}
+        {{ Html::image('imgs/lofc/teams/'.$junction->lofc_team_L_logo_img,'',array('style' => 'height: 50px; margin-right:5px;')) }}
         @endif
         {{$junction->lofc_team_L_name}} 
         <?php if (!$junction->played_1){ ?>
@@ -61,7 +60,7 @@
         <?php } ?>
         {{$junction->lofc_team_V_name}} 
         @if ($junction->lofc_team_V_logo_img != '')
-        {{ Html::image('imgs//lofc/teams/'.$junction->lofc_team_V_logo_img,'',array('style' => 'height: 50px;margin-left:5px;')) }}
+        {{ Html::image('imgs/lofc/teams/'.$junction->lofc_team_V_logo_img,'',array('style' => 'height: 50px;margin-left:5px;')) }}
         @endif</p>
         <p style="text-align: center">
         @if (!Auth::guest())
@@ -190,6 +189,4 @@
   </div>
   @endforeach
 </div>
-
-
 @endsection
