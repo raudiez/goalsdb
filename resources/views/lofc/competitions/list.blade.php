@@ -37,7 +37,7 @@
   @else
   <div class="col-xs-12 col-md-4">
     <div class="list-group">
-      <a href="{{url('lofc/show_competition/'.$competition->id)}}" class="list-group-item" style="text-align: center;height: 150px; position: relative;">
+      <a href="{{url('lofc/show_competition/'.$competition->id)}}" class="list-group-item" style="text-align: center;height: 150px; position: relative;" target="_blank">
         <h3 class="list-group-item-heading" style="text-align: left">{{$competition->name}}</h3>
         <br/>
         <p><b>Tipo de eliminatoria:</b> @if ($competition->round_trip) Ida y vuelta @else Solo ida @endif</p>
