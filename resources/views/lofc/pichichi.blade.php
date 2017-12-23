@@ -21,12 +21,8 @@
             <tr>
             	<th style="text-align: right;">Pos</th>
               <th style="text-align: left;">Jugador</th>
-              @if (count($leagues_goals) > 1)
-                @foreach ($leagues_goals as $league_name => $league_goals)
-                <th style="text-align: center">{{$league_name}}</th>
-                @endforeach
-              @endif
-              <th style="text-align: center">Total</th>
+              <th style="text-align: center">Grupo</th>
+              <th style="text-align: center">Goles</th>
             </tr>
           </thead>
           <tbody style="text-align: center">
@@ -38,27 +34,9 @@
               <?php $i++; ?>
               <!-- JUGADOR -->
               <td class="col-xs-2 col-md-2" style="text-align: left">{{$jugador['name']}}</td>
-              @if (count($leagues_goals) > 1)
-                <!-- LIGAS -->
-                @foreach ($leagues_goals as $league_name => $league)
-                  <?php $found = FALSE; ?>
-                  @foreach ($league as $jugador_lig)
-                    @if ($jugador['name'] == $jugador_lig['name'])
-                    <?php 
-                      $found = TRUE;
-                      $goals_lig = $jugador_lig['goals'];
-                    ?>
-                    @endif
-                  @endforeach
-                  @if ($found)
-                    <td class="col-xs-1 col-md-1">{{$goals_lig}}</td>
-                  @else 
-                    <td class="col-xs-1 col-md-1">-</td>
-                  @endif
-                @endforeach
-              @endif
-
-              <!-- PICHICHI -->
+              <!-- GRUPO -->
+              <td class="col-xs-1 col-md-1">{{$jugador['group_name']}}</td>
+              <!-- GOLES -->
               <td class="col-xs-2 col-md-2">{{$jugador['goals']}}</td>
             </tr>
             @endforeach

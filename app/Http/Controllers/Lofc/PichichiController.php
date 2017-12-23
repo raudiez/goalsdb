@@ -69,9 +69,11 @@ class PichichiController extends Controller{
 
     $goles_totales = array();
     //Inicializa totales con los de ligas de la temporada
-    foreach ($leagues_goals as $league_goals) {
+    foreach ($leagues_goals as $league_name => $league_goals) {
+      preg_match('/.* Grupo ([AB])/', $league_name, $matches);
+      $group_name = $matches[1];
       foreach ($league_goals as $value) {
-        array_push($goles_totales, array('name' => $value['name'], 'goals' => $value['goals']));
+        array_push($goles_totales, array('name' => $value['name'], 'goals' => $value['goals'], 'group_name' => $group_name));
       }
     }
 
