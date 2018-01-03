@@ -25,7 +25,9 @@
               <th style="text-align: center">{{$league_name}}</th>
               @endforeach
               @foreach ($competitions_goals as $competition_name => $competition_goals)
+              @if (strpos($competition_name, 'Playoff') === false)
               <th style="text-align: center">{{$competition_name}}</th>
+              @endif
               @endforeach
               <th style="text-align: center">Total</th>
             </tr>
@@ -60,20 +62,22 @@
 
               <!-- COPAS -->
               @foreach ($competitions_goals as $competition_name => $competition)
-              	<?php $found = FALSE; ?>
-              	@foreach ($competition as $jugador_comp)
-              		@if ($jugador['name'] == $jugador_comp['player_name'])
-              		<?php 
-              			$found = TRUE;
-              			$goals_comp = $jugador_comp['goals'];
-              		?>
-              		@endif
-              	@endforeach
-              	@if ($found)
-              		<td class="col-xs-1 col-md-1">{{$goals_comp}}</td>
-              	@else 
-              		<td class="col-xs-1 col-md-1">-</td>
-              	@endif
+                @if (strpos($competition_name, 'Playoff') === false)
+                	<?php $found = FALSE; ?>
+                	@foreach ($competition as $jugador_comp)
+                		@if ($jugador['name'] == $jugador_comp['player_name'])
+                		<?php 
+                			$found = TRUE;
+                			$goals_comp = $jugador_comp['goals'];
+                		?>
+                		@endif
+                	@endforeach
+                	@if ($found)
+                		<td class="col-xs-1 col-md-1">{{$goals_comp}}</td>
+                	@else 
+                		<td class="col-xs-1 col-md-1">-</td>
+                	@endif
+                @endif
               @endforeach
 
               <!-- BOTA ORO -->

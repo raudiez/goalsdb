@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Lofc;
 
 use App\LOFCCompetition;
+use App\LOFCSeason;
 
 use Illuminate\Http\Request;
 
@@ -67,13 +68,46 @@ class PichichiController extends Controller{
     }
     if($error_gesliga) $leagues_goals = array();
 
+    $season_goals = LOFCSeason::joinGoals_Season($season_id);
+
+    $competitions_goals = array();
+    foreach ($season_goals as $value) {
+      $competition = $value->competition_name;
+      if(!isset($competitions_goals[$competition])) {
+        $competitions_goals[$competition] = array();
+        array_push($competitions_goals[$competition], array('player_name' => $value->player_name, 'goals' => $value->count,  ));
+      }else array_push($competitions_goals[$competition], array('player_name' => $value->player_name, 'goals' => $value->count));
+    }
+
     $goles_totales = array();
-    //Inicializa totales con los de ligas de la temporada
+
+    //Primero añado los goles de Gesliga, por grupos.
     foreach ($leagues_goals as $league_name => $league_goals) {
       preg_match('/.* Grupo ([AB])/', $league_name, $matches);
       $group_name = $matches[1];
       foreach ($league_goals as $value) {
         array_push($goles_totales, array('name' => $value['name'], 'goals' => $value['goals'], 'group_name' => $group_name));
+      }
+    }
+
+    //Luego añado los goles de Playoff
+    foreach ($competitions_goals as $competition_name => $competition_goals) {
+      //Solo añado goles de la BD de Playoff
+      if (strpos($competition_name, 'Playoff') !== false){
+        foreach ($competition_goals as $value) {
+          $k = FALSE;
+          foreach ($goles_totales as $key => $cpy) {
+            if ($cpy['name'] == $value['player_name']){
+              $k = $key;
+            }
+          }
+          if (isset($k) && $k !== FALSE){
+            $goles_totales[$k]['goals'] += $value['goals'];
+          }else {
+            //Al no saber el grupo, no pongo grupo.
+            array_push($goles_totales, array('name' => $value['player_name'], 'goals' => $value['goals'], 'group_name' => '-'));
+          }
+        }
       }
     }
 

@@ -18,6 +18,17 @@ class BotaOroController extends Controller{
 
   public function show($season_id){
     $leagues = LOFCCompetition::getLeaguesBySeasonID($season_id);
+    $season_goals = LOFCSeason::joinGoals_Season($season_id);
+
+    $competitions_goals = array();
+    foreach ($season_goals as $value) {
+      $competition = $value->competition_name;
+      if(!isset($competitions_goals[$competition])) {
+        $competitions_goals[$competition] = array();
+        array_push($competitions_goals[$competition], array('player_name' => $value->player_name, 'goals' => $value->count,  ));
+      }else array_push($competitions_goals[$competition], array('player_name' => $value->player_name, 'goals' => $value->count));
+    }
+
     $leagues_goals = array();
     $error_gesliga = FALSE;
     foreach ($leagues as $league) {
@@ -60,24 +71,24 @@ class BotaOroController extends Controller{
             $arr_goals = explode("\n", $goals);
 
             for($i = 0; $i < count($arr_players); $i++){
-              array_push($leagues_goals[$league->name], array('name' => $arr_players[$i], 'goals' => $arr_goals[$i]));
+              $goals_playoff = 0;
+              foreach ($competitions_goals as $competition_name => $competition_goals) {
+                if (strpos($competition_name, 'Playoff') !== false){
+                  
+                  foreach ($competition_goals as $value) {
+                    if ($arr_players[$i] == $value['player_name']){
+                      $goals_playoff = $value['goals'];
+                    }
+                  }
+                }
+              }
+              array_push($leagues_goals[$league->name], array('name' => $arr_players[$i], 'goals' => $arr_goals[$i]+$goals_playoff));
             }
           }else $error_gesliga = TRUE;
         }else $error_gesliga = RUE;
       }
     }
     if($error_gesliga) $leagues_goals = array();
-
-    $season_goals = LOFCSeason::joinGoals_Season($season_id);
-
-    $competitions_goals = array();
-    foreach ($season_goals as $value) {
-      $competition = $value->competition_name;
-      if(!isset($competitions_goals[$competition])) {
-        $competitions_goals[$competition] = array();
-        array_push($competitions_goals[$competition], array('player_name' => $value->player_name, 'goals' => $value->count,  ));
-      }else array_push($competitions_goals[$competition], array('player_name' => $value->player_name, 'goals' => $value->count));
-    }
 
     $goles_totales = array();
     //Inicializa totales con los de ligas de la temporada
@@ -87,18 +98,20 @@ class BotaOroController extends Controller{
       }
     }
 
-    foreach ($competitions_goals as $competition_goals) {
-      foreach ($competition_goals as $value) {
-        $k = FALSE;
-        foreach ($goles_totales as $key => $cpy) {
-          if ($cpy['name'] == $value['player_name']){
-            $k = $key;
+    foreach ($competitions_goals as $competition_name => $competition_goals) {
+      if (strpos($competition_name, 'Playoff') === false){
+        foreach ($competition_goals as $value) {
+          $k = FALSE;
+          foreach ($goles_totales as $key => $cpy) {
+            if ($cpy['name'] == $value['player_name']){
+              $k = $key;
+            }
           }
-        }
-        if (isset($k) && $k !== FALSE){
-          $goles_totales[$k]['goals'] += $value['goals'];
-        }else {
-          array_push($goles_totales, array('name' => $value['player_name'], 'goals' => $value['goals']));
+          if (isset($k) && $k !== FALSE){
+            $goles_totales[$k]['goals'] += $value['goals'];
+          }else {
+            array_push($goles_totales, array('name' => $value['player_name'], 'goals' => $value['goals']));
+          }
         }
       }
     }
