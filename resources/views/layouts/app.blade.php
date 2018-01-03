@@ -29,7 +29,7 @@
   <script src="{{ URL::asset('js/image-picker.min.js') }}" type="text/javascript"></script>
   <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=cobce5u2ujmkx8bm6g0xxrhynbz9tc96j4iieol3h84h3sx6"></script>
   <script>tinymce.init({ selector:'#palmarestextarea', plugins: "link,lists,table"});</script>
-  <script>tinymce.init({ selector:'#reglamentotextarea', plugins: "link,toc,image,lists,table", image_caption: true});</script>
+  <script>tinymce.init({ selector:'#reglamentotextarea', plugins: "link,toc,image,lists,table,media", image_caption: true, media_live_embeds: true});</script>
   <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 <!--style="background-image:url('imgs/index.jpeg');"-->
