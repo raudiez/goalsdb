@@ -21,7 +21,9 @@
             <tr>
             	<th style="text-align: right;">Pos</th>
               <th style="text-align: left;">Jugador</th>
+              @if(isset($jugador['group_name']))
               <th style="text-align: center">Grupo</th>
+              @endif
               <th style="text-align: center">Goles</th>
             </tr>
           </thead>
@@ -35,7 +37,9 @@
               <!-- JUGADOR -->
               <td class="col-xs-2 col-md-2" style="text-align: left">{{$jugador['name']}}</td>
               <!-- GRUPO -->
+              @if(isset($jugador['group_name']))
               <td class="col-xs-1 col-md-1">{{$jugador['group_name']}}</td>
+              @endif
               <!-- GOLES -->
               <td class="col-xs-2 col-md-2">{{$jugador['goals']}}</td>
             </tr>

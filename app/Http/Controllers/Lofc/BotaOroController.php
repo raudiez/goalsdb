@@ -74,7 +74,6 @@ class BotaOroController extends Controller{
               $goals_playoff = 0;
               foreach ($competitions_goals as $competition_name => $competition_goals) {
                 if (strpos($competition_name, 'Playoff') !== false){
-                  
                   foreach ($competition_goals as $value) {
                     if ($arr_players[$i] == $value['player_name']){
                       $goals_playoff = $value['goals'];

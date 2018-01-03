@@ -83,10 +83,16 @@ class PichichiController extends Controller{
 
     //Primero añado los goles de Gesliga, por grupos.
     foreach ($leagues_goals as $league_name => $league_goals) {
-      preg_match('/.* Grupo ([AB])/', $league_name, $matches);
-      $group_name = $matches[1];
-      foreach ($league_goals as $value) {
-        array_push($goles_totales, array('name' => $value['name'], 'goals' => $value['goals'], 'group_name' => $group_name));
+      if(strpos($league_name, 'Grupo') !== false){
+        preg_match('/.* Grupo ([AB])/', $league_name, $matches);
+        $group_name = $matches[1];
+        foreach ($league_goals as $value) {
+          array_push($goles_totales, array('name' => $value['name'], 'goals' => $value['goals'], 'group_name' => $group_name));
+        }
+      }else{
+        foreach ($league_goals as $value) {
+          array_push($goles_totales, array('name' => $value['name'], 'goals' => $value['goals']));
+        }
       }
     }
 
@@ -105,7 +111,7 @@ class PichichiController extends Controller{
             $goles_totales[$k]['goals'] += $value['goals'];
           }else {
             //Al no saber el grupo, no pongo grupo.
-            array_push($goles_totales, array('name' => $value['player_name'], 'goals' => $value['goals'], 'group_name' => '-'));
+            array_push($goles_totales, array('name' => $value['player_name'], 'goals' => $value['goals'], 'group_name' => NULL));
           }
         }
       }
