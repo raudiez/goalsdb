@@ -20,6 +20,9 @@
       if ($phase != $showed) {
         $phase_name = preg_replace('/[0-9]+/', '', $junction->name);
         $phase_name = preg_replace('/\s$/', '', $phase_name);
+        if ($phase_name === 'Tercer Puesto') {
+          $phase_name = 'Final';
+        }
         ?>
         <div class="col-xs-12 col-md-12">
           <h3 class="premier text-muted" style="text-align: center">
