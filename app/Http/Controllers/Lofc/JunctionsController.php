@@ -71,7 +71,9 @@ class JunctionsController extends Controller{
     $all_ended = 1;
     //checks if all junctions of phase has ended
     foreach ($junctions as $junction){
-      $all_ended = $all_ended * $junction->ended;
+      if ($junction->third_pos != 1){
+        $all_ended = $all_ended * $junction->ended;
+      }
     }
     if ($all_ended == 1){
       //if ended, calculate next phase junction's teams
@@ -86,14 +88,33 @@ class JunctionsController extends Controller{
           $junctionWithTeams = LOFCJunction::joinJunction_Teams($nextJunction->id)['0'];
           //check if undefined teams for junction (local)
           if(substr($junctionWithTeams->lofc_team_L_name, 0, 1) === 'G'){
-              //search for the team that classifies
-              $short = substr($junctionWithTeams->lofc_team_L_name, 1);
-              $junction_L_team = LOFCJunction::getByCompetitionIDandShortName($id_competition, $short)->id_winner;
+            //search for the team that classifies
+            $short = substr($junctionWithTeams->lofc_team_L_name, 1);
+            $junction_L_team = LOFCJunction::getByCompetitionIDandShortName($id_competition, $short)->id_winner;
           }
           //(visitor)
           if(substr($junctionWithTeams->lofc_team_V_name, 0, 1) === 'G'){
-              $short = substr($junctionWithTeams->lofc_team_V_name, 1);
-              $junction_V_team = LOFCJunction::getByCompetitionIDandShortName($id_competition, $short)->id_winner;
+            $short = substr($junctionWithTeams->lofc_team_V_name, 1);
+            $junction_V_team = LOFCJunction::getByCompetitionIDandShortName($id_competition, $short)->id_winner;
+          }
+          //Also checks if is an third position junction:
+          //(local third_pos)
+          if(substr($junctionWithTeams->lofc_team_L_name, 0, 3) === 'PSF'){
+            $short = substr($junctionWithTeams->lofc_team_L_name, 1);
+            if (LOFCJunction::getByCompetitionIDandShortName($id_competition, $short)->id_L_team == LOFCJunction::getByCompetitionIDandShortName($id_competition, $short)->id_winner) {
+              $junction_L_team = LOFCJunction::getByCompetitionIDandShortName($id_competition, $short)->id_V_team;
+            }else{
+              $junction_L_team = LOFCJunction::getByCompetitionIDandShortName($id_competition, $short)->id_L_team;
+            }
+          }
+          //(visitor third_pos)
+          if(substr($junctionWithTeams->lofc_team_V_name, 0, 3) === 'PSF'){
+            $short = substr($junctionWithTeams->lofc_team_V_name, 1);
+            if (LOFCJunction::getByCompetitionIDandShortName($id_competition, $short)->id_L_team == LOFCJunction::getByCompetitionIDandShortName($id_competition, $short)->id_winner) {
+              $junction_V_team = LOFCJunction::getByCompetitionIDandShortName($id_competition, $short)->id_V_team;
+            }else{
+              $junction_V_team = LOFCJunction::getByCompetitionIDandShortName($id_competition, $short)->id_L_team;
+            }
           }
           LOFCJunction::updateNextJunction($nextJunction->id, $junction_L_team, $junction_V_team);
         }

@@ -25,7 +25,7 @@ class BotaOroController extends Controller{
       $competition = $value->competition_name;
       if(!isset($competitions_goals[$competition])) {
         $competitions_goals[$competition] = array();
-        array_push($competitions_goals[$competition], array('player_name' => $value->player_name, 'goals' => $value->count,  ));
+        array_push($competitions_goals[$competition], array('player_name' => $value->player_name, 'goals' => $value->count ));
       }else array_push($competitions_goals[$competition], array('player_name' => $value->player_name, 'goals' => $value->count));
     }
 

@@ -32,6 +32,11 @@
     }
   ?>
   @if ($junction->name == 'Final')
+  <div class="col-xs-12 col-md-12"></div>
+  <div class="col-xs-12 col-md-3"></div>
+  <div class="col-xs-12 col-md-6">
+  @elseif ($junction->name == 'Tercer Puesto') 
+  <div class="col-xs-12 col-md-12"></div>
   <div class="col-xs-12 col-md-3"></div>
   <div class="col-xs-12 col-md-6">
   @else
