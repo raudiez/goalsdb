@@ -30,6 +30,7 @@
   <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=cobce5u2ujmkx8bm6g0xxrhynbz9tc96j4iieol3h84h3sx6"></script>
   <script>tinymce.init({ selector:'#palmarestextarea', plugins: "link,lists,table"});</script>
   <script>tinymce.init({ selector:'#reglamentotextarea', plugins: "link,toc,image,lists,table,media", image_caption: true, media_live_embeds: true});</script>
+  <script>tinymce.init({ selector:'#statstextarea', plugins: "link,toc,lists,table"});</script>
   <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 <!--style="background-image:url('imgs/index.jpeg');"-->
@@ -73,6 +74,7 @@
             <li><a href="{{url('lofc/seasons/create')}}"><b><span class="glyphicon glyphicon-plus" style="font-size: 12px;"></span> Nueva temporada</b></a></li>
             <li role="separator" class="divider"></li>
             @endif
+            <li><a href="{{url('lofc/stats')}}">Estadísticas</a></li>
             <li><a href="{{url('lofc/palmares')}}">Palmarés</a></li>
             <li><a href="{{url('lofc/reglamento')}}">Reglamento</a></li>
             </ul>

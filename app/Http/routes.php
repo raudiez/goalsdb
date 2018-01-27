@@ -145,3 +145,14 @@ Route::post('lofc/reglamento/save',
 	['middleware' => 'auth',
 	'uses' => 'Lofc\ReglamentoController@save'
 	]);
+
+////Estadisticas
+Route::get('lofc/stats', 'Lofc\EstadisticasController@show');
+Route::get('lofc/stats/form',
+	['middleware' => 'auth',
+	'uses' => 'Lofc\EstadisticasController@form'
+	]);
+Route::post('lofc/stats/save',
+	['middleware' => 'auth',
+	'uses' => 'Lofc\EstadisticasController@save'
+	]);
