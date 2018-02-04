@@ -26,10 +26,10 @@ class MatchesGoalsController extends Controller{
 
     $notes = '';
     if ($junction->second_leg && $leg == 1){
-      if(preg_match('/Ida: (.+)\n/', $junction->notes, $matches))
+      if(preg_match("/Ida: (.+)\n/", $junction->notes, $matches))
         $notes = $matches[1];
     }elseif ($junction->second_leg && $leg == 2){
-      if(preg_match('/Vuelta: (.+)\n/', $junction->notes, $matches))
+      if(preg_match("/Vuelta: (.+)\n/", $junction->notes, $matches))
         $notes = $matches[1];
     }else{ //Partido único.
       $notes = $junction->notes;

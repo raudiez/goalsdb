@@ -81,10 +81,24 @@ class BotaOroController extends Controller{
                   }
                 }
               }
-              array_push($leagues_goals[$league->name], array('name' => $arr_players[$i], 'goals' => $arr_goals[$i]+$goals_playoff));
+              $k = FALSE;
+              $k_league_name = FALSE;
+              foreach ($leagues_goals as $league_name => $league_goals){
+                foreach ($league_goals as $key => $cpy){
+                  if ($cpy['name'] == $arr_players[$i]){
+                    $k = $key;
+                    $k_league_name = $league_name;
+                  }
+                }
+              }
+              if (isset($k) && $k !== FALSE){
+                $leagues_goals[$k_league_name][$k]['goals'] += $arr_goals[$i];
+              }else {
+                array_push($leagues_goals[$league->name], array('name' => $arr_players[$i], 'goals' => $arr_goals[$i]+$goals_playoff));
+              }
             }
           }else $error_gesliga = TRUE;
-        }else $error_gesliga = RUE;
+        }else $error_gesliga = TRUE;
       }
     }
     if($error_gesliga) $leagues_goals = array();
