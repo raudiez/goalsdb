@@ -21,7 +21,7 @@
             <tr>
             	<th style="text-align: right;">Pos</th>
               <th style="text-align: left;">Jugador</th>
-              @if(isset($jugador['group_name']))
+              @if(array_key_exists("group_name", $goles_totales[0]))
               <th style="text-align: center">Grupo</th>
               @endif
               <th style="text-align: center">Goles</th>
