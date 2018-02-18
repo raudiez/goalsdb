@@ -20,6 +20,7 @@ use Alaouy\Youtube\Facades\Youtube;
 class CompetitionsController extends Controller{
 
   public function list_competitions($season_id){
+    $season_calendar = LOFCSeason::getByID($season_id)->calendar;
     $competitions = LOFCCompetition::getBySeasonID($season_id);
     $params = array(
         'q'             => 'LOFC GALA TEMPORADA '.$season_id,
@@ -40,7 +41,7 @@ class CompetitionsController extends Controller{
       }
     }
     
-    return view('lofc/competitions/list', compact('season_id', 'competitions', 'gala'));
+    return view('lofc/competitions/list', compact('season_id', 'season_calendar', 'competitions', 'gala'));
   }
 
   public function show_competition($competition_id){

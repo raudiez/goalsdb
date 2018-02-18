@@ -7,6 +7,33 @@
   <li>Temporada {{$season_id}}</li>
   <li>Competiciones</li>
 </ol>
+@if ($season_calendar != '')
+<div class="row">
+  <div class="col-xs-12 col-md-12">
+    <div class="page-header">
+    <h1 class="premier">Calendario de la Temporada {{$season_id}}</h1>
+  </div>
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingOne">
+          <h4 class="panel-title">
+            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#season_calendar" aria-expanded="false" aria-controls="season_calendar">
+              Desplegar calendario »
+            </a>
+          </h4>
+        </div>
+        <div id="season_calendar" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            <?php $season_calendar = str_replace('<table>', '<div class="table-responsive"><table class="table table-bordered">', $season_calendar);?>
+            <?php $season_calendar = str_replace('</table>', '</table></div>', $season_calendar);?>
+            <?php echo html_entity_decode($season_calendar) ?>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+@endif
 <div class="page-header">
   <h1 class="premier">Listado de competiciones de la temporada {{$season_id}}</h1>
 </div>
@@ -49,7 +76,7 @@
   @if (!Auth::guest())
   <div class="col-xs-12 col-md-12">
     <div class="row">
-      <div class="col-md-3"></div>
+      <div class="col-md-2"></div>
       <div class="col-md-2">
         <a href="{{ url('/lofc/competitions/form_league/'.$season_id) }}" class="btn btn-lofc-success" role="button" title="Añadir liga"><span class="glyphicon glyphicon-plus-sign"></span> Añadir liga</a>
       </div>
@@ -59,7 +86,10 @@
       <div class="col-md-2">
         <a href="{{ url('/lofc/teams/modify/'.$season_id) }}" class="btn btn-danger" role="button" title="Modificar equipos"><span class="glyphicon glyphicon-pencil"></span> Modificar equipos</a>
       </div>
-      <div class="col-md-4"></div>
+      <div class="col-md-2">
+        <a href="{{ url('/lofc/seasons/calendar_form/'.$season_id) }}" class="btn btn-info" role="button" title="Modificar calendario"><span class="glyphicon glyphicon-pencil"></span> Modificar calendario</a>
+      </div>
+      <div class="col-md-2"></div>
     </div>
     @endif
     @if (!empty($gala))

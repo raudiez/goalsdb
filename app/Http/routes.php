@@ -51,6 +51,14 @@ Route::post('lofc/seasons/save',
 	['middleware' => 'auth',
 	 'uses' => 'Lofc\SeasonsController@save'
 	]);
+Route::get('lofc/seasons/calendar_form/{season_id}',
+	['middleware' => 'auth',
+	'uses' => 'Lofc\SeasonsController@calendar_form'
+	]);
+Route::post('lofc/seasons/calendar_save/{season_id}',
+	['middleware' => 'auth',
+	'uses' => 'Lofc\SeasonsController@calendar_save'
+	]);
 
 
 ////Competitions

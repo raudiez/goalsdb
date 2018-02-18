@@ -30,5 +30,16 @@ class SeasonsController extends Controller{
   	}
     return redirect('lofc/teams/modify/'.$season_id);
   }
+
+  public function calendar_form($season_id){
+    $calendarText = LOFCSeason::getByID($season_id)->calendar;
+    return view('lofc/seasons/calendar_form', compact('calendarText', 'season_id'));
+  }
+
+  public function calendar_save($season_id, Request $request){
+    $calendarText = $request->input('calendarText');
+    LOFCSeason::updateCalendar($season_id, $calendarText);
+    return redirect('lofc/competitions/'.$season_id);
+  }
   
 }

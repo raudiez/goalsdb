@@ -31,6 +31,7 @@
   <script>tinymce.init({ selector:'#palmarestextarea', plugins: "link,lists,table"});</script>
   <script>tinymce.init({ selector:'#reglamentotextarea', plugins: "link,toc,image,lists,table,media", image_caption: true, media_live_embeds: true});</script>
   <script>tinymce.init({ selector:'#statstextarea', plugins: "link,toc,lists,table"});</script>
+  <script>tinymce.init({ selector:'#calendartextarea', plugins: "link,lists,table"});</script>
   <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 <!--style="background-image:url('imgs/index.jpeg');"-->

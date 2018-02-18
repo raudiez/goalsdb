@@ -19,4 +19,11 @@ class LOFCSeason extends Model{
 		return DB::select('SELECT lofc_goals.id, lofc_players.name AS player_name, lofc_competitions.name AS competition_name, lofc_goals.count FROM lofc_goals INNER JOIN lofc_players ON (lofc_players.id = lofc_goals.id_player) INNER JOIN lofc_competitions ON (lofc_competitions.id = lofc_goals.id_competition) WHERE lofc_competitions.id_season = '.$season_id);
 	}
 
+	public static function updateCalendar($season_id, $calendarText){
+		DB::table('lofc_seasons')->where('id', $season_id)->
+			update([
+				'calendar' => $calendarText,
+				]);
+	}
+
 }
