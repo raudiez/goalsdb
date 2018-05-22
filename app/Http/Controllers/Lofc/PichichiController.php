@@ -103,6 +103,13 @@ class PichichiController extends Controller{
         foreach ($league_goals as $value) {
           array_push($goles_totales, array('name' => $value['name'], 'goals' => $value['goals'], 'group_name' => $group_name));
         }
+      }
+      elseif(strpos($league_name, 'División') !== false){
+        preg_match('/.* División ([12])/', $league_name, $matches);
+        $division_name = $matches[1];
+        foreach ($league_goals as $value) {
+          array_push($goles_totales, array('name' => $value['name'], 'goals' => $value['goals'], 'division_name' => $division_name));
+        }
       }else{
         foreach ($league_goals as $value) {
           array_push($goles_totales, array('name' => $value['name'], 'goals' => $value['goals']));
