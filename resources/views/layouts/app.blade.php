@@ -18,6 +18,9 @@
   <link href="{{ URL::asset('css/image-picker.css') }}" rel="stylesheet">
 
   <style>
+    body{
+      background: url("{{ URL::asset('imgs/background.jpg') }}")no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;
+    }
     .fa-btn {
       margin-right: 6px;
     }

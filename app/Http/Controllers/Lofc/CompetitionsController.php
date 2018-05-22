@@ -79,6 +79,16 @@ class CompetitionsController extends Controller{
                 );
               $i++;
             }
+          }
+          elseif (strpos($league_name, "División")) {
+            preg_match('/.* División ([12])/', $league_name, $matches);
+            if (preg_match('/TEMPORADA '.$season_id.' JORNADA '.$jornada.' DIVISION '.$matches[1].'[.\s].*/', $result->snippet->description)) {
+              $jornadas[$jornada][$i] = array(
+                'videoId' => $result->id->videoId, 
+                'title' => $result->snippet->title,
+                );
+              $i++;
+            }
           }else{
             if (preg_match('/TEMPORADA '.$season_id.' JORNADA '.$jornada.'[.\s].*/', $result->snippet->description)) {
               $jornadas[$jornada][$i] = array(

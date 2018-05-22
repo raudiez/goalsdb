@@ -15,7 +15,7 @@ class TeamsController extends Controller{
   public function modify($season_id){
   	$lofc_teams = LOFCTeam::getBySeasonID($season_id);
   	$lofc_teams_logos = LOFCTeam::getAllLogos();
-    return view('lofc/teams/modify', compact('lofc_teams', 'lofc_teams_logos','season_id'));
+    return view('lofc/teams/modify', compact('season_id', 'lofc_teams', 'lofc_teams_logos'));
   }
 
   public function save(Request $request, $team_id){

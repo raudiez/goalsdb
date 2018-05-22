@@ -105,9 +105,13 @@ class BotaOroController extends Controller{
 
     $goles_totales = array();
     //Inicializa totales con los de ligas de la temporada
-    foreach ($leagues_goals as $league_goals) {
+    foreach ($leagues_goals as $league_name => $league_goals) {
       foreach ($league_goals as $value) {
-        array_push($goles_totales, array('name' => $value['name'], 'goals' => $value['goals']));
+        if(strpos($league_name, 'División 2') !== false){
+          array_push($goles_totales, array('name' => $value['name'], 'goals' => $value['goals']*0.5));
+        }else{
+          array_push($goles_totales, array('name' => $value['name'], 'goals' => $value['goals']));
+        }
       }
     }
 

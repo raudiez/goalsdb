@@ -33,7 +33,7 @@ class SeasonsController extends Controller{
 
   public function calendar_form($season_id){
     $calendarText = LOFCSeason::getByID($season_id)->calendar;
-    return view('lofc/seasons/calendar_form', compact('calendarText', 'season_id'));
+    return view('lofc/seasons/calendar_form', compact('season_id', 'calendarText'));
   }
 
   public function calendar_save($season_id, Request $request){
