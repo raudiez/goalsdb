@@ -10,7 +10,7 @@
   <h1 class="premier">Reglamento</h1>
 </div>
 <div class="row reglamento">
-  {!! Form::open(array('url' => 'lofc/reglamento/save')) !!}
+  {!! Form::open(array('url' => 'lofc/reglamento/save', 'autocomplete' => 'off')) !!}
   {!! Form::textarea('reglamentoText', $reglamentoText, array('class' => 'form-control', 'rows' => '20', 'id' => 'reglamentotextarea')) !!}
       <div class="clearfix"><br/></div>
   {{Form::submit('Guardar', array('class' => 'btn btn-danger'))}}

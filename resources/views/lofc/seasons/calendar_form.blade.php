@@ -10,7 +10,7 @@
   <h1 class="premier">Calendario de la temporada {{$season_id}}</h1>
 </div>
 <div class="row reglamento">
-  {!! Form::open(array('url' => 'lofc/seasons/calendar_save/'.$season_id)) !!}
+  {!! Form::open(array('url' => 'lofc/seasons/calendar_save/'.$season_id , 'autocomplete' => 'off')) !!}
   {!! Form::textarea('calendarText', $calendarText, array('class' => 'form-control', 'rows' => '20', 'id' => 'calendartextarea')) !!}
       <div class="clearfix"><br/></div>
   {{Form::submit('Guardar', array('class' => 'btn btn-danger'))}}

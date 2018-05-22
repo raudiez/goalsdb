@@ -11,7 +11,7 @@
   <h1 class="premier">Palmares</h1>
 </div>
 <div class="row">
-  {!! Form::open(array('url' => 'lofc/palmares/save')) !!}
+  {!! Form::open(array('url' => 'lofc/palmares/save', 'autocomplete' => 'off')) !!}
   {!! Form::textarea('palmaresText', $palmaresText, array('class' => 'form-control', 'rows' => '20', 'id' => 'palmarestextarea')) !!}
       <div class="clearfix"><br/></div>
   {{Form::submit('Guardar', array('class' => 'btn btn-danger'))}}

@@ -12,7 +12,7 @@
   <h1 class="premier">Estadisticas historicas</h1>
 </div>
 <div class="row reglamento">
-  {!! Form::open(array('url' => 'lofc/stats/save')) !!}
+  {!! Form::open(array('url' => 'lofc/stats/save', 'autocomplete' => 'off')) !!}
   {!! Form::textarea('statsText', $statsText, array('class' => 'form-control', 'rows' => '20', 'id' => 'statstextarea')) !!}
       <div class="clearfix"><br/></div>
   {{Form::submit('Guardar', array('class' => 'btn btn-danger'))}}
