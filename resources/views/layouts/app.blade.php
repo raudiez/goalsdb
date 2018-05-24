@@ -19,7 +19,18 @@
 
   <style>
     body{
-      background: url("{{ URL::asset('imgs/background.jpg') }}")no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;
+      <?php 
+        if (!empty($season_id)) {
+          $background_img = 'imgs/lofc/backgrounds/season'.($season_id).'.jpg';
+        }else{
+          $background_img = 'imgs/background.jpg';
+        }
+      ?>
+      background: url("{{ URL::asset($background_img) }}")no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+      background-size: cover;
     }
     .fa-btn {
       margin-right: 6px;
@@ -141,7 +152,7 @@
       <footer class="footer">
         <div class="container">
           <hr>
-          <h6 class="small">&copy; 2017 - <a href="https://github.com/raudiez" target="_blank">Raúl Díez Sánchez</a> - Read <a href="{{ url('/disclaimer') }}">disclaimer</a> for legal and abuse related information.</h6>
+          <h6 class="small">&copy; 2018 - <a href="https://github.com/raudiez" target="_blank">Raúl Díez Sánchez</a> - Read <a href="{{ url('/disclaimer') }}">disclaimer</a> for legal and abuse related information.</h6>
         </div>
       </footer>
     </div>

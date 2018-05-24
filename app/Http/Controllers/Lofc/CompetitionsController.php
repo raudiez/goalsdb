@@ -44,7 +44,7 @@ class CompetitionsController extends Controller{
     return view('lofc/competitions/list', compact('season_id', 'season_calendar', 'competitions', 'gala'));
   }
 
-  public function show_competition($competition_id){
+  public function show_competition($season_id, $competition_id){
     $competition = LOFCCompetition::getByID($competition_id);
     $junctions = LOFCJunction::joinCompetition_Teams($competition_id);
     $params = array(
@@ -54,7 +54,7 @@ class CompetitionsController extends Controller{
         'maxResults'    => 50
     );
     $videos = Youtube::searchAdvanced($params);
-    return view('lofc/competitions/show', compact('competition', 'junctions', 'videos'));
+    return view('lofc/competitions/show', compact('season_id', 'competition', 'junctions', 'videos'));
   }
 
   public function league_videos($season_id, $league_name){

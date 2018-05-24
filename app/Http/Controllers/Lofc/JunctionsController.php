@@ -12,7 +12,7 @@ use App\Http\Controllers\Controller;
 
 class JunctionsController extends Controller{
 
-  public function save(Request $request, $junction_id, $leg){
+  public function save(Request $request, $season_id ,$junction_id, $leg){
     $notes = $request->input('notes');
     $junction = LOFCJunction::getByID($junction_id);
     $ended = $junction->ended;
@@ -63,7 +63,7 @@ class JunctionsController extends Controller{
 
     LOFCJunction::updateJunctionMatch($junction_id, $played_1, $played_2, $ended, $notes, $id_winner);
     $this->checkAndCalculateNext($junction->id_competition, $junction->phase);
-    return redirect('lofc/show_competition/'.$junction->id_competition);
+    return redirect('lofc/show_competition/'.$season_id.'/'.$junction->id_competition);
   }
 
   private function checkAndCalculateNext($id_competition, $phase){

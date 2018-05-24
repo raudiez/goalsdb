@@ -4,9 +4,9 @@
 <ol class="breadcrumb">
   <li><a href="{{ url('/') }}">Inicio</a></li>
   <li>LOFC</li>
-  <li>Temporada {{$competition->id_season}}</li>
-  <li><a href="{{url('lofc/competitions/'.$competition->id_season)}}">Competiciones</a></li>
-  <li><a href="{{url('lofc/show_competition/'.$competition->id)}}">{{$competition->name}}</a></li>
+  <li>Temporada {{$season_id}}</li>
+  <li><a href="{{url('lofc/competitions/'.$season_id)}}">Competiciones</a></li>
+  <li><a href="{{url('lofc/show_competition/'.$season_id.'/'.$competition->id)}}">{{$competition->name}}</a></li>
   <li>{{$junction->name}}</li>
 </ol>
 <div class="page-header">
@@ -72,7 +72,7 @@
         <div class="list-group-item" style="text-align: center; position: relative;">
           <h4 class="list-group-item-heading" style="text-align: left">Goleadores {{$team_name_L}}</h4>
           @foreach ($match_goals_L as $match_scorer_L)
-          <p><a href="{{ url('/lofc/delete_match_goal/'.$match_scorer_L->id) }}" class="btn-sm" role="button" title="Eliminar goleador"><span class="glyphicon glyphicon-minus-sign" style="color: #ff0000"></span></a>   {{$match_scorer_L->player_name.' : '.$match_scorer_L->count}}</p>
+          <p><a href="{{ url('/lofc/delete_match_goal/'.$season_id.'/'.$match_scorer_L->id) }}" class="btn-sm" role="button" title="Eliminar goleador"><span class="glyphicon glyphicon-minus-sign" style="color: #ff0000"></span></a>   {{$match_scorer_L->player_name.' : '.$match_scorer_L->count}}</p>
           @endforeach
         </div>
       </div>
@@ -82,7 +82,7 @@
         <div class="list-group-item" style="text-align: center; position: relative;">
           <h4 class="list-group-item-heading" style="text-align: left">Goleadores {{$team_name_V}}</h4>
           @foreach ($match_goals_V as $match_scorer_V)
-          <p><a href="{{ url('/lofc/delete_match_goal/'.$match_scorer_V->id) }}" class="btn-sm" role="button" title="Eliminar goleador"><span class="glyphicon glyphicon-minus-sign" style="color: #ff0000"></span></a>   {{$match_scorer_V->player_name.' : '.$match_scorer_V->count}}</p>
+          <p><a href="{{ url('/lofc/delete_match_goal/'.$season_id.'/'.$match_scorer_V->id) }}" class="btn-sm" role="button" title="Eliminar goleador"><span class="glyphicon glyphicon-minus-sign" style="color: #ff0000"></span></a>   {{$match_scorer_V->player_name.' : '.$match_scorer_V->count}}</p>
           @endforeach
         </div>
       </div>
@@ -91,9 +91,9 @@
     <div class="clearfix"><br/></div>
   	<div class="col-xs-12 col-md-6">
   		<h4 style="text-align: center">{{ $logo_L }} {{$team_name_L}}</h4>
-  		{!! Form::open(array('url' => 'lofc/match_save/'.$junction->id.'/'.$leg)) !!}
+  		{!! Form::open(array('url' => 'lofc/match_save/'.$season_id.'/'.$junction->id.'/'.$leg)) !!}
   		<div class="col-xs-1 col-md-1"></div>
-	  	<div class="col-xs-1 col-md-1"><a href="{{ url('/lofc/players_form/'.$team_id_L.'/'.$junction->id.'/'.$leg) }}" class="btn btn-lofc-primary" role="button" title="Añadir jugador"><span class="glyphicon glyphicon-plus-sign"></span></a></div>
+	  	<div class="col-xs-1 col-md-1"><a href="{{ url('/lofc/players_form/'.$season_id.'/'.$team_id_L.'/'.$junction->id.'/'.$leg) }}" class="btn btn-lofc-primary" role="button" title="Añadir jugador"><span class="glyphicon glyphicon-plus-sign"></span></a></div>
 	  	<div class="col-xs-7 col-md-7">{!! Form::select('player_id', $select_players_L, null, array('class' => 'form-control', 'placeholder' => 'Selecciona un jugador...')) !!}</div>
 	  	<div class="col-xs-2 col-md-2">{!! Form::number('count', '1', array('class' => 'form-control', 'min' => '1')) !!}</div>
 	  	<div class="clearfix"><br/></div>
@@ -103,9 +103,9 @@
   	</div>
   	<div class="col-xs-12 col-md-6">
   		<h4 style="text-align: center">{{ $logo_V }} {{$team_name_V}}</h4>
-  		{!! Form::open(array('url' => 'lofc/match_save/'.$junction->id.'/'.$leg)) !!}
+  		{!! Form::open(array('url' => 'lofc/match_save/'.$season_id.'/'.$junction->id.'/'.$leg)) !!}
   		<div class="col-xs-1 col-md-1"></div>
-	  	<div class="col-xs-1 col-md-1"><a href="{{ url('/lofc/players_form/'.$team_id_V.'/'.$junction->id.'/'.$leg) }}" class="btn btn-lofc-primary" role="button" title="Añadir jugador"><span class="glyphicon glyphicon-plus-sign"></span></a></div>
+	  	<div class="col-xs-1 col-md-1"><a href="{{ url('/lofc/players_form/'.$season_id.'/'.$team_id_V.'/'.$junction->id.'/'.$leg) }}" class="btn btn-lofc-primary" role="button" title="Añadir jugador"><span class="glyphicon glyphicon-plus-sign"></span></a></div>
 	  	<div class="col-xs-7 col-md-7">{!! Form::select('player_id', $select_players_V, null, array('class' => 'form-control', 'placeholder' => 'Selecciona un jugador...')) !!}</div>
 	  	<div class="col-xs-2 col-md-2">{!! Form::number('count', '1', array('class' => 'form-control', 'min' => '1')) !!}</div>
 	  	<div class="clearfix"><br/></div>
@@ -119,7 +119,7 @@
   	<div class="col-xs-12 col-md-3"></div>
     <div class="col-xs-12 col-md-6" style="text-align: center">
 	    <p>Si ya ha añadido todos los goles, añada notas si es necesario, y finalice el partido.</p>
-	    {!! Form::open(array('url' => 'lofc/junction_save/'.$junction->id.'/'.$leg)) !!}
+	    {!! Form::open(array('url' => 'lofc/junction_save/'.$season_id.'/'.$junction->id.'/'.$leg)) !!}
 	    @if ($notes == '')
 	    	{!! Form::textarea('notes', null, array('class' => 'form-control', 'rows' => '4', 'placeholder' => 'Notas del partido...')) !!}
 	    @else
@@ -129,7 +129,7 @@
 	  	<div class="clearfix"><br/></div>
 	    {{Form::submit('Finalizar partido', array('class' => 'btn btn-danger'))}}
 	  	{!! Form::close() !!}
-	    {{-- <a href="{{ url('lofc/junction_save/'.$junction->id.'/'.$leg) }}" class="btn btn-danger" role="button">Finalizar partido</a> --}}
+	    {{-- <a href="{{ url('lofc/junction_save/'.$season_id.'/'.$junction->id.'/'.$leg) }}" class="btn btn-danger" role="button">Finalizar partido</a> --}}
     </div>
     <div class="col-xs-12 col-md-3"></div>
 </div>{{-- ROW --}}

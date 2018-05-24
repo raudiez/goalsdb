@@ -10,7 +10,7 @@
   <h1 class="premier">Nuevo jugador</h1>
 </div>
 <div class="row">
-  {!! Form::open(array('url' => 'lofc/players_save/'.$team->id)) !!}
+  {!! Form::open(array('url' => 'lofc/players_save/'.$season_id.'/'.$team->id)) !!}
   {{Form::hidden('junction_id', $junction_id)}}
   {{Form::hidden('leg', $leg)}}
   <div class="col-md-4"></div>

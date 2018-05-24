@@ -16,7 +16,7 @@ use App\Http\Controllers\Controller;
 
 class MatchesGoalsController extends Controller{
 
-  public function match_form($junction_id, $leg){
+  public function match_form($season_id, $junction_id, $leg){
     $junction = LOFCJunction::joinJunction_Teams($junction_id)['0'];
     $players_L = LOFCPlayer::getByTeamID($junction->id_L_team);
     $players_V = LOFCPlayer::getByTeamID($junction->id_V_team);
@@ -34,10 +34,10 @@ class MatchesGoalsController extends Controller{
     }else{ //Partido único.
       $notes = $junction->notes;
     }
-    return view('lofc/competitions/matches/form', compact('competition', 'junction', 'leg', 'players_L', 'players_V', 'match_goals_L', 'match_goals_V', 'notes'));
+    return view('lofc/competitions/matches/form', compact('season_id', 'competition', 'junction', 'leg', 'players_L', 'players_V', 'match_goals_L', 'match_goals_V', 'notes'));
   }
 
-  public function match_save(Request $request, $junction_id, $leg){
+  public function match_save(Request $request, $season_id, $junction_id, $leg){
     $this->validate($request, [
         'count' => 'required|min:1',
         'player_id' => 'bail|required:not_in:0',
@@ -51,10 +51,10 @@ class MatchesGoalsController extends Controller{
     if ($player->id_team == $junction->id_L_team){
       LOFCJunction::updateGoals($junction_id, 'L', $leg, $count);
     }else LOFCJunction::updateGoals($junction_id, 'V', $leg, $count);
-    return redirect('lofc/match_form/'.$junction_id.'/'.$leg);
+    return redirect('lofc/match_form/'.$season_id.'/'.$junction_id.'/'.$leg);
   }
 
-  public function delete_match_goal($id_match_goal){
+  public function delete_match_goal($season_id, $id_match_goal){
     $match_goal = LOFCMatchesGoals::getByID($id_match_goal);
     $count = $match_goal->count;
     $leg = $match_goal->leg;
@@ -67,7 +67,7 @@ class MatchesGoalsController extends Controller{
     if ($player->id_team == $junction->id_L_team){
       LOFCJunction::updateGoals($junction_id, 'L', $leg, -$count);
     }else LOFCJunction::updateGoals($junction_id, 'V', $leg, -$count);
-    return redirect('lofc/match_form/'.$junction_id.'/'.$leg);
+    return redirect('lofc/match_form/'.$season_id.'/'.$junction_id.'/'.$leg);
   }
         
 }

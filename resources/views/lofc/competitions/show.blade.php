@@ -4,8 +4,8 @@
 <ol class="breadcrumb">
   <li><a href="{{ url('/') }}">Inicio</a></li>
   <li>LOFC</li>
-  <li>Temporada {{$competition->id_season}}</li>
-  <li><a href="{{url('lofc/competitions/'.$competition->id_season)}}">Competiciones</a></li>
+  <li>Temporada {{$season_id}}</li>
+  <li><a href="{{url('lofc/competitions/'.$season_id)}}">Competiciones</a></li>
   <li>{{$competition->name}}</li>
 </ol>
 <div class="page-header">
@@ -73,18 +73,18 @@
         <p style="text-align: center">
         @if (!Auth::guest())
           @if ($junction->second_leg && !$junction->played_1)
-          <b>Ida:</b> <a href="{{ url('/lofc/match_form/'.$junction->id.'/1') }}">Introducir resultado</a><br/>
-          <b>Vuelta:</b> <a href="{{ url('/lofc/match_form/'.$junction->id.'/2') }}">Introducir resultado</a>
+          <b>Ida:</b> <a href="{{ url('/lofc/match_form/'.$season_id.'/'.$junction->id.'/1') }}">Introducir resultado</a><br/>
+          <b>Vuelta:</b> <a href="{{ url('/lofc/match_form/'.$season_id.'/'.$junction->id.'/2') }}">Introducir resultado</a>
           @elseif ($junction->second_leg && $junction->played_1 && !$junction->played_2)
-          <b>Ida:</b> <b>{{$junction->goals_L_1}}</b> - <b>{{$junction->goals_V_1}}</b>  <a href="{{ url('/lofc/match_form/'.$junction->id.'/1') }}">Modificar resultado</a><br/>
-          <b>Vuelta:</b> <a href="{{ url('/lofc/match_form/'.$junction->id.'/2') }}">Introducir resultado</a>
+          <b>Ida:</b> <b>{{$junction->goals_L_1}}</b> - <b>{{$junction->goals_V_1}}</b>  <a href="{{ url('/lofc/match_form/'.$season_id.'/'.$junction->id.'/1') }}">Modificar resultado</a><br/>
+          <b>Vuelta:</b> <a href="{{ url('/lofc/match_form/'.$season_id.'/'.$junction->id.'/2') }}">Introducir resultado</a>
           @elseif ($junction->second_leg && $junction->played_1 && $junction->played_2)
-          <b>Ida:</b> <b>{{$junction->goals_L_1}}</b> - <b>{{$junction->goals_V_1}}</b>  <a href="{{ url('/lofc/match_form/'.$junction->id.'/1') }}">Modificar resultado</a><br/>
-          <b>Vuelta:</b> <b>{{$junction->goals_V_2}}</b> - <b>{{$junction->goals_L_2}}</b>  <a href="{{ url('/lofc/match_form/'.$junction->id.'/2') }}">Modificar resultado</a>
+          <b>Ida:</b> <b>{{$junction->goals_L_1}}</b> - <b>{{$junction->goals_V_1}}</b>  <a href="{{ url('/lofc/match_form/'.$season_id.'/'.$junction->id.'/1') }}">Modificar resultado</a><br/>
+          <b>Vuelta:</b> <b>{{$junction->goals_V_2}}</b> - <b>{{$junction->goals_L_2}}</b>  <a href="{{ url('/lofc/match_form/'.$season_id.'/'.$junction->id.'/2') }}">Modificar resultado</a>
           @elseif (!$junction->second_leg && !$junction->played_1)
-          <a href="{{ url('/lofc/match_form/'.$junction->id.'/1') }}">Introducir resultado</a>
+          <a href="{{ url('/lofc/match_form/'.$season_id.'/'.$junction->id.'/1') }}">Introducir resultado</a>
           @elseif (!$junction->second_leg && $junction->played_1)
-          <a href="{{ url('/lofc/match_form/'.$junction->id.'/1') }}">Modificar resultado</a><br/>
+          <a href="{{ url('/lofc/match_form/'.$season_id.'/'.$junction->id.'/1') }}">Modificar resultado</a><br/>
           @endif
         @else
           @if ($junction->second_leg && !$junction->played_1)

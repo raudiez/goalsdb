@@ -63,7 +63,7 @@ Route::post('lofc/seasons/calendar_save/{season_id}',
 
 ////Competitions
 Route::get('lofc/competitions/{season_id}', 'Lofc\CompetitionsController@list_competitions');
-Route::get('lofc/show_competition/{competition_id}', 'Lofc\CompetitionsController@show_competition');
+Route::get('lofc/show_competition/{season_id}/{competition_id}', 'Lofc\CompetitionsController@show_competition');
 Route::get('lofc/league_videos/{season_id}/{league_name}', 'Lofc\CompetitionsController@league_videos');
 Route::get('lofc/competitions/form_cup/{season_id}',
 	['middleware' => 'auth',
@@ -84,25 +84,25 @@ Route::post('lofc/competitions/save_league/{season_id}',
 
 
 ////MatchesGoals
-Route::get('lofc/match_form/{junction_id}/{leg}', 
+Route::get('lofc/match_form/{season_id}/{junction_id}/{leg}', 
 	['middleware' => 'auth',
 	 'uses' => 'Lofc\MatchesGoalsController@match_form'
 	]);
-Route::post('lofc/match_save/{junction_id}/{leg}',
+Route::post('lofc/match_save/{season_id}/{junction_id}/{leg}',
 	['middleware' => 'auth',
 	 'uses' => 'Lofc\MatchesGoalsController@match_save'
 	]);
-Route::get('lofc/delete_match_goal/{id_match_goal}',
+Route::get('lofc/delete_match_goal/{season_id}/{id_match_goal}',
 	['middleware' => 'auth',
 	 'uses' => 'Lofc\MatchesGoalsController@delete_match_goal'
 	]);
 
 ////Players
-Route::get('lofc/players_form/{team_id}/{junction_id}/{leg}',
+Route::get('lofc/players_form/{season_id}/{team_id}/{junction_id}/{leg}',
 	['middleware' => 'auth',
 	 'uses' => 'Lofc\PlayersController@players_form'
 	]);
-Route::post('lofc/players_save/{team_id}',
+Route::post('lofc/players_save/{season_id}/{team_id}',
 	['middleware' => 'auth',
 	 'uses' => 'Lofc\PlayersController@players_save'
 	]);
@@ -120,7 +120,7 @@ Route::post('lofc/teams/save/{team_id}',
 
 
 ////Junctions
-Route::post('lofc/junction_save/{junction_id}/{leg}',
+Route::post('lofc/junction_save/{season_id}/{junction_id}/{leg}',
 	['middleware' => 'auth',
 	 'uses' => 'Lofc\JunctionsController@save'
 	]);
