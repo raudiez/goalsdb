@@ -110,26 +110,26 @@ class PichichiController extends Controller{
         foreach ($league_goals as $value) {
           array_push($goles_totales, array('name' => $value['name'], 'goals' => $value['goals'], 'division_name' => $division_name));
         }
-        //Luego añado los goles de Playoff
-        foreach ($competitions_goals as $competition_name => $competition_goals) {
-          //Solo añado goles de la BD de Playoff
-          if (strpos($competition_name, 'Playoff') !== FALSE){
-            foreach ($competition_goals as $value) {
-              $k = FALSE;
-              foreach ($goles_totales as $key => $cpy) {
-                if ($cpy['name'] == $value['player_name']){
-                  $k = $key;
-                }
-              }
-              if (isset($k) && $k !== FALSE){
-                $goles_totales[$k]['goals'] += $value['goals'];
-              }else {
-                //Al no saber la división, no pongo.
-                array_push($goles_totales, array('name' => $value['player_name'], 'goals' => $value['goals'], 'division_name' => NULL));
-              }
-            }
-          }
-        }
+        // //Luego añado los goles de Playoff
+        // foreach ($competitions_goals as $competition_name => $competition_goals) {
+        //   //Solo añado goles de la BD de Playoff
+        //   if (strpos($competition_name, 'Playoff') !== FALSE){
+        //     foreach ($competition_goals as $value) {
+        //       $k = FALSE;
+        //       foreach ($goles_totales as $key => $cpy) {
+        //         if ($cpy['name'] == $value['player_name']){
+        //           $k = $key;
+        //         }
+        //       }
+        //       if (isset($k) && $k !== FALSE){
+        //         $goles_totales[$k]['goals'] += $value['goals'];
+        //       }else {
+        //         //Al no saber la división, no pongo.
+        //         array_push($goles_totales, array('name' => $value['player_name'], 'goals' => $value['goals'], 'division_name' => NULL));
+        //       }
+        //     }
+        //   }
+        // }
         $goals_div1 = array();
         $goals_div2 = array();
         foreach ($goles_totales as $value) {
@@ -160,26 +160,29 @@ class PichichiController extends Controller{
         }
       }
     }
-
-
+    
+    $GROUP_KEY = '';
     if(!array_key_exists("division_name", $goles_totales[0])){
-      //Luego añado los goles de Playoff
-      foreach ($competitions_goals as $competition_name => $competition_goals) {
-        //Solo añado goles de la BD de Playoff
-        if (strpos($competition_name, 'Playoff') !== FALSE){
-          foreach ($competition_goals as $value) {
-            $k = FALSE;
-            foreach ($goles_totales as $key => $cpy) {
-              if ($cpy['name'] == $value['player_name']){
-                $k = $key;
-              }
+      $GROUP_KEY = "group_name";
+    }else if (array_key_exists("division_name", $goles_totales[0])){
+      $GROUP_KEY = "division_name";
+    }
+    //Luego añado los goles de Playoff
+    foreach ($competitions_goals as $competition_name => $competition_goals) {
+      //Solo añado goles de la BD de Playoff
+      if (strpos($competition_name, 'Playoff') !== FALSE){
+        foreach ($competition_goals as $value) {
+          $k = FALSE;
+          foreach ($goles_totales as $key => $cpy) {
+            if ($cpy['name'] == $value['player_name']){
+              $k = $key;
             }
-            if (isset($k) && $k !== FALSE){
-              $goles_totales[$k]['goals'] += $value['goals'];
-            }else {
-              //Al no saber el grupo, no pongo grupo.
-              array_push($goles_totales, array('name' => $value['player_name'], 'goals' => $value['goals'], 'group_name' => NULL));
-            }
+          }
+          if (isset($k) && $k !== FALSE){
+            $goles_totales[$k]['goals'] += $value['goals'];
+          }else {
+            //Al no saber el grupo, no pongo grupo.
+            array_push($goles_totales, array('name' => $value['player_name'], 'goals' => $value['goals'], $GROUP_KEY => NULL));
           }
         }
       }
