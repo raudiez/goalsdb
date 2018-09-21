@@ -160,11 +160,11 @@ class PichichiController extends Controller{
         }
       }
     }
-    
+
     $GROUP_KEY = '';
     if(!array_key_exists("division_name", $goles_totales[0])){
       $GROUP_KEY = "group_name";
-    }else if (array_key_exists("division_name", $goles_totales[0])){
+    }elseif (array_key_exists("division_name", $goles_totales[0])){
       $GROUP_KEY = "division_name";
     }
     //Luego añado los goles de Playoff
@@ -186,7 +186,9 @@ class PichichiController extends Controller{
           }
         }
       }
+    }
 
+    if(!array_key_exists($GROUP_KEY, $goles_totales[0]) and $GROUP_KEY == ''){
       //sort personalizado
       usort($goles_totales, function($a, $b) {
                 return $a['goals'] < $b['goals'];
