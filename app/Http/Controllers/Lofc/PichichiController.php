@@ -110,50 +110,6 @@ class PichichiController extends Controller{
         foreach ($league_goals as $value) {
           array_push($goles_totales, array('name' => $value['name'], 'goals' => $value['goals'], 'division_name' => $division_name));
         }
-        // //Luego añado los goles de Playoff
-        // foreach ($competitions_goals as $competition_name => $competition_goals) {
-        //   //Solo añado goles de la BD de Playoff
-        //   if (strpos($competition_name, 'Playoff') !== FALSE){
-        //     foreach ($competition_goals as $value) {
-        //       $k = FALSE;
-        //       foreach ($goles_totales as $key => $cpy) {
-        //         if ($cpy['name'] == $value['player_name']){
-        //           $k = $key;
-        //         }
-        //       }
-        //       if (isset($k) && $k !== FALSE){
-        //         $goles_totales[$k]['goals'] += $value['goals'];
-        //       }else {
-        //         //Al no saber la división, no pongo.
-        //         array_push($goles_totales, array('name' => $value['player_name'], 'goals' => $value['goals'], 'division_name' => NULL));
-        //       }
-        //     }
-        //   }
-        // }
-        $goals_div1 = array();
-        $goals_div2 = array();
-        foreach ($goles_totales as $value) {
-          if (strpos($value['division_name'], '1') !== FALSE) {
-            array_push($goals_div1, $value);
-          }elseif (strpos($value['division_name'], '2') !== FALSE) {
-            array_push($goals_div2, $value);
-          }
-        }
-        $goles_totales = array();
-        //sort personalizado
-        usort($goals_div1, function($a, $b) {
-                  return $a['goals'] < $b['goals'];
-              });
-        //solo top10 tras todo
-        $goals_div1 = array_slice($goals_div1, 0, 10, true);
-        //sort personalizado
-        usort($goals_div2, function($c, $d) {
-                  return $c['goals'] < $d['goals'];
-              });
-        //solo top10 tras todo
-        $goals_div2 = array_slice($goals_div2, 0, 10, true);
-        $goles_totales = array_merge($goals_div1, $goals_div2);
-
       }else{
         foreach ($league_goals as $value) {
           array_push($goles_totales, array('name' => $value['name'], 'goals' => $value['goals']));
@@ -187,8 +143,32 @@ class PichichiController extends Controller{
         }
       }
     }
+    if(array_key_exists("division_name", $goles_totales[0])){
+      $goals_div1 = array();
+      $goals_div2 = array();
+      foreach ($goles_totales as $value) {
+        if (strpos($value['division_name'], '1') !== FALSE) {
+          array_push($goals_div1, $value);
+        }elseif (strpos($value['division_name'], '2') !== FALSE) {
+          array_push($goals_div2, $value);
+        }
+      }
+      //sort personalizado
+      usort($goals_div1, function($a, $b) {
+                return $a['goals'] < $b['goals'];
+            });
+      //solo top10 tras todo
+      $goals_div1 = array_slice($goals_div1, 0, 10, true);
+      //sort personalizado
+      usort($goals_div2, function($c, $d) {
+                return $c['goals'] < $d['goals'];
+            });
+      //solo top10 tras todo
+      $goals_div2 = array_slice($goals_div2, 0, 10, true);
+      $goles_totales = array_merge($goals_div1, $goals_div2);
+    }
 
-    if(!array_key_exists($GROUP_KEY, $goles_totales[0]) and $GROUP_KEY == ''){
+    elseif(array_key_exists("group_name", $goles_totales[0]) or $GROUP_KEY == ''){
       //sort personalizado
       usort($goles_totales, function($a, $b) {
                 return $a['goals'] < $b['goals'];
