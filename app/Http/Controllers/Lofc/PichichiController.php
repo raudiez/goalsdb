@@ -77,7 +77,7 @@ class PichichiController extends Controller{
               }
             }
           }else $error_gesliga = TRUE;
-        }else $error_gesliga = RUE;
+        }else $error_gesliga = TRUE;
       }
     }
     if($error_gesliga) $leagues_goals = array();
