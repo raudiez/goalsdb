@@ -23,7 +23,7 @@ class PichichiController extends Controller{
     foreach ($leagues as $league) {
       $leagues_goals[$league->name] = array();
       if (!$error_gesliga) {
-        $client = new Client(['http_errors' => false, 'connect_timeout' => 8, 'timeout' => 10]);
+        $client = new Client(['http_errors' => FALSE, 'connect_timeout' => 8, 'timeout' => 10]);
         try {
           $response = $client->get("http://www.gesliga.es/Estadisticas.aspx?Liga=$league->id_gesliga");
           //$response = $client->get("http://slowwly.robertomurray.co.uk/delay/600000/url/http://www.google.co.uk");
@@ -97,14 +97,14 @@ class PichichiController extends Controller{
 
     //Primero añado los goles de Gesliga, por grupos.
     foreach ($leagues_goals as $league_name => $league_goals) {
-      if(strpos($league_name, 'Grupo') !== false){
+      if(strpos($league_name, 'Grupo') !== FALSE){
         preg_match('/.* Grupo ([AB])/', $league_name, $matches);
         $group_name = $matches[1];
         foreach ($league_goals as $value) {
           array_push($goles_totales, array('name' => $value['name'], 'goals' => $value['goals'], 'group_name' => $group_name));
         }
       }
-      elseif(strpos($league_name, 'División') !== false){
+      elseif(strpos($league_name, 'División') !== FALSE){
         preg_match('/.* División ([12])/', $league_name, $matches);
         $division_name = $matches[1];
         foreach ($league_goals as $value) {
@@ -113,7 +113,7 @@ class PichichiController extends Controller{
         //Luego añado los goles de Playoff
         foreach ($competitions_goals as $competition_name => $competition_goals) {
           //Solo añado goles de la BD de Playoff
-          if (strpos($competition_name, 'Playoff') !== false){
+          if (strpos($competition_name, 'Playoff') !== FALSE){
             foreach ($competition_goals as $value) {
               $k = FALSE;
               foreach ($goles_totales as $key => $cpy) {
@@ -133,9 +133,9 @@ class PichichiController extends Controller{
         $goals_div1 = array();
         $goals_div2 = array();
         foreach ($goles_totales as $value) {
-          if (strpos($value['division_name'], '1') !== false) {
+          if (strpos($value['division_name'], '1') !== FALSE) {
             array_push($goals_div1, $value);
-          }elseif (strpos($value['division_name'], '2') !== false) {
+          }elseif (strpos($value['division_name'], '2') !== FALSE) {
             array_push($goals_div2, $value);
           }
         }
@@ -166,7 +166,7 @@ class PichichiController extends Controller{
       //Luego añado los goles de Playoff
       foreach ($competitions_goals as $competition_name => $competition_goals) {
         //Solo añado goles de la BD de Playoff
-        if (strpos($competition_name, 'Playoff') !== false){
+        if (strpos($competition_name, 'Playoff') !== FALSE){
           foreach ($competition_goals as $value) {
             $k = FALSE;
             foreach ($goles_totales as $key => $cpy) {
