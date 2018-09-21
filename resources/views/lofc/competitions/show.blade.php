@@ -52,7 +52,11 @@
         @if ($junction->lofc_team_L_logo_img != '')
         {{ Html::image('imgs/lofc/teams/'.$junction->lofc_team_L_logo_img,'',array('style' => 'height: 50px; margin-right:5px;')) }}
         @endif
-        {{$junction->lofc_team_L_name}} 
+        @if ($junction->id_L_team === $junction->id_winner)
+        <b>{{$junction->lofc_team_L_name}}</b>
+        @else
+        {{$junction->lofc_team_L_name}}
+        @endif
         <?php if (!$junction->played_1){ ?>
         - 
         <?php }elseif ($junction->second_leg && $junction->played_2) {
@@ -66,7 +70,11 @@
           ?>
         <b>{{$goals_L}}</b> - <b>{{$goals_V}}</b>
         <?php } ?>
-        {{$junction->lofc_team_V_name}} 
+        @if ($junction->id_V_team === $junction->id_winner)
+        <b>{{$junction->lofc_team_V_name}}</b>
+        @else
+        {{$junction->lofc_team_V_name}}
+        @endif
         @if ($junction->lofc_team_V_logo_img != '')
         {{ Html::image('imgs/lofc/teams/'.$junction->lofc_team_V_logo_img,'',array('style' => 'height: 50px;margin-left:5px;')) }}
         @endif</p>
