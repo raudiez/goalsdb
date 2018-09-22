@@ -19,6 +19,7 @@ class SeasonsController extends Controller{
 
   public function save(Request $request){
   	$teams_n = $request->input('teams_n');
+    //$season_name = $request->input('season_name');
   	$season = new LOFCSeason;
   	$season->save();
   	$season_id = $season->id;
@@ -32,8 +33,9 @@ class SeasonsController extends Controller{
   }
 
   public function calendar_form($season_id){
+    $season_name = LOFCSeason::getByID($season_id)->name;
     $calendarText = LOFCSeason::getByID($season_id)->calendar;
-    return view('lofc/seasons/calendar_form', compact('season_id', 'calendarText'));
+    return view('lofc/seasons/calendar_form', compact('season_id', 'season_name', 'calendarText'));
   }
 
   public function calendar_save($season_id, Request $request){

@@ -21,6 +21,7 @@ class CompetitionsController extends Controller{
 
   public function list_competitions($season_id){
     $season_calendar = LOFCSeason::getByID($season_id)->calendar;
+    $season_name = LOFCSeason::getByID($season_id)->name;
     $competitions = LOFCCompetition::getBySeasonID($season_id);
     $params = array(
         'q'             => 'LOFC GALA TEMPORADA '.$season_id,
@@ -41,10 +42,11 @@ class CompetitionsController extends Controller{
       }
     }
     
-    return view('lofc/competitions/list', compact('season_id', 'season_calendar', 'competitions', 'gala'));
+    return view('lofc/competitions/list', compact('season_id', 'season_calendar', 'season_name', 'competitions', 'gala'));
   }
 
   public function show_competition($season_id, $competition_id){
+    $season_name = LOFCSeason::getByID($season_id)->name;
     $competition = LOFCCompetition::getByID($competition_id);
     $junctions = LOFCJunction::joinCompetition_Teams($competition_id);
     $params = array(
@@ -54,10 +56,11 @@ class CompetitionsController extends Controller{
         'maxResults'    => 50
     );
     $videos = Youtube::searchAdvanced($params);
-    return view('lofc/competitions/show', compact('season_id', 'competition', 'junctions', 'videos'));
+    return view('lofc/competitions/show', compact('season_id', 'season_name', 'competition', 'junctions', 'videos'));
   }
 
   public function league_videos($season_id, $league_name){
+    $season_name = LOFCSeason::getByID($season_id)->name;
     $params = array(
         'q'             => $league_name.' TEMPORADA '.$season_id,
         'type'          => 'video',
@@ -101,11 +104,12 @@ class CompetitionsController extends Controller{
         }
       }
     }
-    return view('lofc/leagues/videos', compact('season_id', 'league_name', 'jornadas'));
+    return view('lofc/leagues/videos', compact('season_id', 'season_name', 'league_name', 'jornadas'));
   }
 
   public function form_cup($season_id){
-    return view('lofc/competitions/form_cup', compact('season_id'));
+    $season_name = LOFCSeason::getByID($season_id)->name;
+    return view('lofc/competitions/form_cup', compact('season_id', 'season_name'));
   }
 
   public function save_cup(Request $request, $season_id){
@@ -117,7 +121,8 @@ class CompetitionsController extends Controller{
   }
 
   public function form_league($season_id){
-    return view('lofc/competitions/form_league', compact('season_id'));
+    $season_name = LOFCSeason::getByID($season_id)->name;
+    return view('lofc/competitions/form_league', compact('season_id', 'season_name'));
   }
 
   public function save_league(Request $request, $season_id){

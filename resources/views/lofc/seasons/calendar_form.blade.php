@@ -4,10 +4,10 @@
 <ol class="breadcrumb">
   <li><a href="{{ url('/') }}">Inicio</a></li>
   <li>LOFC</li>
-  <li>Temporada {{$season_id}}</li>
+  <li>{{$season_name}}</li>
 </ol>
 <div class="page-header">
-  <h1 class="premier">Calendario de la temporada {{$season_id}}</h1>
+  <h1 class="premier">Calendario de {{$season_name}}</h1>
 </div>
 <div class="row reglamento">
   {!! Form::open(array('url' => 'lofc/seasons/calendar_save/'.$season_id , 'autocomplete' => 'off')) !!}

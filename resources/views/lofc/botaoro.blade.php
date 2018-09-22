@@ -4,7 +4,7 @@
 <ol class="breadcrumb">
   <li><a href="{{ url('/') }}">Inicio</a></li>
   <li>LOFC</li>
-  <li>Temporada {{$season_id}}</li>
+  <li>{{$season_name}}</li>
   <li>Bota de Oro</li>
 </ol>
 <div class="page-header">
@@ -13,7 +13,7 @@
 <div class="row">
 	<div class="col-xs-12 col-md-12">
 		<div class="panel panel-lofc-primary">
-      <div class="panel-heading" style="text-align: center;"><b>Clasificación de la temporada {{$season_id}}</b></div>
+      <div class="panel-heading" style="text-align: center;"><b>Clasificación de {{$season_name}}</b></div>
       <div class="panel-body">
       	@if (!empty($leagues_goals))
       	<div class="table-responsive"><table class="table table-striped table-hover">

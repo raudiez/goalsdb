@@ -17,6 +17,7 @@ use RuntimeException;
 class PichichiController extends Controller{
 
   public function show($season_id){
+    $season_name = LOFCSeason::getByID($season_id)->name;
     $leagues = LOFCCompetition::getLeaguesBySeasonID($season_id);
     $leagues_goals = array();
     $error_gesliga = FALSE;
@@ -178,7 +179,7 @@ class PichichiController extends Controller{
       $goles_totales = array_slice($goles_totales, 0, 10, true);
     } //if !array_key_exists
     
-  	return view('lofc/pichichi', compact('season_id', 'leagues_goals', 'goles_totales'));
+  	return view('lofc/pichichi', compact('season_id', 'season_name', 'leagues_goals', 'goles_totales'));
   }
         
 }

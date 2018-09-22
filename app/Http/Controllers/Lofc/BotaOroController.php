@@ -19,6 +19,7 @@ class BotaOroController extends Controller{
   public function show($season_id){
     $leagues = LOFCCompetition::getLeaguesBySeasonID($season_id);
     $season_goals = LOFCSeason::joinGoals_Season($season_id);
+    $season_name = LOFCSeason::getByID($season_id)->name;
 
     $competitions_goals = array();
     foreach ($season_goals as $value) {
@@ -141,7 +142,7 @@ class BotaOroController extends Controller{
     //solo top10 tras todo
     $goles_totales = array_slice($goles_totales, 0, 10, true);
 
-  	return view('lofc/botaoro', compact('season_id', 'leagues_goals', 'goles_totales', 'competitions_goals'));
+  	return view('lofc/botaoro', compact('season_id', 'season_name', 'leagues_goals', 'goles_totales', 'competitions_goals'));
   }
         
 }

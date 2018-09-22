@@ -4,11 +4,11 @@
 <ol class="breadcrumb">
   <li><a href="{{ url('/') }}">Inicio</a></li>
   <li>LOFC</li>
-  <li>Temporada {{$season_id}}</li>
+  <li>{{$season_name}}</li>
   <li>Añadir liga</li>
 </ol>
 <div class="page-header">
-  <h1 class="premier">Nueva liga de la temporada {{$season_id}}</h1>
+  <h1 class="premier">Nueva liga de {{$season_name}}</h1>
 </div>
 <div class="row">
   <div class="col-md-3"></div>

@@ -74,12 +74,14 @@
             <ul class="dropdown-menu" style="margin-left: -10px;">
             @foreach ($lofc_seasons as $season)
               <li class="dropdown-submenu">
-                <a tabindex="-1" href="#">Temporada {{$season->id}}</a>
+                <a tabindex="-1" href="#">{{$season->name}}</a>
                 <ul class="dropdown-menu">
-                  <li class="dropdown-header">Temporada {{$season->id}}</li>
+                  <li class="dropdown-header">{{$season->name}}</li>
                   <li role="separator" class="divider"></li>
                   <li><a href="{{url('lofc/competitions/'.$season->id)}}">Competiciones</a></li>
-                  <li><a href="{{url('lofc/pichichi/'.$season->id)}}">Pichichi</a></li>
+                  @if (strpos($season->name, 'Mundial') === FALSE )
+                    <li><a href="{{url('lofc/pichichi/'.$season->id)}}">Pichichi</a></li>
+                  @endif
                   <li><a href="{{url('lofc/botaoro/'.$season->id)}}">Bota de Oro</a></li>
                 </ul>
               </li>

@@ -21,7 +21,15 @@
         <div class="col-md-4">
           {!! Form::number('teams_n', 2, array('class' => 'form-control', 'min' => 2)) !!}
         </div>
-        
+      </div>
+      <div class="clearfix"><br/></div>
+      <div class="row">
+        <div class="col-md-8">
+          {!! Form::label('season_name', 'Introduzca el nombre de la temporada:') !!}
+        </div>
+        <div class="col-md-4">
+          {!! Form::text('season_name', "Temporada n",array('class' => 'form-control')) !!}
+        </div>
       </div>
     </div>
     <div class="clearfix"><br/></div>

@@ -4,13 +4,13 @@
 <ol class="breadcrumb">
   <li><a href="{{ url('/') }}">Inicio</a></li>
   <li>LOFC</li>
-  <li>Temporada {{$season_id}}</li>
+  <li>{{$season_name}}</li>
   <li><a href="{{url('lofc/competitions/'.$season_id)}}">Competiciones</a></li>
   <li>{{$league_name}}</li>
   <li>Vídeos de partidos</li>
 </ol>
 <div class="page-header">
-  <h1>Vídeos de la {{$league_name}}</h1>
+  <h1>Vídeos de {{$league_name}}</h1>
 </div>
 <div class="row">
   <div class="col-md-12">

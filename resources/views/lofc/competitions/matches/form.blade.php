@@ -4,7 +4,7 @@
 <ol class="breadcrumb">
   <li><a href="{{ url('/') }}">Inicio</a></li>
   <li>LOFC</li>
-  <li>Temporada {{$season_id}}</li>
+  <li>{{$season_name}}</li>
   <li><a href="{{url('lofc/competitions/'.$season_id)}}">Competiciones</a></li>
   <li><a href="{{url('lofc/show_competition/'.$season_id.'/'.$competition->id)}}">{{$competition->name}}</a></li>
   <li>{{$junction->name}}</li>

@@ -4,7 +4,7 @@
 <ol class="breadcrumb">
   <li><a href="{{ url('/') }}">Inicio</a></li>
   <li>LOFC</li>
-  <li>Modificar equipos de la temporada {{$season_id}}</li>
+  <li>Modificar equipos de {{$season_name}}</li>
 </ol>
 <div class="page-header">
   <h1 class="premier">Modificar equipos</h1>

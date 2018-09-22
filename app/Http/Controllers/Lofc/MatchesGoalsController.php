@@ -7,6 +7,7 @@ use App\LOFCJunction;
 use App\LOFCPlayer;
 use App\LOFCMatchesGoals;
 use App\LOFCGoals;
+use App\LOFCSeason;
 
 use Illuminate\Http\Request;
 
@@ -17,6 +18,7 @@ use App\Http\Controllers\Controller;
 class MatchesGoalsController extends Controller{
 
   public function match_form($season_id, $junction_id, $leg){
+    $season_name = LOFCSeason::getByID($season_id)->name;
     $junction = LOFCJunction::joinJunction_Teams($junction_id)['0'];
     $players_L = LOFCPlayer::getByTeamID($junction->id_L_team);
     $players_V = LOFCPlayer::getByTeamID($junction->id_V_team);
@@ -34,7 +36,7 @@ class MatchesGoalsController extends Controller{
     }else{ //Partido único.
       $notes = $junction->notes;
     }
-    return view('lofc/competitions/matches/form', compact('season_id', 'competition', 'junction', 'leg', 'players_L', 'players_V', 'match_goals_L', 'match_goals_V', 'notes'));
+    return view('lofc/competitions/matches/form', compact('season_id', 'season_name', 'competition', 'junction', 'leg', 'players_L', 'players_V', 'match_goals_L', 'match_goals_V', 'notes'));
   }
 
   public function match_save(Request $request, $season_id, $junction_id, $leg){

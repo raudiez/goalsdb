@@ -4,14 +4,14 @@
 <ol class="breadcrumb">
   <li><a href="{{ url('/') }}">Inicio</a></li>
   <li>LOFC</li>
-  <li>Temporada {{$season_id}}</li>
+  <li>{{$season_name}}</li>
   <li>Competiciones</li>
 </ol>
 @if ($season_calendar != '')
 <div class="row">
   <div class="col-xs-12 col-md-12">
     <div class="page-header">
-    <h1 class="premier">Calendario de la Temporada {{$season_id}}</h1>
+    <h1 class="premier">Calendario de {{$season_name}}</h1>
   </div>
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
       <div class="panel panel-default">
@@ -35,7 +35,7 @@
 </div>
 @endif
 <div class="page-header">
-  <h1 class="premier">Listado de competiciones de la temporada {{$season_id}}</h1>
+  <h1 class="premier">Listado de competiciones de {{$season_name}}</h1>
 </div>
 <div class="row">
   @foreach ($competitions as $competition)
