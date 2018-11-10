@@ -120,6 +120,14 @@ Route::post('lofc/teams/save/{team_id}',
 
 
 ////Junctions
+Route::get('lofc/junctions/edit/{season_id}/{junction_id}',
+	['middleware' => 'auth',
+	 'uses' => 'Lofc\JunctionsController@edit'
+	]);
+Route::post('lofc/junctions/update/{season_id}/{junction_id}',
+	['middleware' => 'auth',
+	 'uses' => 'Lofc\JunctionsController@update'
+	]);
 Route::post('lofc/junction_save/{season_id}/{junction_id}/{leg}',
 	['middleware' => 'auth',
 	 'uses' => 'Lofc\JunctionsController@save'

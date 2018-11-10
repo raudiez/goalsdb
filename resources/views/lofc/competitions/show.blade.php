@@ -46,7 +46,17 @@
   <div class="col-xs-12 col-md-6">
   @endif
     <div class="panel panel-lofc-primary" style="height:92%;">
-      <div class="panel-heading" style="text-align: center;"><b>{{$junction->name}}</b><br/>{{$junction->date}}</div>
+      <div class="panel-heading" style="text-align: center;">
+        <div class="row">
+          <div class="col-xs-1 col-md-1"></div>
+          <div class="col-xs-10 col-md-10">
+            <b>{{$junction->name}}</b><br/>{{$junction->date}}
+          </div>
+          <div class="col-xs-1 col-md-1" style="padding-left: 0px">
+            <a href="{{ url('/lofc/junctions/edit/'.$season_id.'/'.$junction->id) }}" class="btn btn-danger" role="button" title="Editar cruce"><span class="glyphicon glyphicon-pencil"></span></a>
+          </div>
+        </div>
+      </div>
       <div class="panel-body">
         <p style="text-align: center">
         @if ($junction->lofc_team_L_logo_img != '')

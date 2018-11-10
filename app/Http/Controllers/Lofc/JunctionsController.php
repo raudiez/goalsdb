@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\Lofc;
 
+use App\LOFCCompetition;
+use App\LOFCSeason;
 use App\LOFCJunction;
+use App\LOFCTeam;
 
 use Illuminate\Http\Request;
 
@@ -120,6 +123,22 @@ class JunctionsController extends Controller{
         }
       }
     }
+  }
+
+  public function edit(Request $request, $season_id ,$junction_id){
+    $season_name = LOFCSeason::getByID($season_id)->name;
+    $junction = LOFCJunction::joinJunction_Teams($junction_id)['0'];
+    $competition = LOFCCompetition::getByID($junction->id_competition);
+    $lofc_teams = LOFCTeam::getBySeasonID($season_id);
+    return view('lofc/junctions/modify', compact('season_id', 'season_name', 'lofc_teams', 'junction', 'competition'));
+  }
+
+  public function update(Request $request, $season_id ,$junction_id){
+    $L_team = $request->input('L_team');
+    $V_team = $request->input('V_team');
+    $junction = LOFCJunction::getByID($junction_id);
+    LOFCJunction::updateTeams($junction_id, $L_team, $V_team);
+    return redirect('lofc/show_competition/'.$season_id.'/'.$junction->id_competition);
   }
         
 }

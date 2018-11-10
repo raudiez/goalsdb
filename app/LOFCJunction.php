@@ -46,6 +46,15 @@ class LOFCJunction extends Model{
 			increment('goals_'.$team.'_'.$leg, $count);
 	}
 
+	public static function updateTeams($id, $L_team, $V_team){
+		DB::table('lofc_junctions')->
+			where('id',$id)->
+			update([
+				'id_L_team' => $L_team,
+				'id_V_team' => $V_team,
+				]);
+	}
+
 	public static function updateJunctionMatch($id, $played_1, $played_2, $ended, $notes, $id_winner){
 		DB::table('lofc_junctions')->where('id', $id)->
 			update([
