@@ -53,7 +53,9 @@
             <b>{{$junction->name}}</b><br/>{{$junction->date}}
           </div>
           <div class="col-xs-1 col-md-1" style="padding-left: 0px">
-            <a href="{{ url('/lofc/junctions/edit/'.$season_id.'/'.$junction->id) }}" class="btn btn-danger" role="button" title="Editar cruce"><span class="glyphicon glyphicon-pencil"></span></a>
+            @if (!Auth::guest())
+              <a href="{{ url('/lofc/junctions/edit/'.$season_id.'/'.$junction->id) }}" class="btn btn-danger" role="button" title="Editar cruce"><span class="glyphicon glyphicon-pencil"></span></a>
+            @endif
           </div>
         </div>
       </div>
