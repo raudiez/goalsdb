@@ -15,7 +15,7 @@
     @if(array_key_exists("division_name", $goles_totales[0]))
   	<div class="col-xs-12 col-md-6">
       <div class="panel panel-lofc-primary">
-        <div class="panel-heading" style="text-align: center;"><b>Clasificación de primera división, temporada {{$season_id}}</b></div>
+        <div class="panel-heading" style="text-align: center;"><b>Clasificación de primera división, {{$season_name}}</b></div>
         <div class="panel-body">
           <div class="table-responsive"><table class="table table-striped table-hover">
             <thead>
@@ -47,7 +47,7 @@
     </div>
     <div class="col-xs-12 col-md-6">
       <div class="panel panel-lofc-primary">
-        <div class="panel-heading" style="text-align: center;"><b>Clasificación de segunda división, temporada {{$season_id}}</b></div>
+        <div class="panel-heading" style="text-align: center;"><b>Clasificación de segunda división, {{$season_name}}</b></div>
         <div class="panel-body">
           <div class="table-responsive"><table class="table table-striped table-hover">
             <thead>
